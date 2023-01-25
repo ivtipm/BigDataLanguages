@@ -12,7 +12,6 @@
 1. Работы с вводом-выводом. Задачи на Stream API
 
 
-
 # Задания
 ### 1. Основы Java. 
 - https://ivtipm.github.io/Programming/Glava10/index10.htm#z338
@@ -41,3 +40,8 @@ Apache Spark. Настройка и работа c REPL.
 
 ### 8. Apach Spark - 2
 Resilient Distributed Dataset
+
+
+## Рубежный контроль
+1. Программирование на Java. Потоки (stream) и потоки (thred) на Java.
+2. Программирование на Scala. 
