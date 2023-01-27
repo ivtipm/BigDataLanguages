@@ -161,18 +161,59 @@ x match
 ```
 `_` обозначает любое значение.
 
-Можно сопоставлять объекты (экземпляры case classes) по отдельным полям
+
+Вместо значения в `case` можно указать переменную, в которую это значение запишется. 
+Так как переменная будет всегда равна проверяемому значению, такая ветка будет срабатывать всегда.
 ```scala
 import scala.util.Random
-case class Email(sender: String, title: String, body: String)
 
-val x = new Email("Spammer", "Not a Spam", "Hello, dear friend")
+val x: Int = Random.nextInt(10)
+
+println(x)
 
 x match
-  case Email("Spammer", _, _)              => "send to spam"
-  case Email(_, _, "money")                => "mark important"
-  case Email("Manager", "Important!!!", _) => "delete"
-  case _ => "do nothing"
+  case x => "always"
+```
+
+Но в ветку с переменной можно добавить условие:
+```scala
+import scala.util.Random
+
+val x: Int = Random.nextInt(10)
+
+println(x)
+
+x match
+  case x if (x%2==0) => "even"
+  case 1 => "one"
+  case 3 => "three"
+  case _ => "other"
+```
+
+Можно сопоставлять объекты (экземпляры case classes) по отдельным полям. Поля, значение которых не важны заменены на `_`.
+В поле можно встроить сравнение по регулярному выражению.
+```scala
+case class Email(sender: String, title: String, body: String)
+
+//val x = new Email("Spammer", "Not a Spam", "Hello, dear friend")    // send to spam
+val x = new Email("Manager", "important!!!!", "Hello, dear friend")          // delete
+//val x = new Email("Manager2", "important!!!!", "Hello, dear friend")          // also delete
+//val x = new Email("Vasya", "qwerty", "Hello, dear friend")  // do nothing
+
+val title_reg   = "(.*!{2,}.*)".r   // 2 или более восклицательных знака среди всего остального, выражение должно быть в скобках для обозначения места для подставноки строки
+val title_reg22 =  ".*!{2,}.*".r     // 2 или более восклицательных знака среди всего остального
+
+x match
+// проверка по полю sender, с извлечением значения из поля title в переменную title1
+case Email("Spammer", title1, _)           => s"send <$title1> to spam"
+// проверка по последнему полю
+case Email(_, _, "money")                  => "mark important"
+// проверка по точному совпадению с первым полем, извлечение значения второго поля в title22, проверка по регулярному выражению
+case Email("Manager", title_reg(title22), _) => "delete"
+// значение для проверки в регулярном выражении можно и не извлекать в переменную, ведь и так понятно что туда подставлять
+case Email("Manager2", title_reg22(), _) => "also delete"
+// если ничего не сработало
+case _ => "do nothing"
 ```
 
 Использование регулярных выражений с извлечением совпадающих частей регулярного выражения в переменные
@@ -245,3 +286,36 @@ val oddFilter = my_list_filter.curried( isOdd )
 // вызов каррированного метода
 oddFilter( List(1,2,3,4) )
 ```
+
+
+### Частичные функции (Partial Functions)
+Частичная функция содержит в себе оператор match (неявно) и сравнивает значение первого и единственного аргумента 
+со значениями в case, при совпадении возвращает значение. 
+Первый и второй шаблонные типы должны совпадать с проверяемыми и возвращаемыми значениями.
+
+
+```scala
+val divide10: PartialFunction[Int, Int] = {
+    case 1 => 10
+    case 2 => 5
+    case 5 => 2
+    case 10 => 1
+}
+```
+Если вариант case для текущего значения аргумента функции не предусмотрен, то бросается исключение. 
+Однако в такую функцию встраивается метод `.isDefinedAt` которым можно проверить, 
+определена ли функция для такого значения. 
+
+### Обобщённые функции
+
+## Опциональные значения
+Такой тип может содержать значение типа `A`, а может и не содержать
+```scala
+Option[A]
+```
+
+Т.е. у `Option[A]` есть два подтипа
+- `Some[A]` -- контейнер Some, гарантированно содержащий значение типа A
+- `None`
+## Коллекции
+### Кортежи
