@@ -49,6 +49,9 @@ val x = 1_000_000
 ```
 
 
+
+
+
 ## Ввод и вывод
 
 ```scala
@@ -85,11 +88,17 @@ val r = "\\w+\\s\\d".r`
 r.matches( "some text ")    // -> Boolean
 ```
 
+
+
+
 ## Тестирование
 
 ```scala
 assert( 4 == 2+2 )
 ```
+
+
+
 
 ## Управляющие операторы
 **if** считается выражением. Например:
@@ -133,7 +142,56 @@ for { i <- 1 to 5
 Вывод
 ```text
 1,1;  2,1;  2,2;  3,1;  3,2;  3,3;  4,1;  4,2;  4,3;  4,4;  5,1;  5,2;  5,3;  5,4;  5,5;
+
 ```
+
+
+### Сопоставление с образцом (Pattern matching)
+Проверка сверху вниз. Срабатывает только один case. Если не сработал ни один, то генерируется исключение. 
+```scala
+import scala.util.Random
+
+val x: Int = Random.nextInt(10)
+
+x match
+  case 0 => "zero"
+  case 1 => "one"
+  case 2 => "two"
+  case _ => "other"
+```
+`_` обозначает любое значение.
+
+Можно сопоставлять объекты (экземпляры case classes) по отдельным полям
+```scala
+import scala.util.Random
+case class Email(sender: String, title: String, body: String)
+
+val x = new Email("Spammer", "Not a Spam", "Hello, dear friend")
+
+x match
+  case Email("Spammer", _, _)              => "send to spam"
+  case Email(_, _, "money")                => "mark important"
+  case Email("Manager", "Important!!!", _) => "delete"
+  case _ => "do nothing"
+```
+
+Использование регулярных выражений с извлечением совпадающих частей регулярного выражения в переменные
+```scala
+import scala.util.matching.Regex
+val contact = "JohnSmith@sample.domain.com"
+
+val emailPattern: Regex = """^(\w+)@(\w+(.\w+)+)$""".r
+val phonePattern: Regex = """^(\d{3}-\d{3}-\d{4})$""".r
+
+contact match
+  case emailPattern(localPart, domainName, _) =>
+    println(s"Hi $localPart, we have saved your email address.")
+  case phonePattern(phoneNumber) =>
+    println(s"Hi, we have saved your phone number $phoneNumber.")
+  case _ =>
+    println("Invalid contact information, neither an email address nor phone number.")
+```
+
 
 ## Функции
 **Композиция функций**
