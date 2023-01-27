@@ -90,3 +90,48 @@ assert( 4 == 2+2 )
 f andThen g      // g( f(x) )
 f compose g      // f( g(x) )
 ```
+
+```scala
+val f = (_:Double) + 2
+val g = (_:Double) * 3
+
+(f compose g)(1)   // 5
+(f andThen g)(1)   // 9
+```
+
+### Каррирование (Currying)
+Каррирование (карринг) — преобразование функции от многих аргументов в набор функций, 
+каждая из которых является функцией от одного аргумента.
+
+Например: f(x,y) преобразуется в f'(x)(y), где f'(x) -- возвращает функцию.
+
+```scala
+/** Создаёт новый список на основе старого
+ * @param f -- функция фильтрации списка
+ * @param lst   -- список из целых чисел
+ * @return список чисел, для которых функция f возвращает true
+ */
+def my_list_filter(f: Int => Boolean, lst: List[Int] ) =
+  var filtered: List[Int] = List()        // новый пустой список
+  for (element <- lst)                    // перебор элементов списка с записью каждого в element
+    if ( f(element) )
+      filtered = filtered.appended( element ) // добавление элемента в новый список
+  filtered
+
+
+val isOdd = (_:Int) % 2 == 0        // лямбда, проверяющая чётность числа
+  // аналогично: def isOddMethod(x:Int)   =   x % 2 == 0
+
+
+my_list_filter( isOdd,            List(1,2,3,4))          // -> List(2,4)
+my_list_filter( (_:Int) % 2 == 0, List(1,2,3,4))          // -> List(2,4)
+my_list_filter( _ % 2 == 0,       List(1,2,3,4))          // -> List(2,4)
+
+// каррирование метода my_list_filter, 
+// теперь он возвращает функцию, которая должна принять его второй параметр
+// первый параметр уже задан
+val oddFilter = my_list_filter.curried( isOdd )
+
+// вызов каррированного метода
+oddFilter( List(1,2,3,4) )
+```
