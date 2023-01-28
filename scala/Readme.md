@@ -319,3 +319,7 @@ Option[A]
 - `None`
 ## Коллекции
 ### Кортежи
+
+
+# Ссылки
+- [Scala cheatsheet](https://docs.scala-lang.org/cheatsheets/index.html)
