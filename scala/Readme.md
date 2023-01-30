@@ -232,9 +232,33 @@ contact match
   case _ =>
     println("Invalid contact information, neither an email address nor phone number.")
 ```
+## Некоторые модули
 
+```scala
+import Math;
 
-## Функции
+import scala.util.Random.{nextInt, nextDouble};
+```
+
+## Методы и функции
+**Передача по имени (By-name parameters)** и ленивые вычисления
+Параметры переданные по имени будут вычислены только при необходимости. Такие параметры обозначаются `=>` перед именем своего типа.
+```scala
+/** С вероятностью 0.5 возвращает квадрат числа или ноль */
+def foo( x: => Int ) = {
+if ( Random.nextInt() % 2 == 0) pow(x,2)
+else 0
+// оператор return в Scala не используется, метод вернёт значение последнего приведенного выражения
+}
+
+// сумма будет вычислена только если внутри функции будет выполнено условие
+foo( 5 + 3 )
+
+// код внутри фигурных скобок выдаёт результат последнего выражения
+// будет выполнен если внутри функции будет выполнено условие
+foo( {print("Evaluated"); 5 + 3} )
+```
+
 **Композиция функций**
 
 ```scala
@@ -317,9 +341,126 @@ Option[A]
 Т.е. у `Option[A]` есть два подтипа
 - `Some[A]` -- контейнер Some, гарантированно содержащий значение типа A
 - `None`
-## Коллекции
+
+Основные методы
+- `.getOrElse( default )` -- вернёт default, если объект типа `Option[A]` в себе не содержит значения типа A
+- `.OrElse( x: Optional[A])` -- вернёт другое опциональное значение, если первое не содержит в себе значений типа A; 
+будет сгенерировано исключение, если и второе значение является `None`
+- `.map`, `flatMap` -- применяют функцию к опциональному значению, могут вернуть None; второй метод возвращает опциональное значение
+- `.filter` -- применяет придекат, если false делает опциональное значение None
+- `.collect` -- применяет частичную функцию
+
+
+
+
+
+
+## Коллекции [ [Scala Book](https://docs.scala-lang.org/scala3/book/collections-classes.html) ]
+```scala
+scala.collection.immutable
+List[+A], Vector[+A], Set[+A], Map[K, +V]
+
+
+scala.collection.mutable_
+Buffer[A], Set[A], Map[K,V] Builder[-E, C]
+
+scala.collection
+Seq[+A], Set[+A], Map[K, +V], Iterator[+A]
+```
+
+immutable collections\
+![](https://docs.scala-lang.org/resources/images/tour/collections-immutable-diagram-213.svg)
+
+mutable collections\
+![](https://docs.scala-lang.org/resources/images/tour/collections-mutable-diagram-213.svg)
+
+Создание коллекций
+```scala
+val l = List(10,2,3,3,5)
+val v = Vector(1,2,3,3,5)     // implemented as tree of blocks, provides fast random access
+val s = Set(1,2,3,3,5)        // -> Set(1,2,3,5)
+val m = Map("key1" -> 123, "key2" -> 456)
+```
+
+Доступ к элементам через оператор `()`, а не через `[]`
+
+Некоторые примеры
+```scala
+l(0)        // -> 10
+s(5)        // true
+s(55)       // false
+m("key1")   // -> 123
+m("qwerty")   // Exception
+
+m.get("key1")    // Some(123)
+m.get("qwerty")  // None
+s.contains(2)    // true
+
+l.head      // -> 10
+l.last      // -> 5
+
+s.size      // -> 4
+v.size      // -> 5
+
+
+l - 10        // удаление элемента;   -> List(2,3,3,5)
+m - "key1"    // удаление пары c ключом key1 
+```
+
+
+
+Операции для **последовательностей**
+- Добавить слева `+:`
+- Добавить справа `:+`
+- Конкатенация `++`
+
+Добавление в словарь: `val m2 = m + ("kry3" -> 789)`
+
+
+Заполнение списка случайными числами
+```scala
+import scala.util.Random
+
+// List.fill( 10 ) вернёт функцию, которая заполняет все элементы списка вызывая лямбду из своего параметра
+val rand_list = List.fill( 10 ) ( Random.nextInt(10) )
+```
 ### Кортежи
 
 
+## Классы
+- `class` ~ Java classes
+- `trait` ~ Java interface, но может включать не только абстрактные методы
+- `object` ~ Java singleton class; позволяет сразу создать объект, объявляя анонимный класс
+- `case class` ~ Java class, все параметры конструктора автоматически `val`, автоматически реализуются методы `equals`, `hashCode`, `toString`, `copy`, `apply`; могут быть использованы при сопоставлении с образцом
+
+
+```scala
+class MyClass{
+  var name = "World"
+  def method() = println(f"hello $name")
+}
+```
+Можно описывать класс в сокращённой форме
+```scala
+// объявление класса, с полем name и единственным конструктором: с параметром; 
+// простое тело конструктора, задающее значение поля сгенерируется автоматически
+class MyClass(var name: String)
+{
+  // это блок инициализации (часть конструктора):
+  println("object created")
+
+  // это не тело конструктора, а определение класса: 
+  def method() = println(f"hello, $name")
+}
+
+
+val x = MyClass("World")          // object created
+x.name = "New Brave World"        
+x.method()                        // hello, New Brave World
+```
+### Наследование
+
+`<class|trait|object|case class> NewClassName extends OldClass1 [with OldClass2]`
 # Ссылки
-- [Scala cheatsheet](https://docs.scala-lang.org/cheatsheets/index.html)
+- [Documentation - scala-lang.org/api/3.x](https://scala-lang.org/api/3.x/)
+- [Scala cheatsheet - docs.scala-lang.org/cheatsheets/index.html](https://docs.scala-lang.org/cheatsheets/index.html)
