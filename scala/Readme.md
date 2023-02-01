@@ -433,6 +433,7 @@ val rand_list = List.fill( 10 ) ( Random.nextInt(10) )
 - `object` ~ Java singleton class; позволяет сразу создать объект, объявляя анонимный класс
 - `case class` ~ Java class, все параметры конструктора автоматически `val`, автоматически реализуются методы `equals`, `hashCode`, `toString`, `copy`, `apply`; могут быть использованы при сопоставлении с образцом
 
+Класс -- ссылочный тип.
 
 ```scala
 class MyClass{
@@ -440,27 +441,94 @@ class MyClass{
   def method() = println(f"hello $name")
 }
 ```
-Можно описывать класс в сокращённой форме
-```scala
-// объявление класса, с полем name и единственным конструктором: с параметром; 
-// простое тело конструктора, задающее значение поля сгенерируется автоматически
-class MyClass(var name: String)
-{
-  // это блок инициализации (часть конструктора):
-  println("object created")
 
-  // это не тело конструктора, а определение класса: 
-  def method() = println(f"hello, $name")
+Можно описывать класс в сокращённой форме, сразу указывая параметры конструктора и поля
+```scala
+// Объявление класса с 5 полями и одновременно конструктора с параметрами
+class MyClass(field1: Int, val field2: Int, var field3:Int){
+  // остальные члены класса (кроме field1) -- public
+  // параметры конструктора станут полями класса,
+  // параметры без модификатора val будут private и неизменны
+
+
+  // объявление ещё четырёх полей:
+  val const_field4 = 42       // public
+  var var_field = 100;        // public
+
+  protected val x = 200;
+  private  val y = 300;
+
+  // любой код в классе (кроме методов) -- это код, который вызывается при инициализации объекта
+  println("class initialization ...")
+
+
+  // методы
+  def print() =
+    println(this.field1)
+  println(this.field2)
+  println(this.field3)
+  println(this.const_field4)
+  println(this.var_field)
+
+  def foo(x: Int) =
+    this.field1 = x         // ошибка: присваивание нового значения val переменной
+  this.field2 = x         // ошибка: присваивание нового значения val переменной
+  this.const_field4 = x   // ошибка: присваивание нового значения val переменной
+  this.field3 = x         // Ok
+  this.var_field = x      // Ok
+
+  private def private_method() =
+    println("I am private")
 }
 
+// создание экхемпляра класса
+val x = MyClass(1,2,3)
+x.field1 = 0        // ошибка, нет доступа
+x.field2 = 0        // ошибка, нельзя присвоить новое значение val переменной
+x.field3 = 0        // Ok
+x.const_field4 = 0  // ошибка, нельзя присвоить новое значение val переменной
+x.var_field = 0     // Ok
 
-val x = MyClass("World")          // object created
-x.name = "New Brave World"        
-x.method()                        // hello, New Brave World
+x.print()
+x.foo(123)
+x.private_method()    // ошибка, нет доступа
 ```
 ### Наследование
 
 `<class|trait|object|case class> NewClassName extends OldClass1 [with OldClass2]`
+
+
+### Обобщённые типы
+```scala
+// А -- параметр типа
+class NamedValue[A](name: String, value:A)
+
+val a: NamedValue[Int] = NamedValue[Int]("The Answer", 42)
+val pi = NamedValue[Double]("Pi", 333.0/106)
+val pi2 = NamedValue("Pi", 333.0/106)
+```
+
+На параметры типов можно накладывать ограничения. Границы задаются не строго, тип параметр может включать сам пограничный тип. 
+Задание верхней границы -- надтипа (upper type bound)
+```scala
+class NamedValue[A <: AnyRef](name: String, value:A)
+// AnyRef -- более общий (базовый) тип по отношению к A
+```
+
+Задание нижне границы -- подтипа (lower type bound)
+```scala
+class NamedValue[A >: Nothing](name: String, value:A)
+// тип А должен быть надтипом (базовым классом) для Nothing
+```
+
+Верхние и нижние ограничения могут быть любыми типами, в том числе определёнными программистом. Ограничения могут ссылать на другие параметры типа.
+```scala
+class MyClass[A,B <: A](field1:A, field2:B)
+
+val o1 = MyClass[Int,Int](3,4)                    // ok
+val o2 = MyClass[String, Int]("some string", 3)   // Error
+val o3 = MyClass[Int, String](3,"some string")    // Error
+```
 # Ссылки
 - [Documentation - scala-lang.org/api/3.x](https://scala-lang.org/api/3.x/)
 - [Scala cheatsheet - docs.scala-lang.org/cheatsheets/index.html](https://docs.scala-lang.org/cheatsheets/index.html)
