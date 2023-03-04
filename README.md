@@ -33,7 +33,7 @@
      - скачивание текста статьи или новости
      - скачивание картинок
    - Сохраняйте данные в CSV файл
-   * Как скачать веб-страницу: https://mkyong.com/java/java-how-to-download-web-page-from-internet/
+   * Как скачать веб-страницу: https://mkyong.com/java/java-how-to-download-web-page-from-internet/ https://github.com/VetrovSV/OOP/blob/master/examples/java/HTTP_request.md
 
 ### 2. Строки и текст
 Что-то с регулярными выражениями, StringBuilder, Formatter
