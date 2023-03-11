@@ -148,4 +148,7 @@ Java
 
 # Ссылки
 - Слайды: https://docs.google.com/presentation/d/1pmOlWlulw2prFhPjn73f3SE6KCyYtW2jYux-aKugVcA/edit#slide=id.g1b63e56b075_0_77
+- Шпаргалка: https://www.rexegg.com/regex-quickstart.html
+- https://regex101.com/ -- для экспериментов с регулярными выражениями
+***
 - Регулярные выражения в Atom: поиск и замена с извлечением: http://2017.compciv.org/guide/topics/end-user-software/atom/how-to-use-regex-atom.html
