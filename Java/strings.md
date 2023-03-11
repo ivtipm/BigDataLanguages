@@ -91,10 +91,10 @@ String[] peopleArr = peopleString.split("; ");
 import java.util.regex.Pattern;
 
 // проверка соответствия всего текста регулярному выражению
-Pattern.matches("Java \\d{1,2}", text2);      // -> true
+Pattern.matches("Java \\d{1,2}", "Java 20");       // -> true
 
 // проверка соответствия всего текста регулярному выражению
-Pattern.matches("Java \\d{1,2}", "new Java 20");      // -> false
+Pattern.matches("Java \\d{1,2}", "new Java 20");   // -> false
 ```
 
 Создание объекта Регулярное Выражение
@@ -102,6 +102,14 @@ Pattern.matches("Java \\d{1,2}", "new Java 20");      // -> false
 import java.util.regex.Pattern;
 
 Pattern digits = Pattern.compile("\\d{1,4}");     // от 1 до 4 цифр подряд
+
+// matcher - объект для сравнения с текстом
+Matcher matcher = words46.matcher(text);
+while ( matcher.find() ) {      // поиск соответствий (true если найдено)
+       System.out.println(text.substring(matcher.start(), matcher.end()));
+       // matcher.start() - позиция начала текущего соответствия
+       // matcher.end() - позиция конца текущего соответствия
+}
 ```
 
 Параметры проверки [ [doc](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/regex/Pattern.html#compile(java.lang.String,int)) ]
