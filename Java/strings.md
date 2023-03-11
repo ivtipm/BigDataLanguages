@@ -46,6 +46,8 @@ String[] peopleArr = peopleString.split("; ");
 
 # Регулярные выражения
 
+![](https://imgs.xkcd.com/comics/regular_expressions.png)
+
 Метасимволы
 - `.`  — один произволььный символ
 - `\d` — любая цифра, то же самое что и [0-9];
@@ -76,8 +78,11 @@ String[] peopleArr = peopleString.split("; ");
 
 ## Регулярные выражения в Java
 Основные классы для работы с регулярными выражениями
-- Matcher — выполняет операцию сопоставления в результате интерпретации шаблона.
-- Pattern — предоставляет скомпилированное представление регулярного выражения.
+- Matcher — выполняет операцию сопоставления в результате интерпретации шаблона [ [doc](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/regex/Pattern.html#compile(java.lang.String,int)) ]. 
+    - Проверка соответствия строки целиком: `matches()`; 
+    - Проверка соответствия любой части строки: `lookingAt()`;
+    - Искать следующее соответствие `find()`. 
+- Pattern — класс Регулярное Выражение [ [doc](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/regex/Pattern.html) ].
 - PatternSyntaxException — предоставляет непроверенное исключение, что указывает на синтаксическую ошибку, допущенную в шаблоне RegEx.
 
 
@@ -91,6 +96,15 @@ Pattern.matches("Java \\d{1,2}", text2);      // -> true
 // проверка соответствия всего текста регулярному выражению
 Pattern.matches("Java \\d{1,2}", "new Java 20");      // -> false
 ```
+
+Создание объекта Регулярное Выражение
+```Java
+import java.util.regex.Pattern;
+
+Pattern digits = Pattern.compile("\\d{1,4}");     // от 1 до 4 цифр подряд
+```
+
+Параметры проверки [ [doc](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/regex/Pattern.html#compile(java.lang.String,int)) ]
 
 
 # Ссылки
