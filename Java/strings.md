@@ -81,6 +81,17 @@ String[] peopleArr = peopleString.split("; ");
 - PatternSyntaxException — предоставляет непроверенное исключение, что указывает на синтаксическую ошибку, допущенную в шаблоне RegEx.
 
 
+Проверка всей строки
+```Java
+import java.util.regex.Pattern;
+
+// проверка соответствия всего текста регулярному выражению
+Pattern.matches("Java \\d{1,2}", text2);      // -> true
+
+// проверка соответствия всего текста регулярному выражению
+Pattern.matches("Java \\d{1,2}", "new Java 20");      // -> false
+```
+
 
 # Ссылки
 - Слайды: https://docs.google.com/presentation/d/1pmOlWlulw2prFhPjn73f3SE6KCyYtW2jYux-aKugVcA/edit#slide=id.g1b63e56b075_0_77
