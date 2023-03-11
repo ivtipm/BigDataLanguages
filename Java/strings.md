@@ -122,7 +122,11 @@ Pattern digits = Pattern.compile("\\d{1,4}");     // от 1 до 4 цифр по
 // matcher - объект для сравнения с текстом
 Matcher matcher = words46.matcher(text);
 while ( matcher.find() ) {      // поиск соответствий (true если найдено)
-       System.out.println(text.substring(matcher.start(), matcher.end()));
+       // извлечение строки
+       System.out.println( matcher.group() );
+
+       // или
+       System.out.println( text.substring(matcher.start(), matcher.end()));
        // matcher.start() - позиция начала текущего соответствия
        // matcher.end() - позиция конца текущего соответствия
 }
