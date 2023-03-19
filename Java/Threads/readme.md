@@ -12,9 +12,13 @@
 import java.lang.Thread;      // поток
 import java.lang.Runnable;    // интерфейс для выполнения в потоке
 
+import java.util.concurrent.Callable;    // интерфейс для выполнения в потоке и возврата значения
 // класс для хранения будущего результата
 import java.util.concurrent.Future;
 ```
+
+Runnable и Callable. (Интерфейс Callable похож на Runnable тем, что оба они разработаны для классов, экземпляры которых будут выполняться в отдельном потоке. Runnable, однако, не возвращает результата и не может выбросить проверяемое исключение.)
+
 **Thread** — класс Поток.
 
 Threads have a unique identifier and a name. The identifier is generated when a Thread is created and cannot be changed. The thread name can be specified when creating a thread or can be changed at a later time.
