@@ -1,4 +1,5 @@
 # Повторение
+1. Что такое абстрактный класс? Интерфейс(Java)?
 1. Потоки и процессы. Общая и раздельная память.
 1. Неопределённость параллелизма. Взаимная блокировка. Проблема ABA.
 1. Критическая секция. Мьютекс. Атомарность. Потокобезопасность.
@@ -8,23 +9,27 @@
 
 # Thread
 ```java
-// неявное подключение основных классов
-import java.lang.Thread;      // поток
-import java.lang.Runnable;    // интерфейс для выполнения в потоке
+// пакет java.lang поключается атоматически.
+import java.lang.Thread;      // класс для управления потоком
+// public class Thread
+// extends Object
+// implements Runnable: void run()
 
-import java.util.concurrent.Callable;    // интерфейс для выполнения в потоке и возврата значения
-// класс для хранения будущего результата
+import java.lang.Runnable;    // интерфейс, метод которого может выполнятся в потоке
+// @FunctionalInterface
+// public interface Runnable: void run()
+
+import java.util.concurrent.Callable;    // интерфейс, метод которого может выполнятся в потоке и вернуть значение
+// @FunctionalInterface
+// public interface Callable<V>: V call()
+
+// класс для хранения результата выполнения метода из Callable
 import java.util.concurrent.Future;
 ```
 
-Runnable и Callable. (Интерфейс Callable похож на Runnable тем, что оба они разработаны для классов, экземпляры которых будут выполняться в отдельном потоке. Runnable, однако, не возвращает результата и не может выбросить проверяемое исключение.)
+**Thread** — класс Поток. [ [doc](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.html)]
 
-**Thread** — класс Поток.
-
-Threads have a unique identifier and a name. The identifier is generated when a Thread is created and cannot be changed. The thread name can be specified when creating a thread or can be changed at a later time.
-
-Документация: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.html
-
+Каждый поток имеет уникальный индетификатор и имя. Имя задаётся при создании потока и не моежт быть ихменено после.
 
 Методы:
 - `getName()` - получить имя потока
@@ -40,10 +45,13 @@ Threads have a unique identifier and a name. The identifier is generated when a 
 - `Thread(Runnable task)`
 - `Thread(Runnable task, String name)`
 
-
 Код, который должен выполнятся в потоке стоит создавать в отдельном классе, реализующим интерфейс **Runnable** с методом `run()`.
-
 Наследоваться от Thread не стоит, т.к. это нарушит принцип единственной ответственности.
+
+Интерфейс Callable [ [doc](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/Callable.html) ] похож на Runnable [ [doc](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Runnable.html) ] тем, что оба они разработаны для классов, экземпляры которых будут выполняться в отдельном потоке. Runnable, однако, возвращает результат ( Future [[doc](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/Future.html)]) и не может выбросить проверяемое исключение.
+
+
+
 
 ### Пример Thread + Runnable
 Класс для параллельного выполнения кода
@@ -75,9 +83,10 @@ public class Printer implements Runnable{
 Thread th1 = new Thread(new Printer("\\",10) );
 Thread th2 = new Thread(new Printer("/",10) );
 
-th1.start();
-th2.start();
+th1.start();    // вызов метода run() экземпляра класса Printer
+th2.start();    // вызов метода run() экземпляра класса Printer
 
+// Ожидание завершения потока
 th1.join();     // throws InterruptedException
 th2.join();
 ```
@@ -85,6 +94,16 @@ th2.join();
 Вывод программы
 ```
 \/\/\/\/\/\/\/\//\/\
+```
+
+**Определение методы run при создании объекта потока**
+```java
+Thread th = new Thread(new Runnable() {
+    @Override
+    public void run() {
+        // do something
+    }
+});
 ```
 
 Другие примеры:
@@ -117,20 +136,52 @@ th3.start();
 th3.join();
 ```
 
+***
+Получить число ядер
+```java
+import java.lang.Runtime;     // класс для взаимодействия со средой выполнения
+
+Runtime.getRuntime().availableProcessors()    // возвращает: количество _ядер_ * количество потоков процессора
+```
+[Документация](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Runtime.html)
+
+См. также другие методы класса Runtime:
+- `exec(String[] cmdarray)` — Executes the specified command and arguments in a separate process.
+- `freeMemory()` — amount of free memory in the Java Virtual Machine.
+- `gc()` — Runs the garbage collector.
+- ....
+
+
 # Thread Pools
+Чаще всего количество подзадач, которые могут быть выполнены в алгоритме параллельно больше числа потоков, которые на устройстве могут быть выполнены *действительно* параллельно.
+
+Тогда решать параллельные задачи приходится по очереди. Например, на процессоре с 4 ядрами можно сначала первые 4 подзадачи, потом следующие 4 и так далее.
+
+В библиотеке Java для организации таких вычислений реализован подход — пулл потоков (thread pool).
+
 ![](https://cdn.javarush.com/images/article/decabcf3-8341-429b-9266-a262f8a4152b/800.webp)
+
+На рис. задачи (объекты, методы которых нужно выполнить) обозначены кругами.
+Пулл потоков — 6 зелёных прямоугольников.
+
+Результаты вополнения (могут быть теми же самыми объектами, методы которых выполеялись) также могут юыть помещены в очередь.
 
 Основные параметры и методы **ThreadPoolExecutor** [ [doc](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/ThreadPoolExecutor.html) ]
 - corePoolSize — количество потоков, которые могут постоянно(*) существовать, по умолчанию 0;
 - maximumPoolSize
 - keepAliveTime  — время по истечении которого, простаивающие (idle) потоки из corePoolSize не будуд завершены (по умолчанию 60).
 
-- `submit( )` — добавление новой задачи;
+- `submit` — добавление новой задачи;
+  - `public Future<?> submit(Runnable task)`
+  - `public <T> Future<T> submit(Runnable task, T result)`
+  - `public <T> Future<T> submit(Callable<T> task)`
 - `shutdown()` — завершение пула потоков.
 
 
 Создание пула потоков, добавления новых задач в пул.
 ```Java
+import java.util.concurrent.ThreadPoolExecutor;
+
 // Пул из двух потоков
 ThreadPoolExecutor executor =
   (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
