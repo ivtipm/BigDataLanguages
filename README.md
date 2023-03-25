@@ -4,7 +4,7 @@
 1. О курсе. Основы языка программирования Java. Примеры использования технологий BigData. Типы данных в Java. Работа со строками и числами.  Структура JVM
    - https://docs.google.com/presentation/d/1pmOlWlulw2prFhPjn73f3SE6KCyYtW2jYux-aKugVcA/edit?usp=sharing
 2. Структура памяти. Сборщик мусора. Строки. Интернирование строк. Методы. Числа. Библиотека коллекций в Java. Юнит тестирование JUnit. Альтернативная библиотека коллекций в Java: Apache Commons Collections & Google Guava. Примеры
-3. Потоки в Java. Класс Thread, интерфейс Runnable. Ключевое слово synchronized. 
+3. Потоки в Java. Класс Thread, интерфейс Runnable. Ключевое слово synchronized. Пулы потоков.
    - https://github.com/ivtipm/BigDataLanguages/tree/main/Java/Threads
    - Сборщик Maven. Ввод и вывод в Java. Классы: InputStream, Outputstream, Scanner, BufferedReader. Исключения. Stream API
 
