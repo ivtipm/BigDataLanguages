@@ -73,7 +73,7 @@ public class Main {
         ThreadPoolExecutor thread_pool = (ThreadPoolExecutor) Executors.newFixedThreadPool( threads_count );
 
         start = System.currentTimeMillis();
-        for (int i = 1; i < 70; i++) {
+        for (int i = 1; i < pages_count; i++) {
             final int ii = i;               // внутри лямбд можно использовать только final локальные переменные
             // добавление потоку новой работы -- лямбда функции (на основе экземпляра наследника Runnable())
             thread_pool.submit( () -> {
