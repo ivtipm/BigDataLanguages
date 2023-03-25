@@ -265,6 +265,7 @@ public class Exec3 {
 }
 ```
 
+**Пример HTTP запросов в параллельных потоках**: [ThreadPool_UrlConnection.java](ThreadPool_UrlConnection.java)
 
 См. также
 - ScheduledThreadPoolExecutor
