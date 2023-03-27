@@ -178,7 +178,7 @@ Runtime.getRuntime().availableProcessors()    // возвращает: коли�
 - `shutdown()` — завершение пула потоков.
 
 
-Создание пула потоков, добавления новых задач в пул.
+Создание пула потоков, добавления новых задач в пул — **FixedThreadPool**.
 ```Java
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -208,7 +208,7 @@ assertEquals(1, executor.getQueue().size());
 executor.shutdown();
 ```
 
-Неограниченный пул потоков — CachedThreadPool. Максимальное число потоков — максимальное целочисленное значение.
+Неограниченный пул потоков — **CachedThreadPool**. Максимальное число потоков — максимальное целочисленное значение.
 ```java
 ThreadPoolExecutor executor =
   (ThreadPoolExecutor) Executors.newCachedThreadPool();
@@ -231,7 +231,22 @@ assertEquals(0, executor.getQueue().size());
 when the threads are not needed anymore, they will be disposed of after 60 seconds of inactivity
 
 
-**Пример 2**
+**ThreadPoll + Callable = Future**
+```
+Future<String> response = thread_pool.submit( () -> {
+    String page = "";
+    try { page = get_page("https://zabgu.ru/php/news.php?category=1&page=" + 1); }
+    catch (IOException e) { System.out.println(e.toString()); }
+    return page;
+  } );
+
+//
+
+// ожидание данных, получение данных 
+String response_str = res.get();            // throws ExecutionException
+```
+
+**CachedThreadPool + реализация Runnable**
 ```java
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
