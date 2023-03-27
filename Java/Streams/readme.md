@@ -17,25 +17,21 @@ import java.util.stream.*;
 ```
 Потоки (streams) и коллекции частично взаимозаменяемы.
 
-Коллекции обеспечивают эффективный доступ к одиночным объектам, а стримы, наоборот, для прямого доступа и обработки отдельных элементов не используются. Стримы предназначены для параллельных и последовательных агрегаций, выполняемых через цепочку методов.
+Коллекции обеспечивают эффективный доступ к одиночным объектам. Стримы предназначены для параллельных и последовательных агрегаций, выполняемых через цепочку методов.
 
 ![](https://annimon.com/ablogs/file816/stream.png)
 
-Большиснтво коллекций имеют в своём составе методы, которые создают поток на освнове данных коллекции (`Collection.stream()`).
+Большиснтво коллекций имеют в своём составе методы, которые создают поток на освнове данных коллекции:
+- `Collection.stream()` — создание потока из коллекции.
+- `Stream.of("a", "b", "c")` — создание колекции и потока.
 
 Stream API — это новый способ работать со структурами данных в функциональном стиле.
 
 Пакет `java.util.stream` содержит классы для поддержки операций с потоками элементов в функциональном стиле. Ключевой абстракцией, введенной в этом пакете, является Поток [ [doc](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/stream/Stream.html) ].
 
-```java
-public interface Stream<T> extends BaseStream<T,Stream<T>>
 ```
-
-
-
-
-
-
+public interface Stream<T> extends BaseStream< T,Stream<T> >
+```
 
 
 Методы потоков (операторы) можно разделить на две группы:
@@ -58,11 +54,12 @@ public interface Stream<T> extends BaseStream<T,Stream<T>>
 Остальные методы:
 https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/stream/Stream.html
 
+**Пример filter и forEach**
 ```java
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
+import java.util.stream.Stream;
 
 // список на основе динамического массива
 List<String> list = new ArrayList<String>();
@@ -76,13 +73,19 @@ Stream stream = list.stream();
 // создание нового потока в функциональном стиле
 // отберём все элеенты, которые содержат строки длиной в три символа
 Stream short_strs = stream.filter(
-        s -> s.toString().length() == 3     // предикат в виде анонимной функции;
+                            s -> s.toString().length() == 3     // предикат в виде анонимной функции;
         // параметр анонимной функции всегда Object, но можно преобразовать
         );
 // предикат - логическая функция
-
-// применение функции к каждому элементу
+// после вызова промежуточного метода filter поток не обработан
+// вызовем терминальный метод forEach: применение функции к каждому элементу
 short_strs.forEach( System.out::println );
+```
+
+Методы можно записать короче, одним выражением:
+```java
+stream.filter( s -> s.toString().length() == 3 )
+      .forEach( System.out::println );
 ```
 
 
@@ -94,5 +97,22 @@ String[] array = {"Java", "Stream", "API"};
                 .collect(Collectors.toList()).forEach(System.out::println);
 ```
 
+#### Специальный потоки
+Построчное чтение файла:
+```java
+import java.io.IOException;
+import java.nio.file.*; // Files Paths;
+import java.util.stream.Stream;
+
+// поток для построчного чтения файла
+Stream<String> lines = Files.lines( Paths.get("my_file.txt"));      // throws IOException
+lines.forEach(System.out::println);     // чтение, вывод на экран
+
+// поток для перебора файлов и папок в текущей директории
+
+```
+#### Многотопочность (multithreading)
+
+Стримы бывают последовательными (sequential) и параллельными (parallel). Последовательные выполняются только в текущем потоке, а вот параллельные используют общий пул ForkJoinPool.commonPool(). При этом элементы разбиваются (если это возможно) на несколько групп и обрабатываются в каждом потоке отдельно. Затем на нужном этапе группы объединяются в одну для предоставления конечного результата.
 
 #  Ссылки
