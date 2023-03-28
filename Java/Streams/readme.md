@@ -21,9 +21,18 @@ import java.util.stream.*;
 
 ![](https://annimon.com/ablogs/file816/stream.png)
 
-Большиснтво коллекций имеют в своём составе методы, которые создают поток на освнове данных коллекции:
-- `Collection.stream()` — создание потока из коллекции.
-- `Stream.of("a", "b", "c")` — создание колекции и потока.
+Большинство коллекций и массивы имеют в своём составе методы, которые создают поток на основе данных коллекции:
+- `Collection.stream()` — создание потока из коллекции;
+- `Stream.of("a", "b", "c")` — создание коллекции и потока;
+- `Arrays.stream(myArray)` — создание потока из массива;\
+Другие примеры
+- `IntStream ints = IntStream.range(0, 10_000);` — поток на основе диапазона;
+- `IntStream rdInts = new Random().ints(1000);` — поток случайных чисел.
+
+Коллекции и массивы, наоборот, можно создавать из потоков
+- `mystream.collect(Collectors.toList())`
+- `mystream.collect(Collectors.toCollection(ArrayList::new)`
+- `mystream.toArray(String[]::new)`
 
 Stream API — это новый способ работать со структурами данных в функциональном стиле.
 
@@ -45,15 +54,31 @@ public interface Stream<T> extends BaseStream< T,Stream<T> >
 
 
 Промежуточные методы
-- `.filter(Predicate predicate)` выдаёт те элементы потока, для которых predicate -> true;
-- `.map(Function mapper)` преобразует каждый элемент в новый с помощью фукции mapper;
-- `.flatMap(Function<T, Stream<R>> mapper)` аналогично map но умеет обрабатывать вложенные потоки.
+- `Stream<T> filter(Predicate<T> predicate)` -> элементы потока, для которых predicate -> true;
+- `<R> Stream<R>
+map(Function<T, R> mapper)` преобразует каждый элемент (типа T) в новое значение (типа R) с помощью функции mapper;
+- `.flatMap(Function<T, Stream<R>> mapper)` аналогично map, но умеет обрабатывать вложенные потоки.
+- `Stream<T> distinct()` -> различные элементы (сравнение через Object.equals( Object ));
+- `Stream<T> sorted()`, `sorted(comparator)`;
+- `Stream<T> limit(long maxSize)` -> не более maxSize элементов;
+- `Stream<T> skip(long n)` -> пропускает первые n элементов, выдаёт остальные.
 
-Функциональный интерфейс Function<T,R> представляет функцию перехода от объекта типа T к объекту типа R
+Функциональный интерфейс `Function<T,R>` представляет функцию перехода от объекта типа T к объекту типа R
+
+
+Терминальные методы:
+- forEach()
+- toArray()
+- reduce()
+- collect()
+- min(), max(), count()
+- anyMatch(), allMatch(), noneMatch()
+- findFirst(), findAny()
+
 
 Остальные методы:
-https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/stream/Stream.html
-
+- `long count()`
+- https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/stream/Stream.html
 **Пример filter и forEach**
 ```java
 import java.util.ArrayList;
@@ -71,7 +96,7 @@ list.add("Six");  list.add("Seven"); list.add("Eight"); list.add("Nine"); list.a
 Stream stream = list.stream();
 
 // создание нового потока в функциональном стиле
-// отберём все элеенты, которые содержат строки длиной в три символа
+// отберём все элементы, которые содержат строки длиной в три символа
 Stream short_strs = stream.filter(
                             s -> s.toString().length() == 3     // предикат в виде анонимной функции;
         // параметр анонимной функции всегда Object, но можно преобразовать
@@ -107,12 +132,18 @@ import java.util.stream.Stream;
 // поток для построчного чтения файла
 Stream<String> lines = Files.lines( Paths.get("my_file.txt"));      // throws IOException
 lines.forEach(System.out::println);     // чтение, вывод на экран
-
-// поток для перебора файлов и папок в текущей директории
-
 ```
-#### Многотопочность (multithreading)
+
+Перебор файлов и папок в текущей директории
+```java
+```
+
+
+
+#### Многопоточность (multithreading)
 
 Стримы бывают последовательными (sequential) и параллельными (parallel). Последовательные выполняются только в текущем потоке, а вот параллельные используют общий пул ForkJoinPool.commonPool(). При этом элементы разбиваются (если это возможно) на несколько групп и обрабатываются в каждом потоке отдельно. Затем на нужном этапе группы объединяются в одну для предоставления конечного результата.
 
 #  Ссылки
+- https://habr.com/ru/company/otus/blog/658999/ - Java Stream API на простых примерах
+- [Java documentation](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/stream/Stream.html)
