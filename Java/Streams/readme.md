@@ -57,7 +57,7 @@ public interface Stream<T> extends BaseStream< T,Stream<T> >
 - `Stream<T> filter(Predicate<T> predicate)` -> элементы потока, для которых predicate -> true;
 - `<R> Stream<R>
 map(Function<T, R> mapper)` преобразует каждый элемент (типа T) в новое значение (типа R) с помощью функции mapper;
-- `.flatMap(Function<T, Stream<R>> mapper)` аналогично map, но умеет обрабатывать вложенные потоки.
+- `<R> Stream<R> flatMap(Function<T, Stream<R>> mapper)` аналогично map, но умеет обрабатывать вложенные потоки.
 - `Stream<T> distinct()` -> различные элементы (сравнение через Object.equals( Object ));
 - `Stream<T> sorted()`, `sorted(comparator)`;
 - `Stream<T> limit(long maxSize)` -> не более maxSize элементов;
@@ -67,7 +67,7 @@ map(Function<T, R> mapper)` преобразует каждый элемент (
 
 
 Терминальные методы:
-- forEach()
+- `void forEach(Consumer<? super T> action)`
 - toArray()
 - reduce()
 - collect()
@@ -107,6 +107,7 @@ Stream short_strs = stream.filter(
 short_strs.forEach( System.out::println );
 ```
 
+
 Методы можно записать короче, одним выражением:
 ```java
 stream.filter( s -> s.toString().length() == 3 )
@@ -120,6 +121,22 @@ String[] array = {"Java", "Stream", "API"};
         streamOfArray.map( s -> s.split("") )                  // Преобразование слова в массив букв
                 .flatMap(Arrays::stream).distinct()                 // создаёт из трёх потоков из потоков один поток
                 .collect(Collectors.toList()).forEach(System.out::println);
+```
+
+
+**Пример обработки веб-страниц**
+```java
+import java.util.stream.IntStream;
+
+public static String get_page(String url);              // -> исходный код страницы
+public static List<NewsItem> parse_news(String page);   // -> список из новостей NewsItem из одной страницы
+// NewsItem — класс, который хранит всю информацию про новость: заголовок, дату, теги, ...
+        
+IntStream.range(1, pages_count)                          // IntStream                   — число
+         .mapToObj( i -> get_page(BASE_URL+i ) )         // -> Stream<Strings>          — исходный код страницы
+         .map( Main_Streams::parse_news )                // -> Stream< List<NewsItem> > — список NewsItem одной страницы
+         .flatMap( news_item -> news_item.stream() )     // -> Stream< NewsItem >       — NewsItem
+         .forEach(System.out::println);                  // терминальная операция
 ```
 
 #### Специальный потоки
