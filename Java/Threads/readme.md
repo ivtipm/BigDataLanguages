@@ -136,6 +136,10 @@ th3.start();
 th3.join();
 ```
 
+Подробнее про анонимные функции в Java: https://github.com/VetrovSV/OOP/blob/master/examples/java/function-reference.md
+
+Документация: https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/function/package-summary.html
+
 ***
 Получить число ядер
 ```java
