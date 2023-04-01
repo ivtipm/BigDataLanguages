@@ -65,7 +65,7 @@ public class Main {
             pages.add( page );      // не потокоSбезопасная операция
         }
         long stop = System.currentTimeMillis();
-        System.out.println("Скачено страниц:" + pages.size());
+        System.out.println("Скачено страниц: " + pages.size());
         System.out.println( String.format("serial algorithm dt:   %7d ms", stop-start) );
 
 
@@ -74,10 +74,12 @@ public class Main {
         ThreadPoolExecutor thread_pool = (ThreadPoolExecutor) Executors.newFixedThreadPool( threads_count );
 
         start = System.currentTimeMillis();
+        // Создание очереди задач
         for (int i = 1; i < pages_count; i++) {
-            // внутри лямбд можно использовать только final локальные переменные
-            final String url = "https://zabgu.ru/php/news.php?category=1&page=" + i;               
-            
+            // внутри лямбд можно использовать только final переменные, что исключить их изменение 
+            // и потенциального возникновения проблем одновременной записи данных в одну и ту же переменную из разных потоков
+            final String url = "https://zabgu.ru/php/news.php?category=1&page=" + i;
+
             // добавление потоку новой работы -- лямбда функции (на основе экземпляра наследника Runnable())
             thread_pool.submit( () -> {
                 String page = "";
@@ -93,8 +95,8 @@ public class Main {
         }
 
 
-
-        // Initiates an orderly shutdown in which previously submitted tasks are executed, but no new tasks will be accepted.
+        // Ожидание завершения задач потоками
+        // Initiates an orderly shutdown in which previously submitted tasks are executed, but no new tasks will be accepted. I
         thread_pool.shutdown();
         try {
             // пул не завершает все потоки сразу, как только кончились задачи ( Runnable или Callable )
@@ -106,16 +108,14 @@ public class Main {
         stop = System.currentTimeMillis();
 
         System.out.println( String.format("parallel algorithm dt: %7d ms", stop-start) );
+        System.out.println("Скачено страниц: " + pages2.size());
 
-        System.out.println("Скачено страниц:" + pages2.size());
-        // проверка соответствия результатов работы алгоритмов
+        // проверка соответствия результатов работы алгоритмов (нужно включить проверку assert: java -ea)
         assert pages.size() == pages2.size();
         for (int i = 0; i < pages.size(); i++) {
             assert pages.get(i).equals( pages2.get(i) );
         }
 
-
-//        pages2.forEach(System.out::println);
     }
 }
 
