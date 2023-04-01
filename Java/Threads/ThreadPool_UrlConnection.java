@@ -94,11 +94,10 @@ public class Main {
 
 
 
-        // Initiates an orderly shutdown in which previously submitted tasks are executed, but no new tasks will be accepted. I
+        // Initiates an orderly shutdown in which previously submitted tasks are executed, but no new tasks will be accepted.
         thread_pool.shutdown();
         try {
             // пул не завершает все потоки сразу, как только кончились задачи ( Runnable или Callable )
-            // потоки пула можно завершить только после таймаута
             // ждём завершения работы всех потоков ИЛИ Long.MAX_VALUE секунд и удаляем потоки
             thread_pool.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
