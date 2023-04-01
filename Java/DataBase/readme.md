@@ -1,5 +1,5 @@
 # Базы данных в Java
-JDBC - API для работы с СУБД (реляционымм, noSQL и др). Последняя версия 4.3 (на апрель 2023).
+JDBC - API для работы с СУБД (реляционным, noSQL и др). Последняя версия 4.3 (на апрель 2023).
 Для работы с конкретной СУБД требуется специальный JDBC (Java DataBase Connectivity) драйвер, реализующий программный интерфейс согласно стандарту JDBC.
 Иначе возникает ошибка времени выполнения, например `java.sql.SQLException: No suitable driver found for jdbc:sqlite:news.db`.
 Такие модули (драйверы) не входят в JDK.
@@ -8,13 +8,13 @@ JDBC - API для работы с СУБД (реляционымм, noSQL и д�
 
 <img src=https://cdn.javarush.com/images/article/8098e9c9-e40c-4aad-b7c5-93987199aa61/512.webp width=400></img>
 
-Драйверы - это пакеты java, упакованые в jar файл.
-Путь к этим файлам нужно указывать при компиляции с помошью ключа classpath, который используется и для указания путей к другим зависимостям
+Драйверы - это пакеты java, упакованные в jar файл.
+Путь к этим файлам нужно указывать при компиляции с помощью ключа classpath, который используется и для указания путей к другим зависимостям
 `java -classpath путь_к_файлу_драйвера; путь_к_классу_программы  главный_класс_программы`
 
 Основные классы и интерфесы:
 - class DriverManager отвечает за создание соединения с  СУБД.
-- interface Connection - создание запросов и управление созданым соединением.
+- interface Connection - создание запросов и управление созданным соединением.
   - `Statement createStatement()`
   - `String getSchema()`
   - `PreparedStatement prepareStatement(String sql)`
@@ -37,7 +37,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-// ещё нужен JDИВ драйвер для SQLite: IntelliJ IDEA: project structure > Modules > search jdbc sqlite > select xerial/sqlite-jdbc
+// ещё нужен JDBC драйвер для SQLite: IntelliJ IDEA: project structure > Modules > search jdbc sqlite > select xerial/sqlite-jdbc
 
 import java.util.Random;
 ```
@@ -80,11 +80,7 @@ finally {
 - Postgresql `jdbc:postgresql://HOST/DATABASE`, класс org.postgresql.Driver
   - `DriverManager.getConnection(url,"username", "password");` 
 - Microsoft SQL Server `jdbc:microsoft:sqlserver://HOST:1433;DatabaseName=DATABASE`,  класс com.microsoft.jdbc.sqlserver.SQLServerDriver
-- ...
-
-(see the Comments section below for more information and changes)
-DB2 	jdbc:as400://HOST/DATABASE;
-com.ibm.as400.access.AS400JDBCDriver
+- DB2 	`jdbc:as400://HOST/DATABASE`, класс com.ibm.as400.access.AS400JDBCDriver
 
 
 Выполнение запросов на добавление

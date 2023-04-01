@@ -194,6 +194,10 @@ Stream.generate( () -> LocalDateTime.now().toString() + ": Exterminate!" ).forEa
 
 Стримы бывают последовательными (sequential) и параллельными (parallel). Последовательные выполняются только в текущем потоке, а вот параллельные используют общий пул ForkJoinPool.commonPool(). При этом элементы разбиваются (если это возможно) на несколько групп и обрабатываются в каждом потоке отдельно. Затем на нужном этапе группы объединяются в одну для предоставления конечного результата.
 
+Для создания параллельных стримов используется методы
+- `BaseStream.parallel()`  - возвращает копию потока, которая может обрабатывать параллельно
+- `Collection.parallelStream()` - аналог `Collection.stream()`, создаёт стрим из коллекции, который может выполняться параллельно
+
 ```java
 import java.util.stream.LongStream;
         
@@ -219,6 +223,11 @@ System.out.println( "Sum = %.2f ".formatted(sum1));
 assert sum1 == sum2;
 ```
 
+По умолчанию количество потоков в пуле равно число ядер процессора. Но можно изменить
+```java
+System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "4");
+```
+
 #### Пример параллельной обработки двух потоков
 В Java нет аналога функции zip из Питона, но можно логко итерироваться по двум коллекциям или потокам обращаясь к ним как к глобальным переменным:
 ```java
@@ -232,6 +241,7 @@ IntStream
   .mapToObj(i -> names.get(i) + ":" + ages.get(i))
   // ...
 ```
+
 
 #### Операция свёртки
 ```java
@@ -257,6 +267,15 @@ int sum = numbers.stream().reduce(0, (x,y) -> x+y);
 
 
 **См. также метод `collect` и перегруженные варианты метода reduce — [ [doc](https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/stream/Stream.html#reduce(java.util.function.BinaryOperator)) ] 
+
+
+# См. также
+Методы параллельной обработки массивов (Arrays):
+- `parallelPrefix()`: вычисляет некоторое значение для элементов массива (например, сумму элементов)
+- `parallelSetAll()`: устанавливает элементы массива с помощью лямбда-выражения
+- `parallelSort()`: сортирует массив
+
+
 #  Ссылки
 - https://habr.com/ru/company/otus/blog/658999/ - Java Stream API на простых примерах
 - [Java documentation](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/stream/Stream.html)
