@@ -18,7 +18,7 @@ JDBC - API для работы с СУБД (реляционным, noSQL и д�
   - `Statement createStatement()`
   - `String getSchema()`
   - `PreparedStatement prepareStatement(String sql)`
-  - `close` 
+  - `close`
 - Statement, PreparedStatement - запрос, запрос с подстановкой параметров. [doc](https://docs.oracle.com/en/java/javase/20/docs/api/java.sql/java/sql/Statement.html#executeQuery(java.lang.String))
   - `boolean execute(String sql)`
   - `int executeUpdate(String sql)` выполняет INSERT, UPDATE, DELETE или другую операция, котора ничего не возвращает; метод возвращает количество записей, которые были изменены.
@@ -52,7 +52,7 @@ Connection conn = null;
 try {
   // если файл БД sqlite не существует, то при создании соединения он будет создан
   conn = DriverManager.getConnection(DB_URL);        //  throws SQLException
-        
+
   // для создания таблицы
   String sql = """
   create table if not exists News (
@@ -76,9 +76,9 @@ finally {
 Примеры JDBС connection URL (connection string):
 - SQLIte `jdbc:sqlite:MY_DBFILE_NAME`
 - MySQL `jdbc:mysql://HOST/DATABASE`, класс com.mysql.jdbc.Driver
-  - `DriverManager.getConnection(url, "username", "password");` 
+  - `DriverManager.getConnection(url, "username", "password");`
 - Postgresql `jdbc:postgresql://HOST/DATABASE`, класс org.postgresql.Driver
-  - `DriverManager.getConnection(url,"username", "password");` 
+  - `DriverManager.getConnection(url,"username", "password");`
 - Microsoft SQL Server `jdbc:microsoft:sqlserver://HOST:1433;DatabaseName=DATABASE`,  класс com.microsoft.jdbc.sqlserver.SQLServerDriver
 - DB2 	`jdbc:as400://HOST/DATABASE`, класс com.ibm.as400.access.AS400JDBCDriver
 
@@ -134,16 +134,25 @@ CREATE TABLE products (Id INT PRIMARY KEY AUTO_INCREMENT, ProductName VARCHAR(20
 
 -- вставка данных в таблицу
 INSERT Products(ProductName, Price) VALUES ('iPhone X', 76000), ('Galaxy S9', 45000), ('Nokia 9', 36000);
-    
--- обновление записи в таблице 
+
+-- обновление записи в таблице
 UPDATE Products SET Price = Price - 5000 WHERE Price > 10000;
 
 -- Удаление записи из таблицы
 DELETE FROM Products WHERE Id = 3
 ```
-# См. также 
+
+# Перечень СУБД (Database Management Systems, DBMS)
+![](dbms_rating.png)
+Источник: https://insights.stackoverflow.com/survey/2021#section-most-popular-technologies-databases
+
+
+
+# См. также
 - ORM фреимворки
 
 # Ссылки
-- шпарагалка по SQL: https://www.sqltutorial.org/wp-content/uploads/2016/04/SQL-cheat-sheet.pdf, https://learnsql.com/blog/sql-basics-cheat-sheet/sql-basics-cheat-sheet-a4.pdf
-- 
+- шпаргалка по SQL: https://www.sqltutorial.org/wp-content/uploads/2016/04/SQL-cheat-sheet.pdf, https://learnsql.com/blog/sql-basics-cheat-sheet/sql-basics-cheat-sheet-a4.pdf
+**SQLite**
+- Интерактивная демка SQLite: https://sqlite.org/fiddle/index.html
+- Шпаргалка: https://vhernando.github.io/sqlite3-cheat-sheet

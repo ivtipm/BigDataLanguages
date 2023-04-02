@@ -9,7 +9,7 @@
    - Сборщик Maven. Ввод и вывод в Java. Классы: InputStream, Outputstream, Scanner, BufferedReader. Исключения. Stream API
 
 
-### Ситемы хранения и обработки данных, Scala
+### Системы хранения и обработки данных, Scala
 1. Работа с базами данных в Java. Введение в язык Scala – ООП и переменные, Scala Shell, коллекции в Scala
 1. Примеры Pattern matching; ScalikeJDBC - библиотека для работы с реляционными БД в Scala; SCOPT - библиотека по разбору командной строки
 1. Apache Spark, запуск и форматы данных: plain text storage, sequence files, parquet, orc, avro. 
@@ -75,10 +75,10 @@
 Знакомство с базовым синтаксисом Scala: переменные, значения, типы; функции, анонимные функции; классы, объекты; интерфейсы и трейты; особенности и отличия от Java
 - [Шпаргалка](scala/Readme.md)
 
-### 7. Apach Spark - 1
+### 7. Apache Spark - 1
 Apache Spark. Настройка и работа c REPL.
 
-### 8. Apach Spark - 2
+### 8. Apache Spark - 2
 Resilient Distributed Dataset
 
 
