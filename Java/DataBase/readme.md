@@ -143,7 +143,7 @@ DELETE FROM Products WHERE Id = 3
 ```
 
 # Перечень СУБД (Database Management Systems, DBMS)
-![](dbms_rating.png)
+![](dbms_rating.png)\
 Источник: https://insights.stackoverflow.com/survey/2021#section-most-popular-technologies-databases
 
 
