@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Scala</title>
+		<title>Введение в Scala</title>
 
 		<meta name="description" content=" ... ">
 		<meta name="author" content="Vetrov Sergey">
@@ -14,12 +14,23 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+		<!-- <link rel="stylesheet" href="css/user_css.css"> -->
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
 		<link rel="stylesheet" href="dist/theme/night.css" id="theme">
 
+
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+
+		<style type="text/css">
+    :root {
+        --r-main-font-size: 25px;
+    }
+</style>
+
+
 
 	</head>
 
@@ -28,192 +39,444 @@
 		<div class="reveal">
 
 			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
+			<div class="slides" style="font-size: 1.3em; line-height: 1.25em;">
 
 <section>
-	<h1>Введение в Scala</h1>
+	<h2>Введение в Scala</h2>
+	<h2>Основные типы. Ввод и вывод.</h2>
 	<img src="https://www.scala-lang.org/resources/img/frontpage/scala-spiral.png" width="85px" margin-bottom=0> 
 
 
 	<p>Кафедра ИВТ и ПМ. Ветров С. В.</p>
+
+	<br>
+	<div align="right"><a href="https://github.com/ivtipm/BigDataLanguages/blob/main/Scala/Readme.md">короткая шпаргалка</a></div>
 </section>
 
 
-<section>
-	<section data-markdown>
-	### Литература
-
-	- Scala для нетерпеливых / пер. с англ. А. Н. Киселева – 2-е изд., 2017 – 414 с.: ил.
-		
-	- Scala Programming for Big Data Analytics: Get Started With Big Data Analytics Using Apache Spark, Irfan Elahi, 2019
-
-	- Подлодка. Scala. music.yandex.ru/album/7570122/track/59138633)
-	</section>
-
-	<section>
-	<h2>Литература</h2>
-
-	<img src="images\Scala-for-impatient.ru.jpeg">
-	<img src="images\Scala-for-analytics.jpeg">
-	</section>
-</section>
-
-
-
-<section>
-	<section data-markdown>
-	### Scala
-	- Появился в 2003 г
-		- Версия 3.0 – 2021 г.
-	- Последняя версия 3.2.1 (январь 2023)
-	- Параллельно существует Scala 2.13.10
-	- SCALA =  SCalable LAnguage 
-	- Компилируется в байт-код JVM
-		- Можно использовать библиотеки на Java
-	- Меньше boilerplate кода по сравнению c Java
-	- Ориентирован на высокую производительность
-	- ООП и функциональное программирование
-	- Основной язык для BigData
-	</section>
-</section>
-
-
-<section>
-<img src="images/Scala-companies.png">
-
-<br>
-<a href="https://jetbrains.com/ru-ru/lp/devecosystem-2022/scala">jetbrains.com/ru-ru/lp/devecosystem-2022/scala </a>– результаты опроса JetBrains об раных сторонах использования Scala
-</section>
-
-
-<section>
-	<h3>Класс на Java</h3>
-	<pre><code style="max-height:1000px;">
-
-public class Person {
-  private final String name;
-  private final double age;
-
-  public Person(String name, double providedAge) {
-    this.name = name;
-    this.age = providedAge;}
-  
-  @Override
-  public int hashCode() {
-     int hash = 10;
-     hash = 23 * hash + Objects.hashCode(this.name);
-     return hash; 	}
-
-  @Override
-  public boolean equals(Object obj) { … }
-
-  @Override
-  public String toString() {
-    return "Test{" + "name=" + name + ", age=" + age + '}'; }
-
+<section data-auto-animate>
+	<h2>Hello, World!</h2>
+	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+@main
+def main(): Unit = {
+  	println("Hello")
+	  println("world!")
 }
-
-</code></pre>
-</section>
-
-<section>
-	<h3>Класс на Scala</h3>
-	<pre><code>
-		case class Person(name: String, age: double)
 	</code></pre>
 </section>
 
 
-<section data-markdown>
-## Установка
-1. Установить Oracle JDK [oracle.com/cis/java/technologies/downloads](https://oracle.com/cis/java/technologies/downloads)
-2. [scala-lang.org/download](https://www.scala-lang.org/download/)
 
-#### альтернатива
+<section data-auto-animate>
+	<h2>Hello, World!</h2>
+	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+	@main
+	def main() =
+	    println("Hello")
+	    println("world!")
 
-
-- Попробовать онлайн: scastie.scala-lang.org
-- Консольная программа scala исполняет код, может работать как интерактивная оболочка
-</section>
-
-<section data-markdown>
-## HelloWorld.scala
-
-```scala
-@main def main() = println("Hello, World!")
-```
-
-**Компиляция:**
-```bash
-scalac HelloWorld.scala
-```
-
-**Запуск:**
-```bash
-scala HelloWorld
-```
-
+	</code></pre>
 </section>
 
 
-<section data-markdown>
-## Hello, World!  Scala 2 (устаревшая версия)
 
-```scala
 
-object hello {
-  def main(args: Array[String]) = {
-    println("Hello, World!")
-  }
-}
-```
+
+
+<section data-auto-animate>
+	<h2>Hello, World!</h2>
+	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+	@main
+	def main() =
+	    println("Hello world!")
+	    println("Hello world!")
+	</code></pre>
+
+	<ul>
+		<li><code>@main</code> — аннотация, помечающая текущий метод как главную функцию программы. Тело функции начинается после =. Фигурные скобки вокруг тела писать необязательно.</li>
+	</ul>
 </section>
 
 
+<section data-auto-animate>
+	<h2>Hello, World!</h2>
+	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+	@main
+	def main() =
+	    println("Hello world!")
+	    println("Hello world!")
+	</code></pre>
+
+	<ul>
+		<li><code>@main</code> — аннотация, помечающая текущий метод как главную функцию программы. Тело функции начинается после =. Фигурные скобки вокруг тела писать необязательно.</li>
+
+		<li>Если фигурных скобок нет, то вложенность определяют отступы (как в Python).</li>
+
+		<li>В стандарте Scala 2 нужно создать класс наследник от App, который будет включать основной код.</li>
+	</ul>
+</section>
+
+
+<!-- ====================================================================== типы -->
+<section>
+
 <section data-markdown>
-## Scala 2 vs Scala 3
-- Отличия тут: [docs.scala-lang.org/scala3/guides/migration/incompatibility-table.html](https://docs.scala-lang.org/scala3/guides/migration/incompatibility-table.html)
-- В Scala 3 упрощён синтаксис
-	- отступы как в Python
-	- 
+## Система типов
+- Статическая типизация
+- Местами строгая (нельзя без явного преобразования `val x: Int = 2.3`)
+- Возможен автоматический вывод типа (inference) для многих ситуаций.\
+  Например `val y: = 40+2; // Int`
+
+</section>
+
+
+<section data-auto-animate>
+Общий синтаксис объявления переменной или константы
+	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+val|var name: type = value
+</code></pre>
+</section>
+
+<section data-auto-animate>
+Общий синтаксис объявления переменной или константы
+	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+val|var name: type = value
+</code></pre>
+	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+val my_const = 333/106;   		// константа (immutable variable)
+var my_variable:Int = 0;      // переменная
+</code></pre>
+
+
+</section>
+
+<section data-auto-animate>
+Общий синтаксис объявления переменной или константы
+	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+val|var name: type = value
+</code></pre>
+	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+val my_const = 333/106;   		// константа (immutable variable)
+var my_variable:Int = 0;      // переменная
+</code></pre>
+
+<ul>
+	<li>Тип у переменных указывать тоже не обязательно, но рекомендуется.</li>
+	<li>Используйте константы всюду, где это возможно</li>
+</ul>
+</section>
+
+
+<section>
+	<img src="https://github.com/ivtipm/BigDataLanguages/raw/main/Scala/ScalaTypes.drawio.png">
+</section>
+
+<section>
+	<h2>Числовые типы (value типы)</h2>
+	</code></pre>
+		<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+	val b: Byte = 1
+	val i: Int = 1 				// default for type inference
+	val l: Long = 1
+	val s: Short = 1
+	val d: Double = 2.0 	// default for type inference
+	val f: Float = 3.0e2  // 3.0 * 10 ^ 2
+	</code></pre>
+</section>
+
+<section>
+	<h2>Строки</h2>
+Такие же как в Java
+	</code></pre>
+		<pre class="scala"><code data-trim data-noescape style="font-size: 1.1em;line-height: 1.25em;">
+val x = 333.0/106;		
+
+val S = s"pi = $x"
+// pi = 3.141509433962264
+
+val S2 = s"выражение внутри строки: ${ Math.pow(x.ceil,2) }"
+
+// многострочный литерал
+val quote = """The essence of Scala:
+               Fusion of functional and object-oriented
+               programming in a typed setting."""
+
+// многострочный литерал, без пробелов вначале
+val quote = """The essence of Scala:
+               |Fusion of functional and object-oriented
+               |programming in a typed setting.""".stripMargin
+
+	</code></pre>
+</section>
+
+
+
+<section>
+	<h2>Строки</h2>
+Регулярные выражения
+	</code></pre>
+		<pre class="scala"><code data-trim data-noescape style="font-size: 1.1em;line-height: 1.25em;">
+
+		</code></pre>
+</section>
+
+</section>
+
+
+<!-- ====================================================================== управляющие конструкции -->
+
+
+
+
+<section>
+<h2>Управляющие операторы</h2>
+<ul>
+	<li class="fragment">  <code>if/then/else </code></li>
+  <li class="fragment">  <code>for loops </code></li>
+  <li class="fragment">  <code>while loops </code></li>
+  <li class="fragment">  <code>try/catch/finally </code></li>
+  <li class="fragment">  <code>for expressions</code> — генераторы</li>
+  <li class="fragment">  <code>match expressions</code> — сопоставление с образцом</li>
+
+</ul>
+</section>
+
+
+<!-- ================================================= IF -->
+<section>
+<section>
+	<h2>IF</h2>
+	<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+if x < 0 then
+  println("negative")
+else if x == 0 then
+  println("zero")
+else
+  println("positive")
+	</code></pre>
+</section>
+
+
+<section>
+	<h2>IF</h2>
+	<ul>
+		<li> считается выражением </li>
+	</ul>
+
+
+	<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+val minValue = if a < b then a else b
+	</code></pre>
+</section>
+
+
+<section>
+	<h2>IF</h2>
+<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;"
+	data-line-numbers="5-7">
+import scala.util.Random
+val rand = Random
+val a = rand.nextInt()
+val b = rand.nextInt()
+val max = 
+    if (a > b) a 
+    else b
+	</code></pre>
+</section>
+
+</section>
+
+
+<!-- ================================================= match -->
+<section>
+<section>
+	<h2>match — сопоставление с образцом</h2>
+<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;"
+	data-line-numbers="">
+// `i` is an integer
+val day = i match
+  case 0 => "Sunday"
+  case 1 => "Monday"
+  case 2 => "Tuesday"
+  case 3 => "Wednesday"
+  case 4 => "Thursday"
+  case 5 => "Friday"
+  case 6 => "Saturday"
+  case _ => "invalid day"   // the default, catch-all
+	</code></pre>
+</section>
+
+<section>
+	<h2>match</h2>
+	<h4>ИЛИ</h4>
+<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;"
+	data-line-numbers="2">
+val day = i match
+  case 0 | 6 => "Sunday or Saturday"
+  case 1 => "Monday"
+  case 2 => "Tuesday"
+  case 3 => "Wednesday"
+  case 4 => "Thursday"
+  case 5 => "Friday"
+  case _ => "invalid day"   // the default, catch-all
+	</code></pre>
+</section>
+
+<section>
+	<h2>match</h2>
+	<p style="text-align: left">
+	Условие внутри case
+	</p>
+<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;"
+	data-line-numbers="8">
+import scala.util.Random
+
+val x: Int = Random.nextInt(10)
+
+println(x)
+
+x match
+  case x if (x%2==0) => "even"
+  case 1 => "one"
+  case 3 => "three"
+  case _ => "other"
+	</code></pre>
+</section>
+
+
+
+<section>
+	<h2>match</h2>
+	<h4>Извлечение значения</h4>
+
+	<p style="text-align: left">
+	Вместо значения в case можно указать переменную, в которую это значение запишется. Так как переменная будет всегда равна проверяемому значению, такая ветка будет срабатывать всегда.
+	</p>
+
+<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;"
+	data-line-numbers="9">
+val day = i match
+  case 0 => "Sunday"
+  case 1 => "Monday"
+  case 2 => "Tuesday"
+  case 3 => "Wednesday"
+  case 4 => "Thursday"
+  case 5 => "Friday"
+  case 6 => "Saturday"
+	case x => s"$x - not a valid day number" // the default, catch-all
+	</code></pre>
+</section>
+
+
+<section  style="height: 100vh;">
+	<h2>match</h2>
+	<h4>Извлечение значения объекта</h4>
+
+	<p style="text-align: left">
+
+	</p>
+
+<pre class="fragment"  style="height: 40vh;"><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+	data-line-numbers="1|2-17|18-30">
+case class Email(sender: String, title: String, body: String)
+
+// возможные варианты для match
+// send to spam
+//val x = new Email("Spammer", "Not a Spam", "Hello, dear friend")
+// delete
+val x = new Email("Manager", "important!!!!", "Hello, dear friend")          
+//val x = new Email("Manager2", "important!!!!", "Hello, dear friend")
+// do nothing
+//val x = new Email("Vasya", "qwerty", "Hello, dear friend")  
+
+// 2 или более восклицательных знака среди всего остального, 
+// выражение должно быть в скобках для обозначения места для подставноки строки
+val title_reg   = "(.*!{2,}.*)".r   
+// 2 или более восклицательных знака среди всего остального
+val title_reg22 =  ".*!{2,}.*".r     
+
+x match
+// проверка по полю sender, с извлечением значения из поля title в переменную title1
+case Email("Spammer", title1, _)           		=> s"send <$title1> to spam"
+// проверка по последнему полю
+case Email(_, _, "money")                  		=> "mark important"
+// проверка по точному совпадению с первым полем, 
+// извлечение значения второго поля в title22, проверка по регулярному выражению
+case Email("Manager", title_reg(title22), _) 	=> "delete"
+// значение для проверки в регулярном выражении можно и не извлекать в переменную, 
+// ведь и так понятно что туда подставлять
+case Email("Manager2", title_reg22(), _) 			=> "also delete"
+// если ничего не сработало
+case _ => "do nothing"
+	</code></pre>
+</section>
+
+
 
 </section>
 
 
 <section data-visibility="hidden">
-This slide is visible in the source, but hidden when the presentation is viewed. You can show all hidden slides by setting the `showHiddenSlides` config option to `true`.
+Например:
+
+
+
+while используется редко, т.к. есть рекурсия. break и continue отсутствуют (как и return в середине функции).
+do ... while не используется.
+
+for
+
+for ( i <- 1 to 10 )
+    println(i)
+    
+// в обратном порядке
+for ( i <- 10 to 1 by -1)
+  println(i)
+  
+// цикл по коллекции  
+for ( i <- Vector(1,2,3))
+  println(i)
+
+Можно использовать внутри конструкции, похожей как в list comprehension, в том числе с условием.
+
+println( for (i <- 1 to 10) yield i*i)    // 1, 4, 9, ...
+
+// квадраты чисел кратных трём
+println( for (i <- 1 to 100  if i%3 == 0) 
+      yield i*i
+)    // 9, 36, 81, 144 
+
+Можно указывать произвольное число действий в заголовке цикла. Это создаст вложенный цикл:
+
+for ( i <- 1 to 10;  j <- 1 to 10)
+    print(f"$i,$j  ")
+
+Код с фигурными скобками вместо круглых можно записать в несколько строк, не разделяя операторы точкой с запятой.
+
+for { i <- 1 to 10
+      j <- 1 to 10 }
+    print(f"$i,$j;  ")
+
+В тело цикла можно включить условие, котролирующее изменение счётчика
+
+for { i <- 1 to 5
+      j <- 1 to 5 if i >= j}
+    print(f"$i,$j;  ")
+
+Вывод
+
+1,1;  2,1;  2,2;  3,1;  3,2;  3,3;  4,1;  4,2;  4,3;  4,4;  5,1;  5,2;  5,3;  5,4;  5,5;
 </section>
 
 
 
 
-<section data-markdown>
-<script type="text/template">
-## Markdown Support
 
-Write content using inline or external Markdown.
-Instructions and more info available in the [docs](https://revealjs.com/markdown/).
+			<!-- slides -->
+			</div>		
 
-```html []
-<section data-markdown>
-  ## Markdown Support
-
-  Write content using inline or external Markdown.
-  Instructions and more info available in the [docs](https://revealjs.com/markdown/).
-</section>
-```
-</script>
-</section>
-
-
-
-
-
-
-
-			</div>
-
-		</div>
+			<!-- reveal -->
+		</div>			
 
 		<script src="dist/reveal.js"></script>
 		<script src="plugin/zoom/zoom.js"></script>
@@ -231,8 +494,10 @@ Instructions and more info available in the [docs](https://revealjs.com/markdown
 				center: true,
 				hash: true,
 
+				// font-size: 20,
+
 				width: 1280,
-  				height: 960,
+  			height: 960,
 
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]

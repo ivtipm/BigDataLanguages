@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Scala</title>
+		<title>О Scala</title>
 
 		<meta name="description" content=" ... ">
 		<meta name="author" content="Vetrov Sergey">
@@ -17,6 +17,7 @@
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
 		<link rel="stylesheet" href="dist/theme/night.css" id="theme">
+		
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
@@ -31,7 +32,7 @@
 			<div class="slides">
 
 <section>
-	<h1>Введение в Scala</h1>
+	<h2>Обзор Scala</h2>
 	<img src="https://www.scala-lang.org/resources/img/frontpage/scala-spiral.png" width="85px" margin-bottom=0> 
 
 
@@ -47,7 +48,12 @@
 		
 	- Scala Programming for Big Data Analytics: Get Started With Big Data Analytics Using Apache Spark, Irfan Elahi, 2019
 
-	- Подлодка. Scala. music.yandex.ru/album/7570122/track/59138633)
+	- [Scala 3 Book](https://docs.scala-lang.org/scala3/book/introduction.html)
+
+	- Шпаргалка: [github.com/ivtipm/BigDataLanguages/blob/main/Scala/Readme.md](https://github.com/ivtipm/BigDataLanguages/blob/main/Scala/Readme.md)
+
+	<br>
+	- Подлодка. Scala. [music.yandex.ru/album/7570122/track/59138633](https://music.yandex.ru/album/7570122/track/59138633)
 	</section>
 
 	<section>
@@ -68,11 +74,17 @@
 	- Последняя версия 3.2.1 (январь 2023)
 	- Параллельно существует Scala 2.13.10
 	- SCALA =  SCalable LAnguage 
+	</section>
+
+		<section data-markdown>
+	### Scala
 	- Компилируется в байт-код JVM
 		- Можно использовать библиотеки на Java
 	- Меньше boilerplate кода по сравнению c Java
 	- Ориентирован на высокую производительность
-	- ООП и функциональное программирование
+	- ООП и **функциональное** программирование
+		- код строится из комбинации функций
+		- выражения вместо операций (expressions instead of statements)
 	- Основной язык для BigData
 	</section>
 </section>
@@ -175,8 +187,20 @@ object hello {
 - Отличия тут: [docs.scala-lang.org/scala3/guides/migration/incompatibility-table.html](https://docs.scala-lang.org/scala3/guides/migration/incompatibility-table.html)
 - В Scala 3 упрощён синтаксис
 	- отступы как в Python
-	- 
+</section>
 
+
+
+
+<section>
+<h4>IDE: InteliJ IDEA > Интерактивный режим в файле</h4>
+<img src="images/IDEA-worksheet.png">
+</section>
+
+
+<section>
+
+<a href="Scala_introdution.html">Продолжение: Основы Scala</a>
 </section>
 
 
@@ -185,29 +209,9 @@ This slide is visible in the source, but hidden when the presentation is viewed.
 </section>
 
 
-
-
-<section data-markdown>
-<script type="text/template">
-## Markdown Support
-
-Write content using inline or external Markdown.
-Instructions and more info available in the [docs](https://revealjs.com/markdown/).
-
-```html []
-<section data-markdown>
-  ## Markdown Support
-
-  Write content using inline or external Markdown.
-  Instructions and more info available in the [docs](https://revealjs.com/markdown/).
+<section data-visibility="hidden">
+This slide is visible in the source, but hidden when the presentation is viewed. You can show all hidden slides by setting the `showHiddenSlides` config option to `true`.
 </section>
-```
-</script>
-</section>
-
-
-
-
 
 
 
