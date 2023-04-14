@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Scala</title>
+
+		<meta name="description" content=" ... ">
+		<meta name="author" content="Vetrov Sergey">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/night.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+<section>
+	<h1>Введение в Scala</h1>
+	<img src="https://www.scala-lang.org/resources/img/frontpage/scala-spiral.png" width="85px" margin-bottom=0> 
+
+
+	<p>Кафедра ИВТ и ПМ. Ветров С. В.</p>
+</section>
+
+
+<section>
+	<section data-markdown>
+	### Литература
+
+	- Scala для нетерпеливых / пер. с англ. А. Н. Киселева – 2-е изд., 2017 – 414 с.: ил.
+		
+	- Scala Programming for Big Data Analytics: Get Started With Big Data Analytics Using Apache Spark, Irfan Elahi, 2019
+
+	- Подлодка. Scala. music.yandex.ru/album/7570122/track/59138633)
+	</section>
+
+	<section>
+	<h2>Литература</h2>
+
+	<img src="images\Scala-for-impatient.ru.jpeg">
+	<img src="images\Scala-for-analytics.jpeg">
+	</section>
+</section>
+
+
+
+<section>
+	<section data-markdown>
+	### Scala
+	- Появился в 2003 г
+		- Версия 3.0 – 2021 г.
+	- Последняя версия 3.2.1 (январь 2023)
+	- Параллельно существует Scala 2.13.10
+	- SCALA =  SCalable LAnguage 
+	- Компилируется в байт-код JVM
+		- Можно использовать библиотеки на Java
+	- Меньше boilerplate кода по сравнению c Java
+	- Ориентирован на высокую производительность
+	- ООП и функциональное программирование
+	- Основной язык для BigData
+	</section>
+</section>
+
+
+<section>
+<img src="images/Scala-companies.png">
+
+<br>
+<a href="https://jetbrains.com/ru-ru/lp/devecosystem-2022/scala">jetbrains.com/ru-ru/lp/devecosystem-2022/scala </a>– результаты опроса JetBrains об раных сторонах использования Scala
+</section>
+
+
+<section>
+	<h3>Класс на Java</h3>
+	<pre><code style="max-height:1000px;">
+
+public class Person {
+  private final String name;
+  private final double age;
+
+  public Person(String name, double providedAge) {
+    this.name = name;
+    this.age = providedAge;}
+  
+  @Override
+  public int hashCode() {
+     int hash = 10;
+     hash = 23 * hash + Objects.hashCode(this.name);
+     return hash; 	}
+
+  @Override
+  public boolean equals(Object obj) { … }
+
+  @Override
+  public String toString() {
+    return "Test{" + "name=" + name + ", age=" + age + '}'; }
+
+}
+
+</code></pre>
+</section>
+
+<section>
+	<h3>Класс на Scala</h3>
+	<pre><code>
+		case class Person(name: String, age: double)
+	</code></pre>
+</section>
+
+
+<section data-markdown>
+## Установка
+1. Установить Oracle JDK [oracle.com/cis/java/technologies/downloads](https://oracle.com/cis/java/technologies/downloads)
+2. [scala-lang.org/download](https://www.scala-lang.org/download/)
+
+#### альтернатива
+
+
+- Попробовать онлайн: scastie.scala-lang.org
+- Консольная программа scala исполняет код, может работать как интерактивная оболочка
+</section>
+
+<section data-markdown>
+## HelloWorld.scala
+
+```scala
+@main def main() = println("Hello, World!")
+```
+
+**Компиляция:**
+```bash
+scalac HelloWorld.scala
+```
+
+**Запуск:**
+```bash
+scala HelloWorld
+```
+
+</section>
+
+
+<section data-markdown>
+## Hello, World!  Scala 2 (устаревшая версия)
+
+```scala
+
+object hello {
+  def main(args: Array[String]) = {
+    println("Hello, World!")
+  }
+}
+```
+</section>
+
+
+<section data-markdown>
+## Scala 2 vs Scala 3
+- Отличия тут: [docs.scala-lang.org/scala3/guides/migration/incompatibility-table.html](https://docs.scala-lang.org/scala3/guides/migration/incompatibility-table.html)
+- В Scala 3 упрощён синтаксис
+	- отступы как в Python
+	- 
+
+</section>
+
+
+<section data-visibility="hidden">
+This slide is visible in the source, but hidden when the presentation is viewed. You can show all hidden slides by setting the `showHiddenSlides` config option to `true`.
+</section>
+
+
+
+
+<section data-markdown>
+<script type="text/template">
+## Markdown Support
+
+Write content using inline or external Markdown.
+Instructions and more info available in the [docs](https://revealjs.com/markdown/).
+
+```html []
+<section data-markdown>
+  ## Markdown Support
+
+  Write content using inline or external Markdown.
+  Instructions and more info available in the [docs](https://revealjs.com/markdown/).
+</section>
+```
+</script>
+</section>
+
+
+
+
+
+
+
+			</div>
+
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				width: 1280,
+  				height: 960,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+		</script>
+
+	</body>
+</html>
