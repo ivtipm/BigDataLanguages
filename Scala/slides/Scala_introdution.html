@@ -627,17 +627,19 @@ val action = x match
 
 	<div  class="fragment">
 		Цикл со счётчиком
-		<pre  style=""><code data-trim data-noescape style="font-size: 1.25em;line-height: 1.05em;" class="scala">
+		<pre  style=""><code data-trim data-noescape class="scala">
 		for i <- 1 to 10 do 
 			  println(i)
 			</code></pre>
+
+			<code class="frgment">i <- ints</code> - генератор 
 	</div>
 	
 
 	<br>
 	<div  class="fragment">
 		Совместный цикл (цикл по коллекции)
-		<pre  style=""><code data-trim data-noescape style="font-size: 1.25em;line-height: 1.05em;" class="scala"
+		<pre  style=""><code data-trim data-noescape class="scala"
 			data-line-numbers="3-4">
 		val ints = List(1, 2, 3, 4, 5)
 
@@ -645,7 +647,6 @@ val action = x match
 		    println(i)
 			</code></pre>
 
-			<code class="frgment">i <- ints</code> - генератор 
 	</div>
 
 
@@ -686,11 +687,11 @@ do
 <section>
 	<h2>FOR</h2>
 	<ul class="fragment">
-		<li>для записи вложенных циклов достаточно одного оператора for</li>
+		<li>Для записи вложенных циклов достаточно одного оператора for, но нужно несколько итераторов и генераторов</li>
 	</ul>
 
 	<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
-		data-line-numbers="2-7">
+		data-line-numbers="">
 for
   i <- 1 to 3
   j <- 'a' to 'c'
@@ -700,7 +701,7 @@ do
 
 <br>
 <p class="fragment">Вывод</p>
-<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala">
+<pre class="fragment"  style=""><code data-trim data-noescape class="" data-line-numbers="1-3|4-6|7-9">
 i = 1, j = a
 i = 1, j = b
 i = 1, j = c
@@ -757,8 +758,10 @@ i = 10, j = c
 	</ul>
 
 	<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
-		data-line-numbers="2|4-5">
+		data-line-numbers="3-4|6-7">
 val ints = List(1, 2, 3, 4, 5)
+
+// Создание списка
 val doubles = for i <- ints yield i * 2
 
 // Результат List[Int] = 
@@ -845,7 +848,7 @@ List(Chris, Ed, Maurice)
 		<h2>Методы</h2>
 		<pre class=""  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
 		data-line-numbers="">
-def foo(x:Int):Double = 42.0 + x    // Double -- тип возвращаемого значения
+def foo(x:Int):Double = 1 / (1 + Math.exp(x))    // Double -- тип возвращаемого значения
 		</code></pre>
 		<ul>
 			<li class="fragment">Оператор return не используется, возвращаемое значение -- это значение последнего выражения внутри функции; (это тоже упрощает анализ кода, поощряет написание функций где невозможен выход в неожиданном месте) </li>
@@ -855,36 +858,45 @@ def foo(x:Int):Double = 42.0 + x    // Double -- тип возвращаемог
 		
 	</section>
 
+
+
 	<section>
 		<h2>Методы</h2>
 		<ul>
-			<li class="fragment">Тело метода можно заключить в фигурные скобки. Но можно и не заключать</li>
+			<li >Тело метода можно заключить в фигурные скобки. Но можно и не заключать</li>
 		</ul>
 
 
-		<pre class=""  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+		<pre class="fragment"  style=""><code data-trim data-noescape  class="scala"
 		data-line-numbers="1|4-7">
-def foo(x:Int) = 42.0+x     
+def foo(x:Int) = 1 / (1 + Math.exp(x))
 
 // или
 def foo(x:Int) = {
     println("Hello, World!")
-    42+x                      // возвращаемое значение -- значение последнего выражения в функции
+    // возвращаемое значение -- значение последнего выражения в методе
+    1 / (1 + Math.exp(x))
 }
 		</code></pre>
 		
+	</section>
+
+
+<section>
+		<h2>Методы</h2>
+
 		<ul class="fragment">
-			<li>Функции объявлять можно где угодно, в том числе внутри других функций</li>
+			<li>Методы объявлять можно где угодно, в том числе внутри других методов</li>
 		</ul>
 
-<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+<pre class="fragment"  style=""><code data-trim data-noescape  class="scala"
 		data-line-numbers="">
 def foo(x:Int) = {
     
     def hello_world() = println("Hello, World!")
 
   	hello_world()
-    42+x                      // возвращаемое значение -- значение последнего выражения в функции
+    1 / (1 + Math.exp(x))
 }
 
 hello_world
@@ -897,20 +909,38 @@ foo()
 
 
 
-	<section data-markdown>
-		## Функции
-		Функция, сама по себе, являясь значением некоторого функционального типа, может быть записана и в переменную, подобно анонимным функциям в языке C++.
-Например:
+	<section>
+		<h2>Функции</h2>
+		<p>Функция, сама по себе, являясь значением некоторого функционального типа, может быть записана и в переменную, подобно анонимным функциям в языке C++.</p>
 
-  ```scala
+<p>Например:</p>
+
+<pre><code data-trim data-noescape  class="scala">
   val foo: Int => Double = (x:Int) => 42.0 + x
-  ```
+</code></pre>
 
+<br>
 где
 
-- `Int => Double` - тип функции, принимающей Int и возвращавший Double
-- `=` - присваивание значения, в данном случае тела функции
-- `(x:Int) => 42.0 + x` - тело функции
+<br>
+<ul>
+	<li> 
+		тип функции, принимающей Int и возвращавший Double
+		<pre><code data-trim data-noescape  class="scala">
+			Int => Double
+		</code></pre> </li>
+	<li>
+		 присваивание значения, в данном случае тела функции
+		<pre><code data-trim data-noescape  class="scala">
+		= 
+		</code></pre>
+	</li>
+	<li>
+		 тело функции
+		<pre><code data-trim data-noescape  class="scala">
+			(x:Int) => 42.0 + x
+		</code></pre></li>
+</ul>
 
 	</section>
 
