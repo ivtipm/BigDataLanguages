@@ -39,7 +39,7 @@
 		<div class="reveal">
 
 			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides" style="font-size: 1.3em; line-height: 1.25em;">
+			<div class="slides" style="font-size: 1.3em; line-height: 1.25em; text-align: left">
 
 <section>
 	<h2>Введение в Scala</h2>
@@ -54,6 +54,9 @@
 </section>
 
 
+<!-- ====================================================================== hello, world! -->
+<section>
+	
 <section data-auto-animate>
 	<h2>Hello, World!</h2>
 	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
@@ -115,7 +118,7 @@ def main(): Unit = {
 		<li>В стандарте Scala 2 нужно создать класс наследник от App, который будет включать основной код.</li>
 	</ul>
 </section>
-
+</section>
 
 <!-- ====================================================================== типы -->
 <section>
@@ -188,9 +191,10 @@ var my_variable:Int = 0;      // переменная
 	<h2>Строки</h2>
 Такие же как в Java
 	</code></pre>
-		<pre class="scala"><code data-trim data-noescape style="font-size: 1.1em;line-height: 1.25em;">
+		<pre class="scala"><code data-trim data-noescape style="font-size: 1.0em;line-height: 1.25em;">
 val x = 333.0/106;		
 
+// Интерполяция строк
 val S = s"pi = $x"
 // pi = 3.141509433962264
 
@@ -213,15 +217,179 @@ val quote = """The essence of Scala:
 
 <section>
 	<h2>Строки</h2>
-Регулярные выражения
+Интерполяция
 	</code></pre>
+	<p><code>s, f</code> и <code>raw</code> - префиксы для строк</p>
+	<p><code>s</code> - префиксы строки с интерполяцией</p>
 		<pre class="scala"><code data-trim data-noescape style="font-size: 1.1em;line-height: 1.25em;">
+val name = "James"
+println( s"Hello, $name" )  // Hello, James	
 
+// интерполяция с выражениями внутри {}
+println( s"5 = ${2+2}" )  // Hello, James	
+
+// экранирование знака доллара
+println( s"price = $$99.5" )  // price = $99.5
+	</code></pre>
+</section>
+
+
+<section>
+	<h2>Строки</h2>
+Интерполяция и форматирование
+	</code></pre>
+	<p><code>f</code> - префиксы строки с интерполяцией и форматированием</p>
+	<p>Параметры форматирование записываются после знака <code>%</code></p>
+		<pre class="scala"><code data-trim data-noescape style="font-size: 1.1em;line-height: 1.25em;">
+val height = 1.9d
+val name = "James"
+println(f"$name%s is $height%2.2f meters tall")  // James is 1.90 meters tall
+	</code></pre>
+
+	<p><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Formatter.html#detail">Документация о форматировании в Java</a></p>
+</section>
+
+
+<section>
+	<h2>Строки</h2>
+Интерполяция строк как есть (сырых строк)
+	</code></pre>
+	<p><code>raw</code> - интерполяция аналогичная <code>s</code>, но без служебных символов в строке</p>
+		
+<pre class="scala" ><code data-trim data-noescape style="font-size: 1.1em;line-height: 1.25em;">
+s"a\nb"
+
+// Результат:
+a
+b
+</code></pre>
+
+<br>
+<pre class="scala fragment"><code data-trim data-noescape style="font-size: 1.1em;line-height: 1.25em;">
+raw"a\nb"
+
+// Результат:
+a\nb
+</code></pre>
+</section>
+
+<section data-markdown>>
+## Строки. Документация
+- `.toInt`	
+- `.toDouble`	
+- `.size`
+- `.split(Char)`
+- ...
+
+[scala-lang.org/api/3.2.2/scala/collection/StringOps.html#](https://www.scala-lang.org/api/3.2.2/scala/collection/StringOps.html)
+</section>
+
+
+
+</section>
+
+<!-- ====================================================================== регулярные выражения -->
+
+<section>
+<section>
+	<h2>Регулярные выражения</h2>
+
+		<pre class="scala"><code data-trim data-noescape style="font-size: 1.1em;line-height: 1.25em;">
+import scala.util.matching.Regex
+
+@main
+def main() =
+  // метод строки r создаст из неё экземпляр типа numberPattern
+  val number_r: Regex = "[0-9]".r
+  // Для записи метасимволов удобно использовать префикс raw
+  val time_r: Regex = raw"\d\d:\d\d".r
+  
+  // проверка на полное соответствие
+  number_r.matches("7");      // true
+  number_r.matches("71");     // false
+  number_r.matches("number"); // false
 		</code></pre>
 </section>
 
+
+<section>
+	<h2>Регулярные выражения</h2>
+
+		<pre class="scala"><code data-trim data-noescape style="font-size: 1.1em;line-height: 1.25em;">
+import scala.util.matching.Regex
+
+@main
+def main() =
+  // метод строки r создаст из неё экземпляр типа numberPattern
+  val number_r: Regex = "[0-9]".r
+
+  // number_r.findAllIn("12 abc 3 8") -> итератор
+  for m <- number_r.findAllIn("12 abc 3 8") do
+      println(m)
+	</code></pre>
+
+<p class="fragment">Вывод</p>
+		<pre class="scala fragment"><code data-trim data-noescape style="font-size: 1.1em;line-height: 1.25em;">
+1
+2
+3
+8
+	</code></pre>
+
+	<p class="fragment">Возвращаемый итератор имеет метод <code>.toList</code> </p>
 </section>
 
+
+
+<section>
+	<h2>Больше примеров</h2>
+<a href="https://docs.scala-lang.org/tour/regular-expression-patterns.html#inner-main">scala-lang.org/tour/regular-expression-patterns.html#inner-main</a>
+
+<a href="https://www.scala-lang.org/api/3.2.2/scala/util/matching/Regex.html#">scala-lang.org/api/3.2.2/scala/util/matching/Regex.html#</a>
+</section>
+
+
+</section>
+
+
+<!-- ====================================================================== управляющие конструкции -->
+<section>
+	<section>
+		<h2>Вывод</h2>
+		<pre class="" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+println("Hello, World!")
+print("Hello, World!")
+</code></pre>
+
+
+<p class="fragment">Форматные строки</p>
+<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+val p = 333.0 / 106            // 3.141509433962264
+println( f"pi ≈ $p%7.3f" )
+println( f"pi ≈ ${333.0/106}%7.3f" )
+</code></pre>
+
+<p class="fragment">Вывод</p>
+<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+pi ≈   3.143
+pi ≈   3.143
+</code></pre>
+	</section>
+
+
+	<section>
+		<h2>Ввод</h2>
+		<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+// подключение трёх функций из пакета 
+import scala.io.StdIn.{readLine, readInt, readLong}
+
+val s: String = readLine()
+	</code></pre>
+	</section>
+
+
+
+</section>
 
 <!-- ====================================================================== управляющие конструкции -->
 
@@ -390,7 +558,7 @@ val x = new Email("Manager", "important!!!!", "Hello, dear friend")
 //val x = new Email("Vasya", "qwerty", "Hello, dear friend")  
 
 // 2 или более восклицательных знака среди всего остального, 
-// выражение должно быть в скобках для обозначения места для подставноки строки
+// выражение должно быть в скобках для обозначения места для подстановки строки
 val title_reg   = "(.*!{2,}.*)".r   
 // 2 или более восклицательных знака среди всего остального
 val title_reg22 =  ".*!{2,}.*".r     
@@ -416,60 +584,301 @@ case _ => "do nothing"
 </section>
 
 
-<section data-visibility="hidden">
-Например:
+<!-- ====================================================================== for -->
+<section>
+<section>
+	<h2>FOR</h2>
+
+	<div  class="fragment">
+		Цикл со счётчиком
+		<pre  style=""><code data-trim data-noescape style="font-size: 1.25em;line-height: 1.05em;" class="scala">
+		for i <- 1 to 10 do 
+			  println(i)
+			</code></pre>
+	</div>
+	
+
+	<br>
+	<div  class="fragment">
+		Совместный цикл (цикл по коллекции)
+		<pre  style=""><code data-trim data-noescape style="font-size: 1.25em;line-height: 1.05em;" class="scala"
+			data-line-numbers="2">
+		val ints = List(1, 2, 3, 4, 5)
+
+		for i <- ints do 
+		    println(i)
+			</code></pre>
+
+			<code class="frgment">i <- ints</code> - генератор 
+	</div>
 
 
 
-while используется редко, т.к. есть рекурсия. break и continue отсутствуют (как и return в середине функции).
-do ... while не используется.
+
+
+</section>
+
+
+<section>
+	<h2>FOR</h2>
+	<ul class="fragment">
+		<li>Заголовок цикла по коллекции может включать условия (guards)</li>
+		<li>Заголовок можно записывать в несколько строк</li>
+	</ul>
+
+	<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+		data-line-numbers="2-7">
+val ints = List(1, 2, 3, 4, 5)
 
 for
-
-for ( i <- 1 to 10 )
-    println(i)
-    
-// в обратном порядке
-for ( i <- 10 to 1 by -1)
+  i <- ints
+  if i % 2 == 0
+do
   println(i)
-  
-// цикл по коллекции  
-for ( i <- Vector(1,2,3))
-  println(i)
+		</code></pre>
 
-Можно использовать внутри конструкции, похожей как в list comprehension, в том числе с условием.
+<br>
+<p class="fragment">Вывод</p>
+<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala">
+2
+4
+		</code></pre>
 
-println( for (i <- 1 to 10) yield i*i)    // 1, 4, 9, ...
+</section>
 
-// квадраты чисел кратных трём
-println( for (i <- 1 to 100  if i%3 == 0) 
-      yield i*i
-)    // 9, 36, 81, 144 
 
-Можно указывать произвольное число действий в заголовке цикла. Это создаст вложенный цикл:
+<section>
+	<h2>FOR</h2>
+	<ul class="fragment">
+		<li>для записи вложенных циклов достаточно одного оператора for</li>
+	</ul>
 
-for ( i <- 1 to 10;  j <- 1 to 10)
-    print(f"$i,$j  ")
+	<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+		data-line-numbers="2-7">
+for
+  i <- 1 to 3
+  j <- 'a' to 'c'
+do
+  println(s"i = $i, j = $j")  
+		</code></pre>
 
-Код с фигурными скобками вместо круглых можно записать в несколько строк, не разделяя операторы точкой с запятой.
+<br>
+<p class="fragment">Вывод</p>
+<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala">
+i = 1, j = a
+i = 1, j = b
+i = 1, j = c
+i = 2, j = a
+i = 2, j = b
+i = 2, j = c
+i = 3, j = a
+i = 3, j = b
+i = 3, j = c
+		</code></pre>
 
-for { i <- 1 to 10
-      j <- 1 to 10 }
-    print(f"$i,$j;  ")
+</section>
 
-В тело цикла можно включить условие, котролирующее изменение счётчика
 
-for { i <- 1 to 5
-      j <- 1 to 5 if i >= j}
-    print(f"$i,$j;  ")
+<section>
+	<h2>FOR</h2>
+	<ul class="fragment">
+		<li>Условия можно помещать и во вложенных циклах</li>
+		<li>В примере ниже они будут проверяться каждую итерацию самого вложенного цикла</li>
+	</ul>
 
-Вывод
+	<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+		data-line-numbers="">
+for
+  i <- 1 to 10
+  j <- 'a' to 'c'
+  if i % 2 == 0
+  if j != 'b'
+do
+  println(s"i = $i, j = $j")  
+		</code></pre>
 
-1,1;  2,1;  2,2;  3,1;  3,2;  3,3;  4,1;  4,2;  4,3;  4,4;  5,1;  5,2;  5,3;  5,4;  5,5;
+<br>
+<p class="fragment">Вывод</p>
+<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala">
+i = 2, j = a
+i = 2, j = c
+i = 4, j = a
+i = 4, j = c
+i = 6, j = a
+i = 6, j = c
+i = 8, j = a
+i = 8, j = c
+i = 10, j = a
+i = 10, j = c
+		</code></pre>
+
+</section>
+
+<section>
+	<h2>Выражения на основе for (генераторы)</h2>
+	<ul class="fragment">
+		Принцип работы похож на list comprehension из Python
+	</ul>
+
+	<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+		data-line-numbers="1|3-4">
+val doubles = for i <- ints yield i * 2
+
+// Результат List[Int] = 
+List(2, 4, 6, 8, 10)
+		</code></pre>
+
+<br>
+<p class="fragment">Такая запись удобна для преобразования списков</p>
+<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+		data-line-numbers="1-2|4-5">
+val names = List("chris", "ed", "maurice")
+val capNames = for name <- names yield name.capitalize
+
+// Результат List[String] =
+List(Chris, Ed, Maurice)
+		</code></pre>
 </section>
 
 
 
+</section>
+
+
+
+<!-- ====================================================================== for -->
+
+
+<section data-visibility="hidden">
+	Например:
+
+
+	while используется редко, т.к. есть рекурсия. break и continue отсутствуют (как и return в середине функции).
+	do ... while не используется.
+
+	for
+
+	for ( i <- 1 to 10 )
+	    println(i)
+	    
+	// в обратном порядке
+	for ( i <- 10 to 1 by -1)
+	  println(i)
+	  
+	// цикл по коллекции  
+	for ( i <- Vector(1,2,3))
+	  println(i)
+
+	Можно использовать внутри конструкции, похожей как в list comprehension, в том числе с условием.
+
+	println( for (i <- 1 to 10) yield i*i)    // 1, 4, 9, ...
+
+	// квадраты чисел кратных трём
+	println( for (i <- 1 to 100  if i%3 == 0) 
+	      yield i*i
+	)    // 9, 36, 81, 144 
+
+	Можно указывать произвольное число действий в заголовке цикла. Это создаст вложенный цикл:
+
+	for ( i <- 1 to 10;  j <- 1 to 10)
+	    print(f"$i,$j  ")
+
+	Код с фигурными скобками вместо круглых можно записать в несколько строк, не разделяя операторы точкой с запятой.
+
+	for { i <- 1 to 10
+	      j <- 1 to 10 }
+	    print(f"$i,$j;  ")
+
+	В тело цикла можно включить условие, контролирующее изменение счётчика
+
+	for { i <- 1 to 5
+	      j <- 1 to 5 if i >= j}
+	    print(f"$i,$j;  ")
+
+	Вывод
+
+	1,1;  2,1;  2,2;  3,1;  3,2;  3,3;  4,1;  4,2;  4,3;  4,4;  5,1;  5,2;  5,3;  5,4;  5,5;
+</section>
+
+
+
+<!-- ====================================================================== def -->
+<section>
+	<section>
+		<h2>Методы</h2>
+		<pre class=""  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+		data-line-numbers="">
+def foo(x:Int):Double = 42.0 + x    // Double -- тип возвращаемого значения
+		</code></pre>
+		<ul>
+			<li class="fragment">Оператор return не используется, возвращаемое значение -- это значение последнего выражения внутри функции; (это тоже упрощает анализ кода, поощряет написание функций где невозможен выход в неожиданном месте) </li>
+			
+			<li class="fragment">Тип возвращаемого значения может быть выведен автоматически (кроме рекурсивных функций)</li>
+		</ul>
+		
+	</section>
+
+	<section>
+		<h2>Методы</h2>
+		<ul>
+			<li class="fragment">Тело метода можно заключить в фигурные скобки. Но можно и не заключать</li>
+		</ul>
+
+
+		<pre class=""  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+		data-line-numbers="1|4-7">
+def foo(x:Int) = 42.0+x     
+
+// или
+def foo(x:Int) = {
+    println("Hello, World!")
+    42+x                      // возвращаемое значение -- значение последнего выражения в функции
+}
+		</code></pre>
+		
+		<ul class="fragment">
+			<li>Функции объявлять можно где угодно, в том числе внутри других функций</li>
+		</ul>
+
+<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+		data-line-numbers="">
+def foo(x:Int) = {
+    
+    def hello_world() = println("Hello, World!")
+
+  	hello_world()
+    42+x                      // возвращаемое значение -- значение последнего выражения в функции
+}
+
+hello_world
+// ошибка: hello_world вне области видимости
+
+foo()
+</code></pre>
+		
+	</section>
+
+
+
+	<section data-markdown>
+		## Функции
+		Функция, сама по себе, являясь значением некоторого функционального типа, может быть записана и в переменную, подобно анонимным функциям в языке C++.
+Например:
+
+  ```scala
+  val foo: Int => Double = (x:Int) => 42.0 + x
+  ```
+
+где
+
+- `Int => Double` - тип функции, принимающей Int и возвращавший Double
+- `=` - присваивание значения, в данном случае тела функции
+- `(x:Int) => 42.0 + x` - тело функции
+
+	</section>
+
+
+</section>
 
 
 			<!-- slides -->
