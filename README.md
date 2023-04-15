@@ -12,6 +12,7 @@
 ### Системы хранения и обработки данных, Scala
 1. Работа с базами данных в Java. Введение в язык Scala – ООП и переменные, Scala Shell, коллекции в Scala
    - https://ivtipm.github.io/BigDataLanguages/Scala/slides/Scala_about.html
+   - [Шпаргалка](Scala/Readme.md)
 1. Примеры Pattern matching; ScalikeJDBC - библиотека для работы с реляционными БД в Scala; SCOPT - библиотека по разбору командной строки
 1. Apache Spark, запуск и форматы данных: plain text storage, sequence files, parquet, orc, avro. 
 1. Работы с вводом-выводом. Задачи на Stream API
@@ -74,7 +75,8 @@
 
 ### 6. Основы Scala
 Знакомство с базовым синтаксисом Scala: переменные, значения, типы; функции, анонимные функции; классы, объекты; интерфейсы и трейты; особенности и отличия от Java
-- [Шпаргалка](scala/Readme.md)
+- https://ivtipm.github.io/BigDataLanguages/Scala/slides/Scala_about.html
+- [Шпаргалка](Scala/Readme.md)
 
 ### 7. Apache Spark - 1
 Apache Spark. Настройка и работа c REPL.
