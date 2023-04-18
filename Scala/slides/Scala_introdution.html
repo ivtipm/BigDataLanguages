@@ -23,13 +23,14 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 
+		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
 
 		<style type="text/css">
     :root {
         --r-main-font-size: 25px;
     }
 </style>
-
 
 
 	</head>
@@ -118,7 +119,42 @@ def main(): Unit = {
 		<li>В стандарте Scala 2 нужно создать класс наследник от App, который будет включать основной код.</li>
 	</ul>
 </section>
+
+
+<section data-markdown>
+	## Компиляция и запуск
+	```scala
+	@main
+	def main_method() =
+	    println("Hello world!")
+	```
+
+```text[1-2|5-14|16-18]
+# Компиляция 
+scalaс main.scala
+
+
+# Результат:
+main.scala
+# class файлы для каждого пакета, класса, метода
+main$package$.class
+main$package.class
+main_method.class 
+# TASTy = Typed Abstract Syntax Trees
+main$package.tasty
+main_method.tasty
+
+
+# Запуск, нужно указать только имя главного метода
+scala main_method
+```
 </section>
+
+
+
+</section>
+
+
 
 <!-- ====================================================================== типы -->
 <section>
@@ -581,6 +617,12 @@ case _ => "do nothing"
 	</code></pre>
 </section>
 
+
+
+<section>
+	<h2>Пример сопоставления с образцом для аргументом командной строки</h2>
+
+</section>
 
 
 </section>
