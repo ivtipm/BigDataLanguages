@@ -30,6 +30,13 @@
     :root {
         --r-main-font-size: 25px;
     }
+
+    .reveal pre {
+  			font-size: 0.95em;
+  			font-family: var(--r-code-font);
+  			line-height: 1.2em;
+}
+
 </style>
 
 
@@ -40,11 +47,13 @@
 		<div class="reveal">
 
 			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides" style="font-size: 1.3em; line-height: 1.25em; text-align: left">
+			<div class="slides" style="font-size: 1.1em; line-height: 1.15em; text-align: left">
+
+
 
 <section>
 	<h2>Введение в Scala</h2>
-	<h2>Основные типы. Ввод и вывод.</h2>
+	<h4>Основные типы. Ввод и вывод. Управляющие операторы. Функции и методы. Коллекции</h4>
 	<img src="https://www.scala-lang.org/resources/img/frontpage/scala-spiral.png" width="85px" margin-bottom=0> 
 
 
@@ -60,20 +69,21 @@
 	
 <section data-auto-animate>
 	<h2>Hello, World!</h2>
-	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+	<pre class="scala"><code data-trim data-noescape>
 @main
 def main(): Unit = {
   	println("Hello")
 	  println("world!")
 }
 	</code></pre>
+
 </section>
 
 
 
 <section data-auto-animate>
 	<h2>Hello, World!</h2>
-	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+	<pre class="scala"><code data-trim data-noescape >
 	@main
 	def main() =
 	    println("Hello")
@@ -89,7 +99,7 @@ def main(): Unit = {
 
 <section data-auto-animate>
 	<h2>Hello, World!</h2>
-	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+	<pre class="scala"><code data-trim data-noescape  data-line-numbers="1">
 	@main
 	def main() =
 	    println("Hello world!")
@@ -104,7 +114,7 @@ def main(): Unit = {
 
 <section data-auto-animate>
 	<h2>Hello, World!</h2>
-	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+	<pre class="scala"><code data-trim data-noescape >
 	@main
 	def main() =
 	    println("Hello world!")
@@ -150,60 +160,69 @@ scala main_method
 ```
 </section>
 
-
-
 </section>
+
 
 
 
 <!-- ====================================================================== типы -->
 <section>
 
-<section data-markdown>
-## Система типов
-- Статическая типизация
-- Местами строгая (нельзя без явного преобразования `val x: Int = 2.3`)
-- Возможен автоматический вывод типа (inference) для многих ситуаций.\
-  Например `val y: = 40+2; // Int`
-
-</section>
-
-
-<section data-auto-animate>
-Общий синтаксис объявления переменной или константы
-	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
-val|var name: type = value
-</code></pre>
-</section>
-
-<section data-auto-animate>
-Общий синтаксис объявления переменной или константы
-	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
-val|var name: type = value
-</code></pre>
-	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
-val my_const = 333/106;   		// константа (immutable variable)
-var my_variable:Int = 0;      // переменная
-</code></pre>
-
-
-</section>
-
-<section data-auto-animate>
-Общий синтаксис объявления переменной или константы
-	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
-val|var name: type = value
-</code></pre>
-	<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
-val my_const = 333/106;   		// константа (immutable variable)
-var my_variable:Int = 0;      // переменная
-</code></pre>
+<section>
+<h2>Система типов</h2>
 
 <ul>
+<li>Статическая типизация</li>
+<li>Местами строгая (нельзя без явного преобразования </li>
+<pre class="scala"><code data-trim data-noescape>
+val x: Int = 2.3 // ошибка: требуется явное преобразование в Int
+</code></pre>
+<li>Возможен автоматический вывод типа (inference) для многих ситуаций.\
+	  Например 
+<pre class="scala"><code data-trim data-noescape>
+val y: = 40+2; 	// Int
+</code></pre>
+	</li>
+
+<li>Самый базовый тип - <b>надтип</b></li>
+<li>Производный тип - <b>подтип</b></li>
+
+
+</ul>
+
+</section>
+
+
+
+<section>
+Общий синтаксис объявления переменной или константы
+	<pre class="scala"><code data-trim data-noescape >
+val|var name: type = value
+</code></pre>
+
+<p class="fragment">Константа (immutable variable)</p>
+<pre class="scala fragment"><code data-trim data-noescape >
+val my_const:Float = 333/106;
+val my_const = 333/106;					// автоматический вывод типа: Double
+val my_const;									  // Ошибка: значение не задано
+</code></pre>
+
+<br>
+<p class="fragment">Переменная</p>
+<pre class="scala fragment"><code data-trim data-noescape >
+var my_variable:Int = 0;
+var my_variable = 0;
+var my_variable:Int;	// Ошибка: не указано начальное значение
+var my_variable;			// Ошибка: невозможно вывести тип
+</code></pre>
+
+<ul class="fragment">
 	<li>Тип у переменных указывать тоже не обязательно, но рекомендуется.</li>
 	<li>Используйте константы всюду, где это возможно</li>
 </ul>
+
 </section>
+
 
 
 <section>
@@ -213,7 +232,7 @@ var my_variable:Int = 0;      // переменная
 <section>
 	<h2>Числовые типы (value типы)</h2>
 	</code></pre>
-		<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+		<pre class="scala"><code data-trim data-noescape >
 	val b: Byte = 1
 	val i: Int = 1 				// default for type inference
 	val l: Long = 1
@@ -227,14 +246,8 @@ var my_variable:Int = 0;      // переменная
 	<h2>Строки</h2>
 Такие же как в Java
 	</code></pre>
-		<pre class="scala"><code data-trim data-noescape style="font-size: 1.0em;line-height: 1.25em;">
-val x = 333.0/106;		
-
-// Интерполяция строк
-val S = s"pi = $x"
-// pi = 3.141509433962264
-
-val S2 = s"выражение внутри строки: ${ Math.pow(x.ceil,2) }"
+		<pre class="scala" style=""><code data-trim data-noescape >
+val S0 = "I'am string"
 
 // многострочный литерал
 val quote = """The essence of Scala:
@@ -330,38 +343,50 @@ a\nb
 <section>
 	<h2>Регулярные выражения</h2>
 
-		<pre class="scala"><code data-trim data-noescape style="font-size: 1.1em;line-height: 1.25em;">
+Создание регулярного выражения из строки
+<pre class="scala"><code data-trim data-noescape>
 import scala.util.matching.Regex
 
-@main
-def main() =
-  // метод строки r создаст из неё экземпляр типа numberPattern
-  val number_r: Regex = "[0-9]".r
-  // Для записи метасимволов удобно использовать префикс raw
-  val time_r: Regex = raw"\d\d:\d\d".r
-  
-  // проверка на полное соответствие
-  number_r.matches("7");      // true
-  number_r.matches("71");     // false
-  number_r.matches("number"); // false
+// метод строки r создаст из неё экземпляр типа numberPattern
+val number_r: Regex = "[0-9]".r
+
+// Для записи метасимволов удобно использовать префикс raw
+val time_r: Regex = raw"\d\d:\d\d".r
 		</code></pre>
 </section>
 
 
 <section>
 	<h2>Регулярные выражения</h2>
+Проверка соответствия строги регулярному выражению
+<pre class="scala"><code data-trim data-noescape>
+import scala.util.matching.Regex
 
+// метод строки r создаст из неё экземпляр типа numberPattern
+val number_r: Regex = "[0-9]".r
+
+  
+// проверка на полное соответствие
+number_r.matches("7");      // true
+number_r.matches("71");     // false
+number_r.matches("number"); // false
+		</code></pre>
+</section>
+
+
+
+<section>
+	<h2>Регулярные выражения</h2>
+Поиск всех совпадений
 		<pre class="scala"><code data-trim data-noescape style="font-size: 1.1em;line-height: 1.25em;">
 import scala.util.matching.Regex
 
-@main
-def main() =
-  // метод строки r создаст из неё экземпляр типа numberPattern
-  val number_r: Regex = "[0-9]".r
+// метод строки r создаст из неё экземпляр типа numberPattern
+val number_r: Regex = "[0-9]".r
 
-  // number_r.findAllIn("12 abc 3 8") -> итератор
-  for m <- number_r.findAllIn("12 abc 3 8") do
-      println(m)
+// number_r.findAllIn("12 abc 3 8") -> итератор
+for m <- number_r.findAllIn("12 abc 3 8") do
+	  println(m)
 	</code></pre>
 
 <p class="fragment">Вывод</p>
@@ -388,25 +413,25 @@ def main() =
 </section>
 
 
-<!-- ====================================================================== управляющие конструкции -->
+<!-- ====================================================================== Ввод и вывод -->
 <section>
 	<section>
 		<h2>Вывод</h2>
-		<pre class="" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+		<pre class="" class="scala"><code data-trim data-noescape >
 println("Hello, World!")
 print("Hello, World!")
 </code></pre>
 
 
 <p class="fragment">Форматные строки</p>
-<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+<pre class="fragment" class="scala"><code data-trim data-noescape >
 val p = 333.0 / 106            // 3.141509433962264
 println( f"pi ≈ $p%7.3f" )
 println( f"pi ≈ ${333.0/106}%7.3f" )
 </code></pre>
 
 <p class="fragment">Вывод</p>
-<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+<pre class="fragment" class="scala"><code data-trim data-noescape >
 pi ≈   3.143
 pi ≈   3.143
 </code></pre>
@@ -415,7 +440,7 @@ pi ≈   3.143
 
 	<section>
 		<h2>Ввод</h2>
-		<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+		<pre class="fragment" class="scala"><code data-trim data-noescape >
 // подключение трёх функций из пакета 
 import scala.io.StdIn.{readLine, readInt, readLong}
 
@@ -436,9 +461,13 @@ val s: String = readLine()
 <h2>Управляющие операторы</h2>
 <ul>
 	<li class="fragment">  <code>if/then/else </code></li>
+	<li class="fragment">  <code>отсутствует return </code></li>
   <li class="fragment">  <code>for loops </code></li>
   <li class="fragment">  <code>while loops </code><br>
-  	break и continue отсутствуют<br>
+  	<ul>
+  		<li>break и continue отсутствуют</li>
+  		<li>чаще вместо while используется рекурсия</li>
+  	</ul>
   </li>
   <li class="fragment">  <code>try/catch/finally </code></li>
   <li class="fragment">  <code>for expressions</code> — генераторы</li>
@@ -452,7 +481,7 @@ val s: String = readLine()
 <section>
 <section>
 	<h2>IF</h2>
-	<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+	<pre class="" class="scala"><code data-trim data-noescape >
 if x < 0 then
   println("negative")
 else if x == 0 then
@@ -470,7 +499,7 @@ else
 	</ul>
 
 
-	<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;">
+	<pre class="fragment" class="scala"><code data-trim data-noescape >
 val minValue = if a < b then a else b
 	</code></pre>
 </section>
@@ -478,7 +507,7 @@ val minValue = if a < b then a else b
 
 <section>
 	<h2>IF</h2>
-<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;"
+<pre class="scala"><code data-trim data-noescape 
 	data-line-numbers="5-7">
 import scala.util.Random
 val rand = Random
@@ -497,7 +526,7 @@ val max =
 <section>
 <section>
 	<h2>match — сопоставление с образцом</h2>
-<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;"
+<pre class="scala"><code data-trim data-noescape 
 	data-line-numbers="">
 // `i` is an integer
 val day = i match
@@ -515,7 +544,7 @@ val day = i match
 <section>
 	<h2>match</h2>
 	<h4>ИЛИ</h4>
-<pre class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;"
+<pre class="scala"><code data-trim data-noescape 
 	data-line-numbers="2">
 val day = i match
   case 0 | 6 => "Sunday or Saturday"
@@ -533,7 +562,7 @@ val day = i match
 	<p style="text-align: left">
 	Условие внутри case
 	</p>
-<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;"
+<pre class="fragment" class="scala"><code data-trim data-noescape 
 	data-line-numbers="8">
 import scala.util.Random
 
@@ -559,8 +588,8 @@ x match
 	Вместо значения в case можно указать переменную, в которую это значение запишется. Так как переменная будет всегда равна проверяемому значению, такая ветка будет срабатывать всегда.
 	</p>
 
-<pre class="fragment" class="scala"><code data-trim data-noescape style="font-size: 1.3em;line-height: 1.25em;"
-	data-line-numbers="9">
+<pre class="fragment" class="scala"><code data-trim data-noescape 
+	data-line-numbers="9-11">
 val day = i match
   case 0 => "Sunday"
   case 1 => "Monday"
@@ -570,7 +599,10 @@ val day = i match
   case 5 => "Friday"
   case 6 => "Saturday"
 	case x => s"$x - not a valid day number" // the default, catch-all
+	// x - локальная для case переменная, 
+	// в которую извлекается проверяемая переменная
 	</code></pre>
+
 </section>
 
 
@@ -582,18 +614,15 @@ val day = i match
 
 	</p>
 
-<pre class="fragment"  style="height: 40vh;"><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
-	data-line-numbers="1|2-17|18-30">
+<pre class="fragment"  style="height: 80vh; width: 100wh;"><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+	data-line-numbers="1|3-7|9-13|15|15,16-18|15,19-20|15,21-24|15,25-27|15,28-29">
 case class Email(sender: String, title: String, body: String)
 
-// возможные варианты для match
-// send to spam
-//val x = new Email("Spammer", "Not a Spam", "Hello, dear friend")
-// delete
+// возможные варианты для сопоставляемой переменной:
+// val x = new Email("Spammer", "Not a Spam", "Hello, dear friend")
 val x = new Email("Manager", "important!!!!", "Hello, dear friend")          
-//val x = new Email("Manager2", "important!!!!", "Hello, dear friend")
-// do nothing
-//val x = new Email("Vasya", "qwerty", "Hello, dear friend")  
+// val x = new Email("Manager2", "important!!!!", "Hello, dear friend")
+// val x = new Email("Vasya", "qwerty", "Hello, dear friend")  
 
 // 2 или более восклицательных знака среди всего остального, 
 // выражение должно быть в скобках для обозначения места для подстановки строки
@@ -601,19 +630,21 @@ val title_reg   = "(.*!{2,}.*)".r
 // 2 или более восклицательных знака среди всего остального
 val title_reg22 =  ".*!{2,}.*".r     
 
-x match
-// проверка по полю sender, с извлечением значения из поля title в переменную title1
-case Email("Spammer", title1, _)           		=> s"send <$title1> to spam"
-// проверка по последнему полю
-case Email(_, _, "money")                  		=> "mark important"
-// проверка по точному совпадению с первым полем, 
-// извлечение значения второго поля в title22, проверка по регулярному выражению
-case Email("Manager", title_reg(title22), _) 	=> "delete"
-// значение для проверки в регулярном выражении можно и не извлекать в переменную, 
-// ведь и так понятно что туда подставлять
-case Email("Manager2", title_reg22(), _) 			=> "also delete"
-// если ничего не сработало
-case _ => "do nothing"
+val action = x match
+	// проверка по полю sender, с извлечением значения из поля title 
+	// в переменную title1
+	case Email("Spammer", title1, _)    	=> s"send <$title1> to spam"
+	// проверка по последнему полю
+	case Email(_, _, "money")                  		=> "mark important"
+	// проверка по точному совпадению с первым полем, 
+	// извлечение значения второго поля в title22, 
+	// проверка по регулярному выражению
+	case Email("Manager", title_reg(title22), _) 	=> "delete"
+	// значение для проверки в регулярном выражении можно и не извлекать
+	// в переменную, ведь и так понятно что туда подставлять
+	case Email("Manager2", title_reg22(), _) 			=> "also delete"
+	// если ничего не сработало
+	case _ => "do nothing"
 	</code></pre>
 </section>
 
@@ -635,17 +666,19 @@ case _ => "do nothing"
 
 	<div  class="fragment">
 		Цикл со счётчиком
-		<pre  style=""><code data-trim data-noescape style="font-size: 1.25em;line-height: 1.05em;" class="scala">
+		<pre  style=""><code data-trim data-noescape class="scala">
 		for i <- 1 to 10 do 
 			  println(i)
 			</code></pre>
+
+			<code class="frgment">i <- ints</code> - генератор 
 	</div>
 	
 
 	<br>
 	<div  class="fragment">
 		Совместный цикл (цикл по коллекции)
-		<pre  style=""><code data-trim data-noescape style="font-size: 1.25em;line-height: 1.05em;" class="scala"
+		<pre  style=""><code data-trim data-noescape class="scala"
 			data-line-numbers="3-4">
 		val ints = List(1, 2, 3, 4, 5)
 
@@ -653,7 +686,6 @@ case _ => "do nothing"
 		    println(i)
 			</code></pre>
 
-			<code class="frgment">i <- ints</code> - генератор 
 	</div>
 
 
@@ -694,11 +726,11 @@ do
 <section>
 	<h2>FOR</h2>
 	<ul class="fragment">
-		<li>для записи вложенных циклов достаточно одного оператора for</li>
+		<li>Для записи вложенных циклов достаточно одного оператора for, но нужно несколько итераторов и генераторов</li>
 	</ul>
 
 	<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
-		data-line-numbers="2-7">
+		data-line-numbers="">
 for
   i <- 1 to 3
   j <- 'a' to 'c'
@@ -708,7 +740,7 @@ do
 
 <br>
 <p class="fragment">Вывод</p>
-<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala">
+<pre class="fragment"  style=""><code data-trim data-noescape class="" data-line-numbers="1-3|4-6|7-9">
 i = 1, j = a
 i = 1, j = b
 i = 1, j = c
@@ -765,8 +797,10 @@ i = 10, j = c
 	</ul>
 
 	<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
-		data-line-numbers="2|4-5">
+		data-line-numbers="3-4|6-7">
 val ints = List(1, 2, 3, 4, 5)
+
+// Создание списка
 val doubles = for i <- ints yield i * 2
 
 // Результат List[Int] = 
@@ -853,7 +887,7 @@ List(Chris, Ed, Maurice)
 		<h2>Методы</h2>
 		<pre class=""  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
 		data-line-numbers="">
-def foo(x:Int):Double = 42.0 + x    // Double -- тип возвращаемого значения
+def foo(x:Int):Double = 1 / (1 + Math.exp(x))    // Double -- тип возвращаемого значения
 		</code></pre>
 		<ul>
 			<li class="fragment">Оператор return не используется, возвращаемое значение -- это значение последнего выражения внутри функции; (это тоже упрощает анализ кода, поощряет написание функций где невозможен выход в неожиданном месте) </li>
@@ -863,36 +897,45 @@ def foo(x:Int):Double = 42.0 + x    // Double -- тип возвращаемог
 		
 	</section>
 
+
+
 	<section>
 		<h2>Методы</h2>
 		<ul>
-			<li class="fragment">Тело метода можно заключить в фигурные скобки. Но можно и не заключать</li>
+			<li >Тело метода можно заключить в фигурные скобки. Но можно и не заключать</li>
 		</ul>
 
 
-		<pre class=""  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+		<pre class="fragment"  style=""><code data-trim data-noescape  class="scala"
 		data-line-numbers="1|4-7">
-def foo(x:Int) = 42.0+x     
+def foo(x:Int) = 1 / (1 + Math.exp(x))
 
 // или
 def foo(x:Int) = {
     println("Hello, World!")
-    42+x                      // возвращаемое значение -- значение последнего выражения в функции
+    // возвращаемое значение -- значение последнего выражения в методе
+    1 / (1 + Math.exp(x))
 }
 		</code></pre>
 		
+	</section>
+
+
+<section>
+		<h2>Методы</h2>
+
 		<ul class="fragment">
-			<li>Функции объявлять можно где угодно, в том числе внутри других функций</li>
+			<li>Методы объявлять можно где угодно, в том числе внутри других методов</li>
 		</ul>
 
-<pre class="fragment"  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
+<pre class="fragment"  style=""><code data-trim data-noescape  class="scala"
 		data-line-numbers="">
 def foo(x:Int) = {
     
     def hello_world() = println("Hello, World!")
 
   	hello_world()
-    42+x                      // возвращаемое значение -- значение последнего выражения в функции
+    1 / (1 + Math.exp(x))
 }
 
 hello_world
@@ -905,20 +948,38 @@ foo()
 
 
 
-	<section data-markdown>
-		## Функции
-		Функция, сама по себе, являясь значением некоторого функционального типа, может быть записана и в переменную, подобно анонимным функциям в языке C++.
-Например:
+	<section>
+		<h2>Функции</h2>
+		<p>Функция, сама по себе, являясь значением некоторого функционального типа, может быть записана и в переменную, подобно анонимным функциям в языке C++.</p>
 
-  ```scala
+<p>Например:</p>
+
+<pre><code data-trim data-noescape  class="scala">
   val foo: Int => Double = (x:Int) => 42.0 + x
-  ```
+</code></pre>
 
+<br>
 где
 
-- `Int => Double` - тип функции, принимающей Int и возвращавший Double
-- `=` - присваивание значения, в данном случае тела функции
-- `(x:Int) => 42.0 + x` - тело функции
+<br>
+<ul>
+	<li> 
+		тип функции, принимающей Int и возвращавший Double
+		<pre><code data-trim data-noescape  class="scala">
+			Int => Double
+		</code></pre> </li>
+	<li>
+		 присваивание значения, в данном случае тела функции
+		<pre><code data-trim data-noescape  class="scala">
+		= 
+		</code></pre>
+	</li>
+	<li>
+		 тело функции
+		<pre><code data-trim data-noescape  class="scala">
+			(x:Int) => 42.0 + x
+		</code></pre></li>
+</ul>
 
 	</section>
 
