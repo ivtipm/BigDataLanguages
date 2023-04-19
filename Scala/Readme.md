@@ -453,7 +453,7 @@ val divide10: PartialFunction[Int, Int] = {
 
 
 
-## Некоторые типы данных коллекции [ [Scala Book](https://docs.scala-lang.org/scala3/book/collections-classes.html) ]
+## Некоторые типы данных, коллекции [ [Scala Book](https://docs.scala-lang.org/scala3/book/collections-classes.html) ]
 
 ### Опциональный тип Option[A]
 Такой тип может содержать значение типа `A`, а может и не содержать.\
