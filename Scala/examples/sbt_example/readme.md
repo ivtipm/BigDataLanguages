@@ -13,5 +13,4 @@ sbt compile
 
 Проект будет скомпилирован в папку `target`.
 
-
-Например, запуск jar файла проекта: `scala target/scala-3.2.2/sbt_example_3-0.1.0-SNAPSHOT.jar`
+Запуск jar файла проекта: `scala target/scala-3.2.2/sbt_example_3-0.1.0-SNAPSHOT.jar`
