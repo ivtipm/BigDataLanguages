@@ -28,7 +28,7 @@
 
 		<style type="text/css">
     :root {
-        --r-main-font-size: 25px;
+        --r-main-font-size: 18px;
     }
 
     .reveal pre {
@@ -141,8 +141,8 @@ def main(): Unit = {
 
 ```text[1-2|5-14|16-18]
 # Компиляция 
-scalaс main.scala
-
+scalac main.scala
+# многие параметры компилятора, например classpath, похожи на аналогичные для javac
 
 # Результат:
 main.scala
@@ -158,6 +158,64 @@ main_method.tasty
 # Запуск, нужно указать только имя главного метода
 scala main_method
 ```
+</section>
+
+
+
+<section data-markdown>
+	## Запуск без компиляции
+	```scala
+	@main
+	def main_method() =
+	    println("Hello world!")
+	```
+
+Запуск без компиляции
+```bash
+scala main.scala
+```
+</section>
+
+
+<section data-markdown>
+	## Сборщик scala
+	**sbt** — Simple Build Tool
+
+	```bash
+	sbt --version
+	```
+
+Сборщик полагается на заранее созданные файлы:
+- `build.sbt`
+	  - Пример содержимого: `scalaVersion := "3.2.2"`
+- `project\bildp.roperties`
+	  - Пример содержимого: `sbt.version=1.6.1`
+
+	Запуск сборщика в корневой папаке проекта, файл сборки будет найден автоматически
+	```bash
+	sbt compile
+	```
+
+	Проект будет скомпилирован в папку `target`.
+  Например, запуск jar файла проекта: `scala target/scala-3.2.2/sbt_example_3-0.1.0-SNAPSHOT.jar`
+
+
+	Пример: []()
+
+
+	Подробнее о sbt: [https://docs.scala-lang.org/scala3/book/tools-sbt.html](https://docs.scala-lang.org/scala3/book/tools-sbt.html)
+</section>
+
+
+<section data-markdown>
+	## Сборщик scala
+	**sbt** — Simple Build Tool
+
+	```bash
+	sbt --version
+	```
+
+	Подробнее: [https://docs.scala-lang.org/scala3/book/tools-sbt.html](https://docs.scala-lang.org/scala3/book/tools-sbt.html)
 </section>
 
 </section>
@@ -879,6 +937,15 @@ List(Chris, Ed, Maurice)
 	1,1;  2,1;  2,2;  3,1;  3,2;  3,3;  4,1;  4,2;  4,3;  4,4;  5,1;  5,2;  5,3;  5,4;  5,5;
 </section>
 
+<!-- ====================================================================== assert -->
+<section data-markdown>
+	## Assert
+
+	```scala
+	assert( 4 == 2+2 )
+	```
+
+</section>
 
 
 <!-- ====================================================================== def -->
