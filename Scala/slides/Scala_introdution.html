@@ -207,7 +207,7 @@ scala main.scala
 <section data-markdown>
 	## Сборщик scala
 
-	sbt может создавать проекты на основе шаблонов, например
+sbt может создавать проекты на основе шаблонов, например
 	```bash
 sbt new scala/scala-seed.g8
 sbt new playframework/play-scala-seed.g8
@@ -215,6 +215,14 @@ sbt new akka/akka-http-quickstart-scala.g8
 sbt new http4s/http4s.g8
 sbt new holdenk/sparkProjectTemplate.g8
 ```
+
+Другие команды:
+- `compile`
+- `run`
+- `clean`
+- `package` — создать jar файл из исходников (зависимости отдельно)
+- `test`
+- `update` — скачать зависимости (помещаются в папку пользователя, например на linux: `~/.cache/coursier/v1`) [[get-coursier.io/docs/cache](https://get-coursier.io/docs/cache)]
 
 	Пример: [Scala/examples/sbt_example](https://github.com/ivtipm/BigDataLanguages/tree/main/Scala/examples/sbt_example)
 
@@ -1037,7 +1045,7 @@ foo()
 <br>
 <ul>
 	<li> 
-		тип функции, принимающей Int и возвращавший Double
+		тип функции, принимает Int и возвращет Double
 		<pre><code data-trim data-noescape  class="scala">
 			Int => Double
 		</code></pre> </li>
@@ -1057,6 +1065,14 @@ foo()
 	</section>
 
 
+
+<!-- ====================================================================== def -->
+<section data-markdown>
+	## Пакеты
+	- Почти анаолгичны пакетам Java
+	- Имя пакета не обязатоельно должно совпать с именем папок, в которые файл пакета вложен
+	
+</section>
 </section>
 
 
