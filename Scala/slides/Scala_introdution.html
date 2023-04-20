@@ -53,7 +53,7 @@
 
 <section>
 	<h2>Введение в Scala</h2>
-	<h4>Основные типы. Ввод и вывод. Управляющие операторы. Функции и методы. Коллекции</h4>
+	<h4>Основные типы. Ввод и вывод. Управляющие операторы</h4>
 	<img src="https://www.scala-lang.org/resources/img/frontpage/scala-spiral.png" width="85px" margin-bottom=0> 
 
 
@@ -236,10 +236,24 @@ sbt new holdenk/sparkProjectTemplate.g8
 
 
 
+<!-- ====================================================================== REPL -->
+
+<section>
+	<section>
+		<h2>Интерактивный режим</h2>
+		<ul>
+					<li>REPL = Read Eval Print Loop</li>
+					<li>Интерактивный режим как в скриптовых языках</li>
+					<li>Запуск: <code>scala</code></li>
+				</ul>		
+
+				<br>
+				<img src="images/scala_repl.png" alt="" width="650">
+	</section>
+</section>
 
 <!-- ====================================================================== типы -->
 <section>
-
 <section>
 <h2>Система типов</h2>
 
@@ -963,115 +977,8 @@ List(Chris, Ed, Maurice)
 
 
 <!-- ====================================================================== def -->
-<section>
-	<section>
-		<h2>Методы</h2>
-		<pre class=""  style=""><code data-trim data-noescape style="font-size: 1em;line-height: 1.05em;" class="scala"
-		data-line-numbers="">
-def foo(x:Int):Double = 1 / (1 + Math.exp(x))    // Double -- тип возвращаемого значения
-		</code></pre>
-		<ul>
-			<li class="fragment">Оператор return не используется, возвращаемое значение -- это значение последнего выражения внутри функции; (это тоже упрощает анализ кода, поощряет написание функций где невозможен выход в неожиданном месте) </li>
-			
-			<li class="fragment">Тип возвращаемого значения может быть выведен автоматически (кроме рекурсивных функций)</li>
-		</ul>
-		
-	</section>
-
-
-
-	<section>
-		<h2>Методы</h2>
-		<ul>
-			<li >Тело метода можно заключить в фигурные скобки. Но можно и не заключать</li>
-		</ul>
-
-
-		<pre class="fragment"  style=""><code data-trim data-noescape  class="scala"
-		data-line-numbers="1|4-7">
-def foo(x:Int) = 1 / (1 + Math.exp(x))
-
-// или
-def foo(x:Int) = {
-    println("Hello, World!")
-    // возвращаемое значение -- значение последнего выражения в методе
-    1 / (1 + Math.exp(x))
-}
-		</code></pre>
-		
-	</section>
-
-
-<section>
-		<h2>Методы</h2>
-
-		<ul class="fragment">
-			<li>Методы объявлять можно где угодно, в том числе внутри других методов</li>
-		</ul>
-
-<pre class="fragment"  style=""><code data-trim data-noescape  class="scala"
-		data-line-numbers="">
-def foo(x:Int) = {
-    
-    def hello_world() = println("Hello, World!")
-
-  	hello_world()
-    1 / (1 + Math.exp(x))
-}
-
-hello_world
-// ошибка: hello_world вне области видимости
-
-foo()
-</code></pre>
-		
-	</section>
-
-
-
-	<section>
-		<h2>Функции</h2>
-		<p>Функция, сама по себе, являясь значением некоторого функционального типа, может быть записана и в переменную, подобно анонимным функциям в языке C++.</p>
-
-<p>Например:</p>
-
-<pre><code data-trim data-noescape  class="scala">
-  val foo: Int => Double = (x:Int) => 42.0 + x
-</code></pre>
-
-<br>
-где
-
-<br>
-<ul>
-	<li> 
-		тип функции, принимает Int и возвращет Double
-		<pre><code data-trim data-noescape  class="scala">
-			Int => Double
-		</code></pre> </li>
-	<li>
-		 присваивание значения, в данном случае тела функции
-		<pre><code data-trim data-noescape  class="scala">
-		= 
-		</code></pre>
-	</li>
-	<li>
-		 тело функции
-		<pre><code data-trim data-noescape  class="scala">
-			(x:Int) => 42.0 + x
-		</code></pre></li>
-</ul>
-
-	</section>
-
-
-
-<!-- ====================================================================== def -->
 <section data-markdown>
-	## Пакеты
-	- Почти анаолгичны пакетам Java
-	- Имя пакета не обязатоельно должно совпать с именем папок, в которые файл пакета вложен
-	
+	Продолжение: [ООП, методы, функции, коллекции](Scala_oop_func_collections.html)	
 </section>
 </section>
 
