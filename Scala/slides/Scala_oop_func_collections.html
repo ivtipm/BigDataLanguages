@@ -66,11 +66,35 @@
 
 
 <!-- ====================================================================== def -->
+<section>
+	<section>
+		## Файлы
+
+Чтение
+```scala
+import scala.io.Source
+
+val filename = "fileopen.scala"
+for (line <- Source.fromFile(filename).getLines) {
+    println(line)
+}
+```
+	</section>
+
+</section>
+
+<!-- ====================================================================== def -->
 <section data-markdown>
 	## Пакеты
 	- Почти анаолгичны пакетам Java
 	- Имя пакета не обязатоельно должно совпать с именем папок, в которые файл пакета вложен
-	
+
+
+**Подключение**
+```scala
+import Math._    // подключить всё пространство имён Math
+```
+
 </section>
 
 

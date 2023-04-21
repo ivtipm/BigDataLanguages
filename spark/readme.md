@@ -6,17 +6,38 @@
 > Thousands of companies, including 80% of the Fortune 500, use Apache Spark™.
 Over 2,000 contributors to the open source project from industry and academia.  [ [spark.apache.org](https://spark.apache.org/) ]
 
+[https://stackshare.io/spark](https://stackshare.io/spark) — Spark в индустрии.
+
+todo: общая характеристика
+
+Варианты и аналоги:
+- PySpark
+- Docker Containers
+- ...
+
+
+**Установка**
 Скачать: https://spark.apache.org/downloads.html
 - Pre build for Apache Hadoop
 - Pre build with user-provided Apache Hadoop (без Apache Hadoop в коплекте)
 
-[https://stackshare.io/spark](https://stackshare.io/spark) — Spark в индустрии.
+Linux:
+1. Распаковать архив в `/opt/spark`
+2. Задать значение переменной окружения `SPARK_HOME`, добавить `spark/bin` в `PATH`
+  ```bash
+  export SPARK_HOME=/opt/spark
+  export PATH=$SPARK_HOME/bin:$PATH
+  ```
+  Проверить:
+  ```bash
+  printenv SPARK_HOME
+  ```
 
 
-Варианты и мналоги:
-- PySpark
-- Docker Containers
-- ...
+**Основные инструменты**
+- `spark-shell`
+- `Appache Zeppelin` (устанавливается отдельно)
+
 
 
 Структура\

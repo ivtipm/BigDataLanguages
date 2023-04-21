@@ -250,6 +250,21 @@ sbt new holdenk/sparkProjectTemplate.g8
 				<br>
 				<img src="images/scala_repl.png" alt="" width="650">
 	</section>
+
+
+		<section data-markdown>
+		## Интерактивный режим
+		
+
+		Обращение к командной оболочке ОС из scala REPL
+		```scala
+		import sys.process._
+
+		// вызов команды
+		"ls -al".!
+		```
+	</section>
+
 </section>
 
 <!-- ====================================================================== типы -->
@@ -965,6 +980,8 @@ List(Chris, Ed, Maurice)
 	1,1;  2,1;  2,2;  3,1;  3,2;  3,3;  4,1;  4,2;  4,3;  4,4;  5,1;  5,2;  5,3;  5,4;  5,5;
 </section>
 
+
+
 <!-- ====================================================================== assert -->
 <section data-markdown>
 	## Assert
@@ -976,10 +993,26 @@ List(Chris, Ed, Maurice)
 </section>
 
 
-<!-- ====================================================================== def -->
-<section data-markdown>
-	Продолжение: [ООП, методы, функции, коллекции](Scala_oop_func_collections.html)	
-</section>
+
+<!-- ====================================================================== std lib -->
+
+<section>
+	<section data-markdown>
+		## Стандартная библиотека `scala.`
+		- [`math`](https://scala-lang.org/api/3.x/scala/math.html#)
+		- [`io`](https://scala-lang.org/api/3.x/scala/io.html#)
+			- `object StdIn`
+			- `object Source`
+		- [`sys`](https://scala-lang.org/api/3.x/scala/sys.html#) — methods for reading and altering core aspects of the virtual machine as well as the world outside of it
+		- [`util`](https://scala-lang.org/api/3.x/scala/util.html#)
+			- `matching`
+				- `class Regex`
+			- `class Random`
+		- [`jdk`](https://scala-lang.org/api/3.x/scala/jdk.html#) — utilities to interact with JDK classes
+		- [`concurrent`](https://scala-lang.org/api/3.x/scala/concurrent.html#) — concurrent and parallel programming
+		- ...
+
+	</section>
 </section>
 
 
