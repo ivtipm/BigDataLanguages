@@ -232,6 +232,52 @@ sbt new holdenk/sparkProjectTemplate.g8
 	Документация: [scala-sbt.org](https://www.scala-sbt.org/index.html)
 </section>
 
+
+<section data-markdown>
+	## Сборщик sbt
+
+	Минимальная структура проекта с тестами:
+	```text
+.
+├── build.sbt
+├── src/
+│   ├── main/
+│   │   └── scala/
+│   └── test/
+│       └── scala/
+└── target/
+	```	
+
+	Каталог сборки `.`, sbt автоматически находит все файлы исходного кода в указанной структуре проекта.
+</section>
+
+
+<section data-markdown>
+	## Сборщик sbt
+
+	Более полная структура:
+	```text
+.
+├── build.sbt
+├── project/
+│   └── build.properties
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   ├── resources/
+│   │   └── scala/
+│   └── test/
+│       ├── java/
+│       ├── resources/
+│       └── scala/
+└── target/
+	```	
+
+- `sbt compile`
+- `sbt test`
+- `sbt run`
+</section>
+
 </section>
 
 
