@@ -232,6 +232,52 @@ sbt new holdenk/sparkProjectTemplate.g8
 	Документация: [scala-sbt.org](https://www.scala-sbt.org/index.html)
 </section>
 
+
+<section data-markdown>
+	## Сборщик sbt
+
+	Минимальная структура проекта с тестами:
+	```text
+.
+├── build.sbt
+├── src/
+│   ├── main/
+│   │   └── scala/
+│   └── test/
+│       └── scala/
+└── target/
+	```	
+
+	Каталог сборки `.`, sbt автоматически находит все файлы исходного кода в указанной структуре проекта.
+</section>
+
+
+<section data-markdown>
+	## Сборщик sbt
+
+	Более полная структура:
+	```text
+.
+├── build.sbt
+├── project/
+│   └── build.properties
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   ├── resources/
+│   │   └── scala/
+│   └── test/
+│       ├── java/
+│       ├── resources/
+│       └── scala/
+└── target/
+	```	
+
+- `sbt compile`
+- `sbt test`
+- `sbt run`
+</section>
+
 </section>
 
 
@@ -342,7 +388,6 @@ val my_const:Float = 333/106;
 val my_const = 333/106;					// автоматический вывод типа: Double
 val my_const;									  // Ошибка: значение не задано
 </code></pre>
-
 <br>
 <p class="fragment">Переменная</p>
 <pre class="scala fragment"><code data-trim data-noescape >
@@ -1051,6 +1096,13 @@ List(Chris, Ed, Maurice)
 
 	</section>
 </section>
+
+
+
+	<section data-markdown>
+		## Продолжение
+		[Scala_oop_func_collections.html](Scala_oop_func_collections.html)
+	</section>
 
 
 			<!-- slides -->
