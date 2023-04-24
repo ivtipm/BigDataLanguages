@@ -178,7 +178,7 @@ scala main.scala
 
 
 <section data-markdown>
-	## Сборщик scala
+	## Сборщик SBT
 	**sbt** — Simple Build Tool
 
 	```bash
@@ -205,7 +205,7 @@ scala main.scala
 
 
 <section data-markdown>
-	## Сборщик scala
+	## Сборщик SBT
 
 sbt может создавать проекты на основе шаблонов, например
 	```bash
@@ -266,6 +266,41 @@ sbt new holdenk/sparkProjectTemplate.g8
 	</section>
 
 </section>
+
+
+<!-- ====================================================================== аргументы командной строки -->
+<section data-markdown>
+	## Аргументы командной строки
+```scala
+@main
+def main(filename: String) = 
+    // программа с одним параметром (имя текущего файла не считается)
+    // набор параметров функции = минимально необходимый набор аргументов командной строки
+
+    println( filename)
+```
+
+
+Запуск (с интерпретатором)
+```bash
+scala main.scala my_filename.txt
+```
+
+Запуск с sbt
+```
+sbt "run my_file.txt"
+```
+
+
+Аргументы могт иметь проивзольный тип, до тех пор пока есть стандартный способ получить их из строкогвого типа
+
+Подробнее: [docs.scala-lang.org/scala3/book/methods-main-methods.html#command-line-arguments](https://docs.scala-lang.org/scala3/book/methods-main-methods.html#command-line-arguments)
+
+
+См. также: [https://github.com/scopt/scopt](https://github.com/scopt/scopt) — библиотека для разбора аргументов командной строки
+</section>
+
+
 
 <!-- ====================================================================== типы -->
 <section>
@@ -751,11 +786,11 @@ val action = x match
 
 
 
-<section>
+<!-- <section>
 	<h2>Пример сопоставления с образцом для аргументом командной строки</h2>
 
 </section>
-
+ -->
 
 </section>
 
@@ -1000,6 +1035,8 @@ List(Chris, Ed, Maurice)
 	<section data-markdown>
 		## Стандартная библиотека `scala.`
 		- [`math`](https://scala-lang.org/api/3.x/scala/math.html#)
+		- [`cllection`](https://scala-lang.org/api/3.x/scala/collection.html#)
+
 		- [`io`](https://scala-lang.org/api/3.x/scala/io.html#)
 			- `object StdIn`
 			- `object Source`

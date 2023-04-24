@@ -741,6 +741,44 @@ val dt = (System.nanoTime()-t0)/1e9
 ```
 
 
+#### Аргументы командной строки 
+```scala
+@main
+def main(filename: String, n:Int) = 
+  // программа с одним параметром (имя текущего файла не считается)
+  // набор параметров функции = минимально необходимый набор аргументов командной строки
+  println(f"filename = $filename")
+  println(f"n = $n")
+```
+
+Примеры запуска:
+```bash
+scala my_progr some_filename.txt 1234
+
+# Вывод
+filename = some_filename.txt
+n = 1234
+```
+
+
+```bash
+scala procees_log.scala flask.log 234 1 2 another arg
+
+# Вывод
+filename = some_filename.txt
+n = 1234
+```
+
+```bash
+scala procees_log.scala flask.log
+
+# Вывод
+Illegal command line after first argument: more arguments expected
+```
+**См. также**
+- Scopt — библиотека для разбора аргументов командной строки
+
+[ [https://docs.scala-lang.org/scala3/book/methods-main-methods.html#command-line-arguments](https://docs.scala-lang.org/scala3/book/methods-main-methods.html#command-line-arguments) ]
 
 #### Тестирование
 ```scala
