@@ -60,7 +60,15 @@
 	<p>Кафедра ИВТ и ПМ. Ветров С. В.</p>
 
 	<br>
-	<div align="right"><a href="https://github.com/ivtipm/BigDataLanguages/blob/main/Scala/Readme.md">короткая шпаргалка</a></div>
+	<div align="right"><ul>
+		<li><a href="Scala_introdution.html">О языке</a></li>
+		<li><a href="Scala_about.html">Основы: типы, операторы</a></li>
+		<li><a href="#">ООП. Функции. Коллекции</a></li>
+		<li><a href="https://github.com/ivtipm/BigDataLanguages/blob/main/Scala/Readme.md">Короткая шпаргалка</a></li>
+	</ul>
+		
+
+	</div>
 </section>
 
 
@@ -87,6 +95,7 @@ for (line <- Source.fromFile(filename).getLines) {
 Использованы классы Java
 ```scala
 import java.io.PrintWriter
+// подключение Java класса 
 
 @main
 def main() =
@@ -112,16 +121,11 @@ def main() =
 
 **Подключение**
 ```scala
-import Math._    // подключить всё пространство имён Math
+// подключить всё пространство имён Math
+import Math._    	// Scala 2+
+import Math.* 		// Scala 3
 ```
 </section>
-</section>
-
-<section>
-	<section data-markdown>
-		## Коллекции
-		<img src="https://github.com/ivtipm/BigDataLanguages/tree/main/ScalaTypes.drawio.png" alt="">
-	</section>
 </section>
 
 
@@ -434,6 +438,8 @@ def square_equation(a: Double, b:Double, c:Double): (Double, Option[Double], Opt
 </section>
 
 
+
+<!-- ====================================================================== Некоторые коллекции -->
 <section>
 	<h2>Некоторые коллекции</h2>
 <pre>
@@ -454,6 +460,12 @@ Seq[+A], Set[+A], Map[K, +V], Iterator[+A]
 не беспокоясь об отсутствии потокобезопансоти. </p>
 </section>
 
+
+
+<section>
+	<h2>Некоторые коллекции</h2>
+
+</section>
 
 
 <section>
@@ -486,7 +498,7 @@ val m = Map("key1" -> 123, "key2" -> 456)
 <section>
 	<h2>Заполнение списка случайными числами</h2>
 <pre>
-<code data-trim data-noescape class="scala" data-line-numbers="1-5|7-9|11-12|14-15|17-18">
+<code data-trim data-noescape class="scala" data-line-numbers="3-4">
 import scala.util.Random
 
 // List.fill принимает два набора параметров: размер последовательности и выражение,
@@ -526,7 +538,7 @@ m - "key1"    // удаление пары c ключом key1
 
 <section>
 <h2>Работа с коллекциями в функциональном стиле</h2>	
-Использование неизменяемых значений типично для функциональной парадигмы. Похоже на Stream API в Java.
+Использование неизменяемых значений типично для функциональной парадигмы. Похоже на <a href="https://github.com/ivtipm/BigDataLanguages/tree/main/Java/Streams#stream-api-%D0%BF%D0%BE%D1%82%D0%BE%D0%BA%D0%B8-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%B8-%D0%BA%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8">Stream API в Java</a>.
 
 <div class="fragment">
 <p>В переменной list лежит отсортированный в порядке возрастания список целых чисел. Со списком необходимо выполнить следующие операции:</p>
@@ -543,15 +555,14 @@ m - "key1"    // удаление пары c ключом key1
 val list = List(10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150)
 
 list
-	.takeWhile(_ < 100)
-	.filter( _ % 4 ==0)
-	.init 						// -> все, кроме последнего
-	.map( _ / 4)
-	.foreach(println)
-
-// takeWhile -- забирать из списка элементы, которые подходят под условие;
-// при первом false остановится и вернуть новый список
+	.takeWhile(_ < 100)     // отбор начальныъ элеентов, для которых предикат = true
+	.filter( _ % 4 ==0)     // отбор всех, для которых предикат = true
+	.init                   // взять все, кроме последнего
+	.map( _ / 4)            // применить функцию
+	.foreach(println)       // терминальный метод: применяет функцию
 </code></pre>
+
+Предикат — функция с множеством значений: true и false.
 </section>
 
 
