@@ -35,6 +35,10 @@
   			font-size: 0.95em;
   			font-family: var(--r-code-font);
   			line-height: 1.2em;
+
+  	.flex-container{
+  		display: flex;
+  	}
 }
 
 </style>
@@ -354,6 +358,51 @@ sbt "run my_file.txt"
 См. также: [https://github.com/scopt/scopt](https://github.com/scopt/scopt) — библиотека для разбора аргументов командной строки
 </section>
 
+
+
+<!-- ====================================================================== packages -->
+<section>
+<section>
+	<h2>Пакеты</h2>
+	<ul>
+		<li>Почти анаолгичны пакетам Java</li>
+		<li>Имя пакета не обязатоельно должно совпать с именем папок, в которые файл пакета вложен</li>
+	</ul>
+
+<br>
+<br>
+<h4>Объявление</h4>
+<pre class="scala"><code data-trim data-noescape>
+package my_package
+
+// my_code
+</code></pre>
+
+<div class="fragment">
+	<h4>Подключение</h4>
+	<pre class="scala"><code data-trim data-noescape>
+	// подключить всё пространство имён Math
+	import Math._    		// Scala 2+
+	import Math.* 			// Scala 3
+
+	import Math.exp
+
+	// подключение нескольких имён отдельно
+	import Math.{PI, E}
+	</code></pre>
+</div>
+
+<pre class="scala fragment"><code data-trim data-noescape>
+// подключаются автоматически
+java.lang.*
+scala.*
+</code></pre>
+</section>
+
+
+
+
+</section>
 
 
 <!-- ====================================================================== типы -->

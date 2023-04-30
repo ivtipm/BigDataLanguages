@@ -22,6 +22,25 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 
+		<style type="text/css">
+    :root {
+        --r-main-font-size: 18px;
+    }
+
+    .reveal pre {
+  			font-size: 1em;
+  			font-family: var(--r-code-font);
+  			line-height: 1.2em;
+
+  	.flex-container{
+  		display: flex;
+  		justify-content: center;
+  		align-items: flex-start;
+  	}
+}
+
+</style>
+
 	</head>
 
 	<body>
@@ -78,25 +97,41 @@
 
 
 <section>
-	<section data-markdown>
-	### Scala
-	- Появился в 2003 г
-		- Версия 3.0 – 2021 г.
-	- Последняя версия 3.2.1 (январь 2023)
-	- Параллельно существует Scala 2.13.10
-	- SCALA =  SCalable LAnguage 
+	<section>
+	<h2>Scala</h2>
+	<div style="display: flex;">
+		<ul style="vertical-align: top; margin-right: 3em;">
+			<li>SCALA =  SCalable LAnguage</li>
+			<li>Появился в 2003 г</li>
+			    Версия 3.0 – 2021 г.
+			<li>Последняя версия 3.2.1 (январь 2023)</li>
+			<li>Параллельно существует Scala 2.x</li>
+			<br class="fragment">
+			<li>ООП и <b>функциональное</b> программирование
+				<ul>
+					<li>код строится из комбинации функций</li>
+					<li>выражения вместо операций (expressions instead of statements)</li>
+				</ul>
+		</li>
+			<li>Компилируется в байт-код JVM<br>
+			Можно использовать библиотеки на Java </li>
+			<li> Меньше boilerplate кода по сравнению c Java </li>
+			<li> Ориентирован на высокую производительность </li>
+			<li>Основной язык для BigData</li>
+		</ul>
+
+		<figure>
+			<img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Mark_Odersky_photo_by_Linda_Poeng.jpg" alt="" width=250>
+
+			<figcaption>Майкл Одерски — создатель языка</figcaption>
+		</figure>
+
+	</div>
 	</section>
 
 		<section data-markdown>
 	### Scala
-	- Компилируется в байт-код JVM
-		- Можно использовать библиотеки на Java
-	- Меньше boilerplate кода по сравнению c Java
-	- Ориентирован на высокую производительность
-	- ООП и **функциональное** программирование
-		- код строится из комбинации функций
-		- выражения вместо операций (expressions instead of statements)
-	- Основной язык для BigData
+
 	</section>
 </section>
 
@@ -146,6 +181,8 @@ public class Person {
 	<pre><code>
 		case class Person(name: String, age: double)
 	</code></pre>
+
+	Приведён специальный вид класса. Из конструктора автоматически создаются поля.
 </section>
 
 
@@ -154,9 +191,10 @@ public class Person {
 1. Установить Oracle JDK [oracle.com/cis/java/technologies/downloads](https://oracle.com/cis/java/technologies/downloads)
 2. [scala-lang.org/download](https://www.scala-lang.org/download/)
 
+
+# 
+<br>
 #### альтернатива
-
-
 - Попробовать онлайн: scastie.scala-lang.org
 - Консольная программа scala исполняет код, может работать как интерактивная оболочка
 </section>
