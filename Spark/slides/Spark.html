@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Spark</title>
+
+		<meta name="description" content=" ... ">
+		<meta name="author" content="Vetrov Sergey">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/night.css" id="theme">
+		
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+		<style type="text/css">
+    :root {
+        --r-main-font-size: 18px;
+    }
+
+    .reveal pre {
+  			font-size: 1em;
+  			font-family: var(--r-code-font);
+  			line-height: 1.2em;
+
+  	.flex-container{
+  		display: flex;
+  		justify-content: center;
+  		align-items: flex-start;
+  	}
+}
+
+</style>
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides" style="font-size: 1.1em; line-height: 1.15em; text-align: left">
+
+
+
+
+<section>
+	<h2>Обзор Apache Spark</h2>
+	
+	<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Apache_Spark_logo.svg/308px-Apache_Spark_logo.svg.png" alt="">
+
+	<p>Кафедра ИВТ и ПМ.</p> 
+	<p>Ветров С. В.</p>
+		
+		<br>
+
+		<div align="right"><ul>
+		<li><a href="../../Scala/slides/Scala_about.html">О языке Scala</a></li>
+		<li><a href="../../Scala/slides/Scala_introdution.html">Scala основы: типы, операторы</a></li>
+		<li><a href="../../Scala/slides/Scala_oop_func_collections.html">Scala: ООП. Функции. Коллекции</a></li>
+	</ul>
+</section>
+
+
+<section>
+	<section data-markdown>
+	### Литература
+
+	</section>
+
+	<section>
+	<h2>Литература</h2>
+
+	</section>
+</section>
+
+
+<section>
+	<section>
+	<h2>Spark</h2>
+<p><b>Apache Spark</b> – это распределенный фреймворк обработки данных, де-факто стандарт в обработке больших данных.</p>
+
+<br>
+
+<p>
+<em>Thousands of companies, including 80% of the Fortune 500, use Apache Spark™.
+Over 2,000 contributors to the open source project from industry and academia.</em></p>
+
+<p><a href="https://stackshare.io/spark">stackshare: Spark в индустрии</a></p>
+</section>
+
+</section>
+
+
+<!------------------------------------------------------------- Установка -->
+<section>
+	<section  data-markdown>
+	## Установка
+	Скачать: https://spark.apache.org/downloads.html
+	- Pre build for Apache Hadoop
+	- Pre build with user-provided Apache Hadoop (без Apache Hadoop в коплекте)
+
+	Последняя версия (май 2023) — 3.4.0
+
+	Spark поддерживает Scala 2.13
+
+	Linux:
+	1. Распаковать архив в `/opt/spark`
+	2. Задать значение переменной окружения `SPARK_HOME`, добавить `spark/bin` в `PATH`
+	  ```bash
+	  export SPARK_HOME=/opt/spark
+	  export PATH=$SPARK_HOME/bin:$PATH
+	  ```
+	  Проверить:
+	  ```bash
+	  printenv SPARK_HOME
+	  ```
+	</section>
+
+
+	<section  data-markdown>
+	## Установка. Альтернативные варианты
+	- [Docker Container Images](https://hub.docker.com/r/apache/spark)
+	- Отдельная установка PySpark — реализация Spark для Python. Входит в дистрибутив Spark; код на Python взаимодействет с Spark через библиотеку Py4J
+	</section>
+
+
+	<section  data-markdown>
+		## Интерфейсы
+		- `spark-shell` (pyspark) — scala shell
+
+		- [Apache Zeppelin](https://zeppelin.apache.org/) — Сервис ноутбуков в браузере. Поддерживает большое количество интерпретаторов, включая Spark, Scala и Python. Удобен тем, что как и стандартный консольный REPL предоставляет настроенный Spark.
+			- Устанавливается отдельно
+			- Дистрибутив Zeppelin содержит версию Spark, которая может работать локально
+
+		- JetBrains Big Data ToolsПлагин для IntelliJ IDEA, DataGrip и PyCharm IDE от JetBrains. Позволяет прямо из IDE работать с ноутбуками Zeppelin, предоставляет доступ к мониторингу Spark и Kafka, доступ к HDFS и т.п.
+
+		- ...
+	</section>
+
+
+	<section  data-markdown>
+		## Apache Zeppelin
+		```bash
+		# запуск
+		PATH_TO_ZEPPELIN/bin/zeppelin-daemon.sh start
+		# по умолчанию запускается локально 127.0.0.1:8080
+
+		# остановка
+		PATH_TO_ZEPPELIN/bin/zeppelin-daemon.sh stop
+	</section>
+
+	Настройка параметров интерпретатора в веб интерфйесе: 
+	https://stackoverflow.com/questions/67990701/how-to-run-apache-zeppelin-0-9-0-and-apache-spark-3-1-1-if-they-are-not-compatab
+
+</section>
+
+
+<section>
+	<h2>Структура</h2>
+	<img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/e61/de0/97f/e61de097ff4f435c96268e7fff8bc02f.png" width=350>
+
+	<br>
+
+	<ul>
+		<li>MLlib — библиотека алгоритмов и вспомогательных стредсв для МО, похожа на SKlearn</li>
+		<ul>
+			<li>spark.ml – в основе DataFrame API;</li>
+			<li>spark.mllib – в основе Resilient Distributed Dataset, RDD — распределённый набор данных</li>
+		</ul>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+
+</section>
+
+
+
+<section>
+	<ul>
+		<li>https://habr.com/ru/companies/otus/articles/653033/</li>
+	</ul>
+	
+</section>
+			</div>
+
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				width: 1280,
+  				height: 960,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+		</script>
+
+	</body>
+</html>
