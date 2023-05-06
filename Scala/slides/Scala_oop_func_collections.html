@@ -128,7 +128,7 @@ def foo(x:Int):Double = 42.0 + x    // Double -- тип возвращаемог
 ```
 - Оператор `return` не используется, возвращаемое значение — это значение последнего выражения внутри функции;
 (это тоже упрощает анализ кода, поощряет написание функций где невозможен выход в неожиданном месте)
-- Тип возвращаемого значения может быть выведен автоматиески (кроме рекурсивных функций)
+- Тип возвращаемого значения может быть выведен автоматически (кроме рекурсивных функций)
 
 ```scala
 def foo(x:Int) = 42.0+x     
@@ -158,7 +158,7 @@ val foo: Int => Double = (x:Int) => 42.0 + x
 <div class="fragment">
   <ul>
   	<li class="fragment"><code>foo</code> — имя функции</li>
-  	<li class="fragment"><code>Int => Double</code> — тип функции, принимающей Int и возвращаюший Double</li>
+  	<li class="fragment"><code>Int => Double</code> — тип функции, принимающей Int и возвращающий Double</li>
   	<li class="fragment"><code> = </code> — присваивание значения, в данном случае тела функции</li>
   	<li class="fragment"><code>(x:Int) => 42.0 + x</code> — тело функции</li>
   </ul>
@@ -187,7 +187,7 @@ val isOdd = (_:Int) % 2 == 0        // лямбда, проверяющая чё
 def gareaterOn(f: Int => Int): (Int, Int) => Boolean =
     (x,y) => f(x) > f(y)
 // Int => Int -- тип функция, принимающая Int и возвращающая Int
-// (Int, Int) => Boolean -- возвр тип -- логическая функция двух аргументов
+// (Int, Int) => Boolean — возвр. тип -- логическая функция двух аргументов
 
 // вызов: 
 gareaterOn( x => x)(1,2)
@@ -334,7 +334,7 @@ plusxy(1)(2)
 
 	<li class="fragment">Частичная функция содержит в себе оператор match (неявно) и сравнивает значение первого и единственного аргумента со значениями в case, при совпадении возвращает значение</li>
 
-	<li class="fragment">Типы аргументов указываются не как у обучной функии, а как шблаонные типы, в квадратных скобках: <pre><code data-trim data-noescape class="scala">[Int, Int]</code></pre></li>
+	<li class="fragment">Типы аргументов указываются не как у обычной функции, а как шаблонные типы, в квадратных скобках: <pre><code data-trim data-noescape class="scala">[Int, Int]</code></pre></li>
 	<li class="fragment">Первый и второй шаблонные типы должны совпадать с проверяемыми и возвращаемыми значениями.</li>
 </ul>
 
@@ -360,20 +360,108 @@ val divide10: PartialFunction[Int, Int] = {
 
 
 
+
+
+
 <!-- ====================================================================== ООП -->
 
 <section>
 	<section>
 		<h2>ООП</h2>
 
-		Класс - ссылочный тип.
+		<p>Класс - ссылочный тип.</p>
+
+
 		<ul>
-			<li>trait ~ абстрактный класс; может содержать абстрактные и обычные методы</li>
 			<li>class - обыкновенный класс</li>
+			<li>anstract class - абстрактный класс</li>
+			<li>trait ~ абстрактный класс; может содержать абстрактные и обычные методы</li>
 			<li>case class - класс с коротким объявлением, используется при сопоставлении с образцом</li>
-			<li>object - объект-компаньон (синглтон, экземпляр анонимного класса)</li>
+			<li>object - объект (синглтон, экземпляр анонимного класса)</li>
+			<li>object - объект-компаньон (синглтон, имя которого совпадает с именем класса)</li>
 		</ul>
 	</section>
+
+
+
+	<section>
+		<h2>Класс</h2>
+		
+		<ul>
+			<li>Похож на класс в Java</li>
+			<li>Модификатор доступа по умолчанию — public</li>
+			<li>Код конструктора записывается непосредственно в теле класса</li>
+		</ul>
+		<pre class="">
+		<code data-trim data-noescape class="scala">
+// Можно использовать отступы и двоеточие (Scala 3)
+class Customer:
+    // поля (public):
+    var id: Int = 0
+    var name: String = ""
+</code></pre>
+
+<pre class="fragment">
+<code data-trim data-noescape class="scala">
+// можно использовать скобки {}
+class Customer {
+    // поля (public):
+    var id: Int = 0
+    var name: String = ""
+}
+</code></pre>
+
+
+	</section>
+
+	<section>
+		<h2>Класс</h2>
+		
+		<pre class="">
+		<code data-trim data-noescape class="scala"  data-line-numbers="1-2|1-5|7-8|10-12">
+/** Клиент */
+class Customer {
+    // поля (public):
+    var id: Int = 0
+    var name: String = ""
+
+    private   var note: String =""
+    protected var field: String =""
+
+    // переопределение метода; если нет параметров, то скобки () можно опустить
+    override def toString: String =
+        f"$id%6d $name%-32s; $note"
+        // %-32s — формат: 32 символа, выравнивание по левому краю
+}
+		</code></pre>
+
+		<pre class="fragment">
+		<code data-trim data-noescape class="scala" data-line-numbers="1|2-3|5-7|9-10|11|13">
+    val c: Customer = new Customer
+    // Ошибка! Нельзя менять val переменную
+    c = new Customer;
+    
+    // можно менять поля
+    c.name = "Martin O."
+    c.name = "Martin Odersky"
+
+    println(c.id)
+    println(c.name)
+    println(c.note) // Error: private
+
+    println( c.toString )
+		</code></pre>
+
+
+		<pre class="fragment">
+		<code data-trim data-noescape class="text">
+// вывод
+0
+Martin Odersky
+     0 Martin Odersky                  ; 
+		</code></pre>
+	</section>
+
 
 
 	<section>
@@ -381,27 +469,288 @@ val divide10: PartialFunction[Int, Int] = {
 		
 		<pre class="">
 		<code data-trim data-noescape class="scala">
-			class Customer {
-			    // поля:
-			    val id: Int = 0
-			    val name: String = ""
-			}
-		</code></pre>		<pre class="fragment">
+class Customer {
+    // поля (public):
+    var id: Int = 0
+    var name: String = ""
+    
+    // область инициализации (вызывается при создании объекта):
+    print("Object created")
 
+
+    // закрытое поле
+    private var note: String =""
+}
+
+@main
+def main() =
+    val c: Customer = new Customer 			// Object created
+		</code></pre>
+	</section>
+
+
+
+
+	<section>
+		<h2>Класс</h2>
+		
+		<pre class="">
+		<code data-trim data-noescape class="scala">
+class Customer(id:Int, name:String, note:String);
+// параметры — private val поля
+		</code></pre>
+
+<pre class="fragment">
+<code data-trim data-noescape class="scala">
+@main
+def main() =
+    //Ошибка: нет конструктора по умолчанию
+    // val c: Customer = new Customer
+    val c: Customer = new Customer(0, "Martin Odersky", "")
+
+    // Ошибка: нельзя менять поля
+//    c.name = "Martin O."
+//    c.name = "Martin Odersky"
+
+    // Ошибка: нет доступа к полям
+//    println(c.id)
+//    println(c.name)
+    // println(c.note) // Error
+
+    // вызов унаследованного метода toString
+    println( c.toString )
+</code></pre>
+	</section>
+
+
+
+	<section>
+		<h2>Класс</h2>
+В классы с объявлением полей через конструктор можно добавлять методы
+		<pre class="">
+		<code data-trim data-noescape class="scala">
+class Customer(id:Int, name:String, note:String){
+    // параметры — private val поля
+
+    override def toString: String =
+        f"$id%6d $name%-32s; $note"
+}
+		</code></pre>
+
+<pre class="">
+<code data-trim data-noescape class="scala">
+@main
+def main() =
+    //Ошибка: нет конструктора по умолчанию
+    // val c: Customer = new Customer
+    val c: Customer = new Customer(0, "Martin Odersky", "")
+
+    // Ошибка: нельзя менять поля
+//    c.name = "Martin O."
+//    c.name = "Martin Odersky"
+
+    // Ошибка: нет доступа к полям
+//    println(c.id)
+//    println(c.name)
+    // println(c.note) // Error
+
+    // вызов унаследованного метода toString
+    println( c.toString )
+</code></pre>
+	</section>
+
+
+	<section>
+		<h2>Абстрактный класс</h2>
+
+		<p>Похож на абстрактный класс в Java:</p>
+		<ul>
+			<li>Может содержать обычные методы</li>
+			<li>Може не содержать абстрактных методов</li>
+			<li>Нельзя наследоваться (extend) более чем от одного абстрактного класса</li>
+		</ul>
+		<pre class="fragment">
+		<code data-trim data-noescape class="scala">
+abstract class IntSet {
+    // add an element to the set
+    def incl(x: Int): IntSet
+
+    // whether an element belongs to the set
+    def contains(x: Int): Boolean
+    
+    // абстрактный класс может содержать методы с реализацией
+    def foo() = print("real method")
+}
+
+@main
+def main() =
+    // Ошибка: нельзя создавать экземпляры абстрактного класса
+    val s: intSet = new IntSet;
+		</code></pre>
+	</section>
+
+
+
+
+	<section>
+		<h2>Наследование от абстрактного класса</h2>
+
+		<pre class="">
+		<code data-trim data-noescape class="scala">
+class EmptyIntSet extends IntSet {	 	 
+  
+  def contains(x : Int) = false	 	 
+  
+  def incl(x : Int) =	 	 
+  	  new NonEmptyIntSet(x, this)	 	 
+}
+		</code></pre>
+	</section>
+
+
+
+
+	<section>
+		<h2>Trait</h2>
+
+		<p>Похожи на интерфейсы в Java, но:</p>
+		<ul>
+			<li>Могут быть потомками</li>
+			<li>Могут содержать обычные методы</li>
+			<li>Могут содержать разделы инициализации</li>
+		</ul>
+		<pre class="fragment">
+		<code data-trim data-noescape class="scala">
+trait Employee:
+	// абстрактные методы:
+    def id: Int
+    def firstName: String
+    def lastName: String
+    
+    def drink_coffe: Unit 			// не возвращает значения
+	
+	// обычный метод    
+    def work =
+        print("Do something....")
+		</code></pre>
+
+
+		<a href="https://www.guru99.com/interface-vs-abstract-class-java.html">Отличия абстрактного класса и интерфейса в Java</a>
+	</section>
+
+
+
+	<section>
+		<h2>Object</h2>
+
+		<p></p>
+		<ul>
+			<li>Похож на класс со статическими членами</li>
+			<li>Синглтон — единственно возможный экземпляр класса</li>
+			<li>Ленивая инициализация (всегда lazy val)</li>
+		</ul>
+		<pre class="fragment">
+		<code data-trim data-noescape class="scala">
+object StringUtils:
+    def truncate(s: String, length: Int): String = s.take(length)
+    def containsWhitespace(s: String): Boolean = s.matches(".*\\s.*")
+    def isNullOrEmpty(s: String): Boolean = s == null || s.trim.isEmpty
+
+
+object MathConstants:
+  val PI = 3.14159
+  val E = 2.71828
+
+		</code></pre>
 
 		<pre class="fragment">
 		<code data-trim data-noescape class="scala">
-			@main
-			def main() =
-			  val c: Customer = new Customer
+// Использование
+StringUtils.truncate("Да, нет, наверное", 2)  // "Да"
 
-			  println( c.id )
-			  println( c.name )
+println(MathConstants.PI)   // 3.14159
 		</code></pre>
 
 	</section>
 
+
+
+
+	<section>
+		<h2>Companion object — объект компаньон</h2>
+
+		<ul>
+			<li>Имя совпадает с именем класса</li>
+			<li>Объявляется в одном и том же файле, с одноимённым классом (класс-компаньон)</li>
+			<li>Используется для объявления аналога статических полей и методов</li>
+		</ul>
+		<pre class="fragment">
+		<code data-trim data-noescape class="scala">
+import scala.math.*
+
+class Circle(val radius: Double):
+  def area: Double = Circle.calculateArea(radius)
+
+object Circle:
+  private def calculateArea(radius: Double): Double = Pi * pow(radius, 2.0)
+
+val circle1 = Circle(5.0)
+circle1.area
+		</code></pre>
+
+	</section>
+
+
+
+
+
+	<section>
+		<h2>Companion object — объект компаньон</h2>
+
+		<p>Содержит методы</p>
+		<ul>
+			<li>apply — фабричный метод, аналог конструктора, создаёт объекты</li>
+			<li>unapply — аналог деструктора</li>
+		</ul>
+
+		<pre class="fragment">
+		<code data-trim data-noescape class="scala" style="font-size: 0.7em; line-height: 1.1em;">
+class Person:
+  var name = ""
+  var age = 0
+  override def toString = s"$name is $age years old"
+
+object Person:
+  def apply(name: String): Person =		// аналог конструктора 
+    var p = new Person
+    p.name = name
+    p
+
+  def apply(name: String, age: Int): Person = // аналог конструктора 
+    var p = new Person
+    p.name = name
+    p.age = age
+    p
+
+
+val joe = Person("Joe")
+val fred = Person("Fred", 29)
+
+//val joe: Person = Joe is 0 years old
+//val fred: Person = Fred is 29 years old
+		</code></pre>
+
+	</section>
+
+
+
 </section>
+
+
+
+
+
+
 
 
 
@@ -605,7 +954,7 @@ m - "key1"    // удаление пары c ключом key1
 val list = List(10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150)
 
 list
-	.takeWhile(_ < 100)     // отбор начальныъ элеентов, для которых предикат = true
+	.takeWhile(_ < 100)     // отбор начальных элементов, для которых предикат = true
 	.filter( _ % 4 ==0)     // отбор всех, для которых предикат = true
 	.init                   // взять все, кроме последнего
 	.map( _ / 4)            // применить функцию
