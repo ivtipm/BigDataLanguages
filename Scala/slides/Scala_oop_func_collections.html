@@ -359,6 +359,52 @@ val divide10: PartialFunction[Int, Int] = {
 </section>
 
 
+
+<!-- ====================================================================== ООП -->
+
+<section>
+	<section>
+		<h2>ООП</h2>
+
+		Класс - ссылочный тип.
+		<ul>
+			<li>trait ~ абстрактный класс; может содержать абстрактные и обычные методы</li>
+			<li>class - обыкновенный класс</li>
+			<li>case class - класс с коротким объявлением, используется при сопоставлении с образцом</li>
+			<li>object - объект-компаньон (синглтон, экземпляр анонимного класса)</li>
+		</ul>
+	</section>
+
+
+	<section>
+		<h2>Класс</h2>
+		
+		<pre class="">
+		<code data-trim data-noescape class="scala">
+			class Customer {
+			    // поля:
+			    val id: Int = 0
+			    val name: String = ""
+			}
+		</code></pre>		<pre class="fragment">
+
+
+		<pre class="fragment">
+		<code data-trim data-noescape class="scala">
+			@main
+			def main() =
+			  val c: Customer = new Customer
+
+			  println( c.id )
+			  println( c.name )
+		</code></pre>
+
+	</section>
+
+</section>
+
+
+
 <!-- ====================================================================== типы -->
 
 	<section>
@@ -370,7 +416,7 @@ val divide10: PartialFunction[Int, Int] = {
 
 <section>
 	<section>
-	<h1>Опциальный тип Option</h1>
+	<h1>Опциональный тип Option</h1>
 	<h1>Тип вариант Either</h1>
 	</section>
 
@@ -403,9 +449,9 @@ k match
 ## Основные методы опционального типа
 - `.getOrElse( default )` -- вернёт default, если объект типа `Option[A]` в себе не содержит значения типа A
 - `.OrElse( x: Optional[A])` -- вернёт другое опциональное значение, если первое не содержит в себе значений типа A;
-  будет сгенерировано исключение, если и второе значение является `None`
+  будет сгенерированно исключение, если и второе значение является `None`
 - `.map`, `flatMap` -- применяют функцию к опциональному значению, могут вернуть None; второй метод возвращает опциональное значение
-- `.filter` -- применяет придекат, если false делает опциональное значение None
+- `.filter` -- применяет предикат, если false делает опциональное значение None
 - `.collect` -- применяет частичную функцию
 </section>
 

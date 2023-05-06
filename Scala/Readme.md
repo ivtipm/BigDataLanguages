@@ -621,7 +621,7 @@ class MyClass(field1: Int, val field2: Int, var field3:Int){
     println("I am private")
 }
 
-// создание экхемпляра класса
+// создание экземпляра класса
 val x = MyClass(1,2,3)
 x.field1 = 0        // ошибка, нет доступа
 x.field2 = 0        // ошибка, нельзя присвоить новое значение val переменной
