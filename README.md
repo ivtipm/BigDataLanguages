@@ -69,7 +69,8 @@
 
 
 ### 5. Взаимодействие с СУБД
-Использовать JDBC.
+- https://github.com/ivtipm/BigDataLanguages/tree/main/Java/DataBase
+
 #### Задание 4. Взаимодействие с БД
 Модифицируйте программу из прошлого задания. Записывайте данные в БД на выбор: SQLite, Postgres, MySql, свой вариант, в том числе noSql БД.
 #### Задание 5. Stream API
