@@ -1,6 +1,8 @@
 # Spark
 Слайды: https://ivtipm.github.io/BigDataLanguages/Spark/slides/Spark.html
 
+Запуск на одной машине:
+https://spark.apache.org/docs/latest/spark-standalone.html
 
 # Настройка и установка тестовой среды
 
@@ -68,60 +70,15 @@ For more examples and ideas, visit:
 https://www.docker.com/
 
 
-
+<br>
 
 
 ## Настройка тестового стенда Apache Spark на основе контейнеров Docker
-Скачать образ:
+#### 1. Скачать образ
 ```bash
 docker pull apache/spark
 ```
 
-*См. также создание собственных образов (с предварительно установленным и настроенными дополнительными программами) с помощью Dockerfile и команды build.*
-
-Запуск контейнера в интерактивном режиме (REPL)
-`docker run -it <image name> <cmd-shell-name>` — запустить с подключением ввода (`i`) и терминала (`t`)\
-  Выход — Ctrl + C\
-  Вместо spark-shell можно запустить командную оболочку ОС — bash: `docker run -it apache/spark bash`
-
-```bash
-docker run -it apache/spark /opt/spark/bin/spark-shell
-```
-
-Можно подключится к уже запущенному контейнеру: `docker exec -it <my-container> bash`
-
-Контейнер работает пока в нём запушена программа или командная оболочка.
-
-Как правило контейнеры запускаются с дополнительными параметрами, описывающими способ взаимодействия контейнера и основной ОС. Среди них:
-- `-p <external-port>:<container-port>`
-  - `external-port` — порт на машине, где запускается контейнер
-  - `container-port` — порт внутри контейнера, на котором что-то работает
-- `docker run -it <image name> <cmd-shell-name>` — запустить с подключением ввода (`i`) и терминала (`t`)\
-  Например: `docker run -it --name zeppelin apache/zeppelin:0.10.1 bash`; Выход — Ctrl + D
-
-К контейнеру можно подключить внешние каталоги
-```bash
-docker run "<внешняя папка>:<папка внутри контейнера для монтирования>" имя_образа
-```
-Кавычки нужны на случай пробелов в путях.
-
-По умолчанию контейнер запускается с рабочим каталогом: `/opt/spark/work-dir`
-
-
-
-
-## Настройка Apache Zeppelin — оболочки Spark для работы с интерактивными тетрадками (Scala, R, Python, Notebook)
-Для Spark доступны образы Docker:
-- https://hub.docker.com/r/apache/spark — Spark
-- https://hub.docker.com/r/apache/zeppelin — Zeppilin (~ 3 Гб)
-
-
-Далее все опарации будут выполняться в командной строке:
-
-1. Скачать образ
-```bash
-docker pull apache/zeppelin:0.10.1
-```
 Посмотреть список скаченных образов:
 ```bash
 docker images
@@ -134,6 +91,52 @@ apache/zeppelin   0.10.1    e8b5b40b7720   14 months ago   7.81GB
 ```
 TAG как правило обозначает версию и её особенности.\
 Удаление образа: `docker image rm <image id>`
+
+*См. также создание собственных образов (с предварительно установленным и настроенными дополнительными программами) с помощью Dockerfile и команды build.*
+
+#### 2. Запуск
+  1. Запуск контейнера в интерактивном режиме (REPL)\
+     `docker run -it <image name> <cmd-shell-name>` — запустить с подключением ввода (`i`) и терминала (`t`)\
+  Выход — Ctrl + C\
+  Вместо spark-shell можно запустить командную оболочку ОС — bash: `docker run -it apache/spark bash`\
+  По умолчанию контейнер запускается с рабочим каталогом: `/opt/spark/work-dir`
+
+```bash
+docker run -it apache/spark /opt/spark/bin/spark-shell
+```
+
+  Можно подключится к уже запущенному контейнеру: `docker exec -it <my-container> bash`
+
+  Контейнер работает пока в нём запушена программа или командная оболочка. После остановки контейнера, все изменения в нём (файлы, переменные среды ....) не сохраняются.
+
+  Как правило контейнеры запускаются с дополнительными параметрами, описывающими способ взаимодействия контейнера и основной ОС. Среди них:
+  - `-v <host_folder>:<container_folder>` — подключить внешний каталог [ [doc](https://docs.docker.com/storage/bind-mounts/) ]\
+    `docker run -v ".:/opt/spark/work-dir" имя_образа` — подключение текущей папки (`.`) в папку контейнера `/opt/spark/work-dir`
+  - `-p <external-port>:<container-port>`
+    - `external-port` — порт на машине, где запускается контейнер
+    - `container-port` — порт внутри контейнера, на котором что-то работает
+
+  Запустить контейнер с доступом к текущей папке, в контейнере запустится программа `/opt/spark/bin/spark-submit` с аргументом `test.py` (файл находится в текущей папке):
+  ```bash
+  docker run -v .:/opt/spark/work-dir  apache/spark /opt/spark/bin/spark-submit test.py
+  ```
+
+
+<br>
+
+
+## Настройка тестового стенда Apache Zeppelin — оболочки Spark для работы с интерактивными тетрадками (Scala, R, Python, Notebook)
+Для Spark доступны образы Docker:
+- https://hub.docker.com/r/apache/spark — Spark
+- https://hub.docker.com/r/apache/zeppelin — Zeppilin (~ 3 Гб)
+
+
+Далее все опарации будут выполняться в командной строке:
+
+1. Скачать образ
+```bash
+docker pull apache/zeppelin:0.10.1
+```
 
 2. Запуск одного контейнера
 `docker run [options] <image name>` — команда запуска [ [doc](https://docs.docker.com/engine/reference/commandline/run/) ]
