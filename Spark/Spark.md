@@ -1,10 +1,46 @@
 # Spark
 Слайды: https://ivtipm.github.io/BigDataLanguages/Spark/slides/Spark.html
 
-Запуск на одной машине:
+### Запуск на одной машине:
 https://spark.apache.org/docs/latest/spark-standalone.html
 
-# Настройка и установка тестовой среды
+Далее предполагается, что путь к папке Spark указан в Path
+
+1. Запуск основного (координирующего) сервера
+```bash
+./sbin/start-master.sh
+# или
+# запуск с интерфейсом на сетевом интерфейсе хоста -h 127.0.0.1 
+# с портом -p 7034 для взаимодействия с Workers
+# и web интерфейсом на порту 8080
+./sbin/start-master.sh -h 127.0.0.1 -p 7034 --webui-port 8080
+```
+
+Далее, все остальные узлы-исполнители (даже запущенные на той же машине) будут взаимодействовать с сервером через сетевой интерфейс по его Master URL формата `spark://HOST:PORT`.
+
+С запуском основного сервера становится доступна веб-страница его состояния:\
+<img src=images/master-empty.png width=400>
+
+2. Запуск исполнителей Workers
+```bash
+./sbin/start-worker.sh spark://127.0.0.1:7034
+```
+
+`spark://127.0.0.1:7034` — URL основного сервера.
+Теперь страница состояния выглядит так:\
+<img src=images/master-with-worker.png width=600>
+
+
+3. Запуск интерактивной оболочки или программы на кластере
+```bash
+./bin/spark-shell --master spark://127.0.0.1:7034 test.py
+```
+
+<img src=images/master-with-task.png width=600>
+
+<br>
+
+# Настройка и установка тестовой среды на основе контейнеров Docker
 
 Виртуальная машина vs контейнер\
 <img src="https://cdn-fiejl.nitrocdn.com/yNfvfiSxoeXhsQRaJFUuQCCZqugXTTRV/assets/images/optimized/rev-912609b/blog/wp-content/uploads/2020/12/container-vms.jpg" width=600>
