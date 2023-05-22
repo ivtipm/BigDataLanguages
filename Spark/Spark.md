@@ -21,7 +21,7 @@ https://spark.apache.org/docs/latest/spark-standalone.html
 С запуском основного сервера становится доступна веб-страница его состояния:\
 <img src=images/master-empty.png width=400>
 
-2. Запуск исполнителей Workers
+2. Запуск исполнителей (workers)
 ```bash
 ./sbin/start-worker.sh spark://127.0.0.1:7034
 ```
@@ -38,7 +38,23 @@ https://spark.apache.org/docs/latest/spark-standalone.html
 
 <img src=images/master-with-task.png width=600>
 
+
+4. Остановка всех серверов:
+```bash
+./sbin/stop-all.sh
+# остановить только главный сервер
+./sbin/stop-master.sh
+# остановить только исполнителей
+./sbin/stop-workers.sh
+```
+
+
+
+
 <br>
+
+
+
 
 # Настройка и установка тестовой среды на основе контейнеров Docker
 
@@ -105,12 +121,28 @@ For more examples and ideas, visit:
 #### Windows
 https://www.docker.com/
 
+### Сеть
+По умолчанию контейнеры работают в одной виртуальной локальной сети с адресами вида 172.17.0.0 и маской
+255.255.0.0.
+Узнать IP адрес из контейнера можно стандартной программой `ifconfig`
+```bash
+ifconfig
+```
 
+```text
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.17.0.2  netmask 255.255.0.0  broadcast 172.17.255.255
+        ether 02:42:ac:11:00:02  txqueuelen 0  (Ethernet)
+        RX packets 26  bytes 4715 (4.7 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
 <br>
 
 
 ## Настройка тестового стенда Apache Spark на основе контейнеров Docker
-#### 1. Скачать образ
+### Скачать образ
 ```bash
 docker pull apache/spark
 ```
@@ -130,7 +162,7 @@ TAG как правило обозначает версию и её особен
 
 *См. также создание собственных образов (с предварительно установленным и настроенными дополнительными программами) с помощью Dockerfile и команды build.*
 
-#### 2. Запуск
+### Запуск одного узла
   1. Запуск контейнера в интерактивном режиме (REPL)\
      `docker run -it <image name> <cmd-shell-name>` — запустить с подключением ввода (`i`) и терминала (`t`)\
   Выход — Ctrl + C\
@@ -139,6 +171,16 @@ TAG как правило обозначает версию и её особен
 
 ```bash
 docker run -it apache/spark /opt/spark/bin/spark-shell
+```
+
+Показать список [запущенных] контейнеров
+```bash
+docker ps
+```
+
+```
+CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+1e07a12e5336   apache/zeppelin:0.10.1   "/usr/bin/tini -- bi…"   39 seconds ago   Up 37 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   zeppelin
 ```
 
   Можно подключится к уже запущенному контейнеру: `docker exec -it <my-container> bash`
@@ -152,13 +194,66 @@ docker run -it apache/spark /opt/spark/bin/spark-shell
     - `external-port` — порт на машине, где запускается контейнер
     - `container-port` — порт внутри контейнера, на котором что-то работает
 
-  Запустить контейнер с доступом к текущей папке, в контейнере запустится программа `/opt/spark/bin/spark-submit` с аргументом `test.py` (файл находится в текущей папке):
+  Запустить контейнер с доступом к текущей папке, в контейнере запустится программа `/opt/spark/bin/spark-submit` с аргументом `test.jar` (файл находится в текущей папке):
   ```bash
-  docker run -v .:/opt/spark/work-dir  apache/spark /opt/spark/bin/spark-submit test.py
+  docker run -v .:/opt/spark/work-dir  apache/spark /opt/spark/bin/spark-submit test.jar
   ```
+  Программа должна содержать параллельный алгоритм.
+
 
 
 <br>
+
+
+
+### Запуск кластера из контейнеров (интерактивный режим контейнера)
+Кластер будет состоять из двух узлов: 
+- главный, где запущен основной сервер (master) и исполнитель (worker)
+- только исполнитель (worker)
+
+
+Запуск главного контейнера с пробросом порта страницы состояния кластера (`-p 8080:8080`), монтированием текущей папки в контейнер (`-v .:/opt/spark/work-dir `) и запуском командной оболочки после старта контейнера (`it .... bash`)
+```bash
+docker run -p 8080:8080 -it -v .:/opt/spark/work-dir apache/spark  bash
+```
+Предположим, контейнер получил адрес 172.17.0.2. Для взаимодействия с другими узлами по умолчанию используется порт 7077, порт 8080 — для веб-страницы состояния.
+
+Запуск основного сервера Spark и исполнителя:
+```bash
+/opt/spark/sbin/start-master.sh --webui-port 8080
+# указать MASTER_URL 
+/opt/spark/sbin/start-worker.sh spark://172.17.0.2:7077
+```
+Дальше, можно проверить состояние кластера по адресу 172.17.0.2
+
+Запуск узла исполнителя, здесь страница состояния не представляет интереса, поэтому явно не указывается порт
+```bash
+docker run -it -v .:/opt/spark/work-dir apache/spark  bash
+```
+Запуск исполнителя на кластере:
+```bash
+/opt/spark/sbin/start-worker.sh spark://172.17.0.2:7077
+```
+
+Результат на странице состояния кластера:\
+<img src="images/master-with-workers (docker).png" width=500>
+<br>
+
+
+Запустить на кластере spark-shell с любого узла
+```bash
+/opt/spark/bin/spark-shell --master spark://172.17.0.2:7077
+```
+
+Пример тестовой **параллельной** программы
+```scala
+val NUM_SAMPLES=10000
+var count = sc.parallelize(1 to NUM_SAMPLES).filter { _ =>
+  val x = math.random
+  val y = math.random
+  x*x + y*y < 1
+}.count() * 4/(NUM_SAMPLES.toFloat)
+```
 
 
 ## Настройка тестового стенда Apache Zeppelin — оболочки Spark для работы с интерактивными тетрадками (Scala, R, Python, Notebook)
@@ -167,7 +262,7 @@ docker run -it apache/spark /opt/spark/bin/spark-shell
 - https://hub.docker.com/r/apache/zeppelin — Zeppilin (~ 3 Гб)
 
 
-Далее все опарации будут выполняться в командной строке:
+Далее все операции будут выполняться в командной строке:
 
 1. Скачать образ
 ```bash
@@ -184,15 +279,6 @@ docker run -p 8080:8080 --rm --name zeppelin apache/zeppelin:0.10.1
 - `--rm` 		Automatically remove the container when it exits
 - `--name` 		Assign a name to the container (по умолчанию для каждого контейнера выбирается случайное имя)
 
-Показать список [запущенных] контейнеров
-```bash
-docker ps
-```
-
-```
-CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS          PORTS                                       NAMES
-1e07a12e5336   apache/zeppelin:0.10.1   "/usr/bin/tini -- bi…"   39 seconds ago   Up 37 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   zeppelin
-```
 
 Теперь интерфейс ноутбуков доступен по адресу: `localhost:8080`
 
