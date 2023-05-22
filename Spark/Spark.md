@@ -141,7 +141,7 @@ eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 <br>
 
 
-## Настройка тестового стенда Apache Spark на основе контейнеров Docker
+## Настройка тестового кластера Apache Spark на основе контейнеров Docker
 ### Скачать образ
 ```bash
 docker pull apache/spark
@@ -183,6 +183,9 @@ CONTAINER ID   IMAGE                    COMMAND                  CREATED        
 1e07a12e5336   apache/zeppelin:0.10.1   "/usr/bin/tini -- bi…"   39 seconds ago   Up 37 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   zeppelin
 ```
 
+Контейнер выполняется до тех пор, пока в нём есть хотя бы один *не фоновый* процесс.
+
+
   Можно подключится к уже запущенному контейнеру: `docker exec -it <my-container> bash`
 
   Контейнер работает пока в нём запушена программа или командная оболочка. После остановки контейнера, все изменения в нём (файлы, переменные среды ....) не сохраняются.
@@ -202,6 +205,7 @@ CONTAINER ID   IMAGE                    COMMAND                  CREATED        
 
 
 
+
 <br>
 
 
@@ -210,6 +214,9 @@ CONTAINER ID   IMAGE                    COMMAND                  CREATED        
 Кластер будет состоять из двух узлов: 
 - главный, где запущен основной сервер (master) и исполнитель (worker)
 - только исполнитель (worker)
+
+Схема тестового кластера\
+<img src="images/spark-docker.drawio.png" width=700>
 
 
 Запуск главного контейнера с пробросом порта страницы состояния кластера (`-p 8080:8080`), монтированием текущей папки в контейнер (`-v .:/opt/spark/work-dir `) и запуском командной оболочки после старта контейнера (`it .... bash`)
@@ -237,7 +244,7 @@ docker run -it -v .:/opt/spark/work-dir apache/spark  bash
 
 Результат на странице состояния кластера:\
 <img src="images/master-with-workers (docker).png" width=500>
-<br>
+
 
 
 Запустить на кластере spark-shell с любого узла
@@ -254,6 +261,19 @@ var count = sc.parallelize(1 to NUM_SAMPLES).filter { _ =>
   x*x + y*y < 1
 }.count() * 4/(NUM_SAMPLES.toFloat)
 ```
+
+
+Все приведённые операции можно автоматизировать и упростить
+- создать новый образ (см. docker build и dockerfile), на основе apache\spark со стартовым скриптом
+- передавать переменные окружения стартовому скрипту
+- сразу запускать несколько контейнеров (см. docker compose)
+...
+
+
+
+
+<br>
+
 
 
 ## Настройка тестового стенда Apache Zeppelin — оболочки Spark для работы с интерактивными тетрадками (Scala, R, Python, Notebook)
