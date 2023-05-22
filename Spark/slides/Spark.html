@@ -151,8 +151,9 @@
 
 	Linux:
 	1. Распаковать архив в `/opt/spark`
-	2. Задать значение переменной окружения `SPARK_HOME`, добавить `spark/bin` в `PATH`
+	2. Задать значение переменным окружения `JAVA`, `SPARK_HOME`, добавить `spark/bin` в `PATH`
 	  ```bash
+	  export JAVA_HOME=JAVA_HOME=/usr/lib/jvm/java-20-openjdk-amd64  #если не задано
 	  export SPARK_HOME=/opt/spark
 	  export PATH=$SPARK_HOME/bin:$PATH
 	  ```
