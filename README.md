@@ -115,9 +115,14 @@ https://ivtipm.github.io/BigDataLanguages/Spark/slides/Spark.html
    - tmux
    - grep
    - wget
+3. Запустите кластер [в докер контейнерах]
 
 ### 8. Apache Spark - 2
 Resilient Distributed Dataset
+
+### Задание Spark 
+Допишите ноутбук `zeppelin_notebook.zpln`, решающий задачу классификации. Дополните коментариями.\
+https://github.com/ivtipm/BigDataLanguages/tree/main/Spark
 
 
 ## Рубежный контроль
