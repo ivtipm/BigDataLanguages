@@ -98,6 +98,8 @@
 
 ### 7. Apache Spark - 1
 Apache Spark. Настройка и работа c REPL.
+https://ivtipm.github.io/BigDataLanguages/Spark/slides/Spark.html
+
 
 ### Задание Spark
 1. Войдите на сервер, где установлен Spark
