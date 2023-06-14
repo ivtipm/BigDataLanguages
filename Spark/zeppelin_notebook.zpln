@@ -1,0 +1,947 @@
+﻿{
+  "paragraphs": [
+    {
+      "title": "",
+      "text": "%md\n\n### Подготовка к запуску\n```bash\nexport SPARK_HOME=/opt/spark\nexport PATH=$SPARK_HOME/bin:$PATH\n\n# проверить\nprintenv SPARK_HOME\n```\n\nПосле изменения переменных, может потребоваться перезапуск Zeppelin\n\n## Запуск этой тетрадки (notebook)\n\n```bash\nPATH_TO_ZEPPELIN/bin/zeppelin-daemon.sh start\n```\n\nпо умолчанию запускается локально: 127.0.0.1:8080\n\nОстановка\n\n```bash\nPATH_TO_ZEPPELIN/bin/zeppelin-daemon.sh stop\n```\n\n\n\n\nПодробнее об интерфейсе Zeppeilin: https://zeppelin.apache.org/docs/latest/quickstart/explore_ui.html",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:17:18+0900",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "title": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>Подготовка к запуску</h3>\n<pre><code class=\"language-bash\">export SPARK_HOME=/opt/spark\nexport PATH=$SPARK_HOME/bin:$PATH\n\n# проверить\nprintenv SPARK_HOME\n</code></pre>\n<p>После изменения переменных, может потребоваться перезапуск Zeppelin</p>\n<h2>Запуск этой тетрадки (notebook)</h2>\n<pre><code class=\"language-bash\">PATH_TO_ZEPPELIN/bin/zeppelin-daemon.sh start\n</code></pre>\n<p>по умолчанию запускается локально: 127.0.0.1:8080</p>\n<p>Остановка</p>\n<pre><code class=\"language-bash\">PATH_TO_ZEPPELIN/bin/zeppelin-daemon.sh stop\n</code></pre>\n<p>Подробнее об интерфейсе Zeppeilin: <a href=\"https://zeppelin.apache.org/docs/latest/quickstart/explore_ui.html\">https://zeppelin.apache.org/docs/latest/quickstart/explore_ui.html</a></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742468602_1581901141",
+      "id": "paragraph_1684742468602_1581901141",
+      "dateCreated": "2023-05-22T17:01:08+0900",
+      "dateStarted": "2023-05-22T18:17:18+0900",
+      "dateFinished": "2023-05-22T18:17:18+0900",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:15172"
+    },
+    {
+      "text": "%md\n\nПо умолчанию все ячейки — это ячейки с кодом.\nЕсли это не так, то типа ячейки указывается в первой её строке. *Двойной клик на это ячейку чтобы просомотреть.*\nНекоторые типы ячеек\n- `%md` —  markdown (нужно \"запускать\" чтобы отобразить с форматированием)\n- `%spark` — тип по умолчанию (не указывается)\n- `%spark.pyspark` \n- `%spark.r`\n- `%sh` — обращение к командной оболочке\n- ...\n- \n\nЗапуск ячейки — Shift + Enter",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:19:25+0900",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684747040885_839842888",
+      "id": "paragraph_1684747040885_839842888",
+      "dateCreated": "2023-05-22T18:17:20+0900",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:17784",
+      "dateFinished": "2023-05-22T18:19:25+0900",
+      "dateStarted": "2023-05-22T18:19:25+0900",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>По умолчанию все ячейки — это ячейки с кодом.<br />\nЕсли это не так, то типа ячейки указывается в первой её строке. <em>Двойной клик на это ячейку чтобы просомотреть.</em><br />\nНекоторые типы ячеек</p>\n<ul>\n<li><code>%md</code> —  markdown (нужно &ldquo;запускать&rdquo; чтобы отобразить с форматированием)</li>\n<li><code>%spark</code> — тип по умолчанию (не указывается)</li>\n<li><code>%spark.pyspark</code></li>\n<li><code>%spark.r</code></li>\n<li><code>%sh</code> — обращение к командной оболочке</li>\n<li>&hellip;</li>\n<li></li>\n</ul>\n<p>Запуск ячейки — Shift + Enter</p>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%sh\n# напечатать переменные окружения\nprintenv PATH\necho\nprintenv SPARK_HOME\necho\nprintenv JAVA_HOME",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:18:05+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/s/.cache/coursier/arc/https/github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u292-b10/OpenJDK8U-jdk_x64_linux_hotspot_8u292b10.tar.gz/jdk8u292-b10/bin:/home/s/.local/share/coursier/bin\n\n/opt/spark-3.4.0-bin-hadoop3/\n\n/usr/lib/jvm/java-20-openjdk-amd64\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684743276349_1456490833",
+      "id": "paragraph_1684743276349_1456490833",
+      "dateCreated": "2023-05-22T17:14:36+0900",
+      "dateStarted": "2023-05-22T18:18:05+0900",
+      "dateFinished": "2023-05-22T18:18:05+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15173"
+    },
+    {
+      "text": "// приверка вывода и работы Scala\nprint(\"Hello, World!\")\n\n// java.lang.Exception: This is not officially supported spark version: 3.4.0\n// https://stackoverflow.com/questions/67990701/how-to-run-apache-zeppelin-0-9-0-and-apache-spark-3-1-1-if-they-are-not-compatab",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:16:54+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Hello, World!"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174578_1263211009",
+      "id": "paragraph_1683296007874_734950927",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "dateStarted": "2023-05-22T18:16:54+0900",
+      "dateFinished": "2023-05-22T18:16:55+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15174"
+    },
+    {
+      "text": "// обычные команды\n2+2",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:16:55+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres8\u001b[0m: \u001b[1m\u001b[32mInt\u001b[0m = 4\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174579_1779912078",
+      "id": "paragraph_1683296191442_231835849",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15175",
+      "dateFinished": "2023-05-22T18:16:55+0900",
+      "dateStarted": "2023-05-22T18:16:55+0900"
+    },
+    {
+      "text": "%sh\npwd\n# для обращение к другим оболочкам, например консоли (sh)\n# после % указывают их название",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:16:55+0900",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "/home/s/w/prep/computer science/Языки программирования для больших данных/BigDataLanguages/Spark\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174579_841394438",
+      "id": "paragraph_1683296045958_930227386",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "dateStarted": "2023-05-22T18:16:55+0900",
+      "dateFinished": "2023-05-22T18:16:55+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15176"
+    },
+    {
+      "text": "%md\n## Версии",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:18:49+0900",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Версии</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174579_1793735252",
+      "id": "paragraph_1683302387173_1693440043",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15177",
+      "dateFinished": "2023-05-22T18:18:49+0900",
+      "dateStarted": "2023-05-22T18:18:49+0900"
+    },
+    {
+      "text": "util.Properties.versionString",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:16:55+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres9\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = version 2.12.17\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174579_97383738",
+      "id": "paragraph_1683301998950_1863298170",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15178",
+      "dateFinished": "2023-05-22T18:16:55+0900",
+      "dateStarted": "2023-05-22T18:16:55+0900"
+    },
+    {
+      "text": "import org.apache.spark.sql.SparkSession\n\nval spark = SparkSession\n  .builder\n  .appName(\"my_app\")\n  .master(\"local[6]\")\n  .getOrCreate()\nprintln(\"Spark Version: \" + spark.version)",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:16:55+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Spark Version: 3.4.0\nimport org.apache.spark.sql.SparkSession\n\u001b[1m\u001b[34mspark\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.SparkSession\u001b[0m = org.apache.spark.sql.SparkSession@8e26895\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174579_2043458402",
+      "id": "paragraph_1683302367297_1857297743",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15179",
+      "dateFinished": "2023-05-22T18:16:55+0900",
+      "dateStarted": "2023-05-22T18:16:55+0900"
+    },
+    {
+      "text": "%md\n# Пример ",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:16:55+0900",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>Пример</h1>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174579_1688209566",
+      "id": "paragraph_1683296760088_1468260022",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15180",
+      "dateFinished": "2023-05-22T18:16:55+0900",
+      "dateStarted": "2023-05-22T18:16:55+0900"
+    },
+    {
+      "text": "// далее будет использована библиотека scala для обработки данных\n// чтение данных в DataFrame (почти как в pandas)\n\n// https://spark.apache.org/docs/3.4.0/api/scala/org/apache/spark/sql/Dataset.html — DataFrame = Dataset of Row\n// https://spark.apache.org/docs/3.4.0/api/scala/org/apache/spark/sql/Column.html — колонка\nval df0 = spark\n        .read\n        .option(\"header\", \"true\")\n        .csv(s\"titanic.csv\")",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:16:55+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf0\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [PassengerId: string, Survived: string ... 10 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.1.8:4040/jobs/job?id=1",
+              "$$hashKey": "object:17467"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174579_2378291",
+      "id": "paragraph_1683296566089_59271363",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15181",
+      "dateFinished": "2023-05-22T18:16:55+0900",
+      "dateStarted": "2023-05-22T18:16:55+0900"
+    },
+    {
+      "text": "df0.show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:16:55+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----------+--------+------+--------------------+------+----+-----+-----+----------------+-------+-----+--------+\n|PassengerId|Survived|Pclass|                Name|   Sex| Age|SibSp|Parch|          Ticket|   Fare|Cabin|Embarked|\n+-----------+--------+------+--------------------+------+----+-----+-----+----------------+-------+-----+--------+\n|          1|       0|     3|Braund, Mr. Owen ...|  male|  22|    1|    0|       A/5 21171|   7.25| null|       S|\n|          2|       1|     1|Cumings, Mrs. Joh...|female|  38|    1|    0|        PC 17599|71.2833|  C85|       C|\n|          3|       1|     3|Heikkinen, Miss. ...|female|  26|    0|    0|STON/O2. 3101282|  7.925| null|       S|\n|          4|       1|     1|Futrelle, Mrs. Ja...|female|  35|    1|    0|          113803|   53.1| C123|       S|\n|          5|       0|     3|Allen, Mr. Willia...|  male|  35|    0|    0|          373450|   8.05| null|       S|\n|          6|       0|     3|    Moran, Mr. James|  male|null|    0|    0|          330877| 8.4583| null|       Q|\n|          7|       0|     1|McCarthy, Mr. Tim...|  male|  54|    0|    0|           17463|51.8625|  E46|       S|\n|          8|       0|     3|Palsson, Master. ...|  male|   2|    3|    1|          349909| 21.075| null|       S|\n|          9|       1|     3|Johnson, Mrs. Osc...|female|  27|    0|    2|          347742|11.1333| null|       S|\n|         10|       1|     2|Nasser, Mrs. Nich...|female|  14|    1|    0|          237736|30.0708| null|       C|\n|         11|       1|     3|Sandstrom, Miss. ...|female|   4|    1|    1|         PP 9549|   16.7|   G6|       S|\n|         12|       1|     1|Bonnell, Miss. El...|female|  58|    0|    0|          113783|  26.55| C103|       S|\n|         13|       0|     3|Saundercock, Mr. ...|  male|  20|    0|    0|       A/5. 2151|   8.05| null|       S|\n|         14|       0|     3|Andersson, Mr. An...|  male|  39|    1|    5|          347082| 31.275| null|       S|\n|         15|       0|     3|Vestrom, Miss. Hu...|female|  14|    0|    0|          350406| 7.8542| null|       S|\n|         16|       1|     2|Hewlett, Mrs. (Ma...|female|  55|    0|    0|          248706|     16| null|       S|\n|         17|       0|     3|Rice, Master. Eugene|  male|   2|    4|    1|          382652| 29.125| null|       Q|\n|         18|       1|     2|Williams, Mr. Cha...|  male|null|    0|    0|          244373|     13| null|       S|\n|         19|       0|     3|Vander Planke, Mr...|female|  31|    1|    0|          345763|     18| null|       S|\n|         20|       1|     3|Masselmani, Mrs. ...|female|null|    0|    0|            2649|  7.225| null|       C|\n+-----------+--------+------+--------------------+------+----+-----+-----+----------------+-------+-----+--------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.1.8:4040/jobs/job?id=2",
+              "$$hashKey": "object:17503"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174579_1852715446",
+      "id": "paragraph_1683296635245_243924055",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15182",
+      "dateFinished": "2023-05-22T18:16:56+0900",
+      "dateStarted": "2023-05-22T18:16:55+0900"
+    },
+    {
+      "text": "// удалим некоторые колонки\n// df0.columns -> Array(PassengerId, Survived, Pclass, Name, Sex, Age, SibSp, Parch, Ticket, Fare, Cabin, Embarked)\nval df1 = df0.drop( Array(\"PassengerId\", \"Name\", \"Cabin\", \"Ticket\", \"Embarked\"): _* )",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:16:56+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf1\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [Survived: string, Pclass: string ... 5 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174580_665490244",
+      "id": "paragraph_1683301728382_1534630911",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15183",
+      "dateFinished": "2023-05-22T18:16:58+0900",
+      "dateStarted": "2023-05-22T18:16:56+0900"
+    },
+    {
+      "text": "// типы данных\ndf1.printSchema",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:16:58+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- Survived: string (nullable = true)\n |-- Pclass: string (nullable = true)\n |-- Sex: string (nullable = true)\n |-- Age: string (nullable = true)\n |-- SibSp: string (nullable = true)\n |-- Parch: string (nullable = true)\n |-- Fare: string (nullable = true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174580_1951816326",
+      "id": "paragraph_1683296739479_1137904625",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15184",
+      "dateFinished": "2023-05-22T18:16:58+0900",
+      "dateStarted": "2023-05-22T18:16:58+0900"
+    },
+    {
+      "text": "// изменим типы некоторых колонок\nval df2 = df1.withColumn(\"Survived\",col(\"Survived\").cast(\"int\"))\n             .withColumn(\"Pclass\",  col(\"Pclass\").cast(\"int\"))\n             .withColumn(\"Age\",  col(\"Age\").cast(\"int\"))\n             .withColumn(\"SibSp\",col(\"SibSp\").cast(\"int\"))\n             .withColumn(\"Parch\",col(\"Parch\").cast(\"int\"))\n             .withColumn(\"Fare\",col(\"Fare\").cast(\"double\"))\n\n//  withColumn Returns a new Dataset by adding a column or replacing the existing column that has the same name.\n\ndf2.printSchema\n\ndf2.show",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:16:58+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- Survived: integer (nullable = true)\n |-- Pclass: integer (nullable = true)\n |-- Sex: string (nullable = true)\n |-- Age: integer (nullable = true)\n |-- SibSp: integer (nullable = true)\n |-- Parch: integer (nullable = true)\n |-- Fare: double (nullable = true)\n\n+--------+------+------+----+-----+-----+-------+\n|Survived|Pclass|   Sex| Age|SibSp|Parch|   Fare|\n+--------+------+------+----+-----+-----+-------+\n|       0|     3|  male|  22|    1|    0|   7.25|\n|       1|     1|female|  38|    1|    0|71.2833|\n|       1|     3|female|  26|    0|    0|  7.925|\n|       1|     1|female|  35|    1|    0|   53.1|\n|       0|     3|  male|  35|    0|    0|   8.05|\n|       0|     3|  male|null|    0|    0| 8.4583|\n|       0|     1|  male|  54|    0|    0|51.8625|\n|       0|     3|  male|   2|    3|    1| 21.075|\n|       1|     3|female|  27|    0|    2|11.1333|\n|       1|     2|female|  14|    1|    0|30.0708|\n|       1|     3|female|   4|    1|    1|   16.7|\n|       1|     1|female|  58|    0|    0|  26.55|\n|       0|     3|  male|  20|    0|    0|   8.05|\n|       0|     3|  male|  39|    1|    5| 31.275|\n|       0|     3|female|  14|    0|    0| 7.8542|\n|       1|     2|female|  55|    0|    0|   16.0|\n|       0|     3|  male|   2|    4|    1| 29.125|\n|       1|     2|  male|null|    0|    0|   13.0|\n|       0|     3|female|  31|    1|    0|   18.0|\n|       1|     3|female|null|    0|    0|  7.225|\n+--------+------+------+----+-----+-----+-------+\nonly showing top 20 rows\n\n\u001b[1m\u001b[34mdf2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [Survived: int, Pclass: int ... 5 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.1.8:4040/jobs/job?id=3",
+              "$$hashKey": "object:17580"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174580_1029832780",
+      "id": "paragraph_1683304270573_1295996183",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15185",
+      "dateFinished": "2023-05-22T18:16:58+0900",
+      "dateStarted": "2023-05-22T18:16:58+0900"
+    },
+    {
+      "text": "import org.apache.spark.ml.feature.{OneHotEncoder, StringIndexer}\n\nval sex_indexer = new StringIndexer()\n                    .setInputCol(\"Sex\")\n                    .setOutputCol(\"Sex_int\")\n                    .fit(df2)\n                    \nval df3 = sex_indexer.transform(df2)\n                     .drop(\"Sex\")\n\ndf3.show\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:16:58+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+------+----+-----+-----+-------+-------+\n|Survived|Pclass| Age|SibSp|Parch|   Fare|Sex_int|\n+--------+------+----+-----+-----+-------+-------+\n|       0|     3|  22|    1|    0|   7.25|    0.0|\n|       1|     1|  38|    1|    0|71.2833|    1.0|\n|       1|     3|  26|    0|    0|  7.925|    1.0|\n|       1|     1|  35|    1|    0|   53.1|    1.0|\n|       0|     3|  35|    0|    0|   8.05|    0.0|\n|       0|     3|null|    0|    0| 8.4583|    0.0|\n|       0|     1|  54|    0|    0|51.8625|    0.0|\n|       0|     3|   2|    3|    1| 21.075|    0.0|\n|       1|     3|  27|    0|    2|11.1333|    1.0|\n|       1|     2|  14|    1|    0|30.0708|    1.0|\n|       1|     3|   4|    1|    1|   16.7|    1.0|\n|       1|     1|  58|    0|    0|  26.55|    1.0|\n|       0|     3|  20|    0|    0|   8.05|    0.0|\n|       0|     3|  39|    1|    5| 31.275|    0.0|\n|       0|     3|  14|    0|    0| 7.8542|    1.0|\n|       1|     2|  55|    0|    0|   16.0|    1.0|\n|       0|     3|   2|    4|    1| 29.125|    0.0|\n|       1|     2|null|    0|    0|   13.0|    0.0|\n|       0|     3|  31|    1|    0|   18.0|    1.0|\n|       1|     3|null|    0|    0|  7.225|    1.0|\n+--------+------+----+-----+-----+-------+-------+\nonly showing top 20 rows\n\nimport org.apache.spark.ml.feature.{OneHotEncoder, StringIndexer}\n\u001b[1m\u001b[34msex_indexer\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.feature.StringIndexerModel\u001b[0m = StringIndexerModel: uid=strIdx_61de90150d03, handleInvalid=error\n\u001b[1m\u001b[34mdf3\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [Survived: int, Pclass: int ... 5 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.1.8:4040/jobs/job?id=4",
+              "$$hashKey": "object:17641"
+            },
+            {
+              "jobUrl": "http://192.168.1.8:4040/jobs/job?id=5",
+              "$$hashKey": "object:17642"
+            },
+            {
+              "jobUrl": "http://192.168.1.8:4040/jobs/job?id=6",
+              "$$hashKey": "object:17643"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174580_1140625812",
+      "id": "paragraph_1683304290949_1888514048",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15186",
+      "dateFinished": "2023-05-22T18:16:59+0900",
+      "dateStarted": "2023-05-22T18:16:58+0900"
+    },
+    {
+      "text": "df2.groupBy(\"Survived\").count.show",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:16:59+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+-----+\n|Survived|count|\n+--------+-----+\n|       1|  342|\n|       0|  549|\n+--------+-----+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.1.8:4040/jobs/job?id=7",
+              "$$hashKey": "object:17697"
+            },
+            {
+              "jobUrl": "http://192.168.1.8:4040/jobs/job?id=8",
+              "$$hashKey": "object:17698"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174580_1559439884",
+      "id": "paragraph_1683304961609_2008976487",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15187",
+      "dateFinished": "2023-05-22T18:17:00+0900",
+      "dateStarted": "2023-05-22T18:16:59+0900"
+    },
+    {
+      "text": "import org.apache.spark.ml.feature.VectorAssembler\n\nval featureColumns = df3.columns\n \n \nval assembler = new VectorAssembler()\n  .setInputCols(featureColumns)\n  .setOutputCol(\"features\")\n \nval assembled = assembler.transform(df3)",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:17:00+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.ml.feature.VectorAssembler\n\u001b[1m\u001b[34mfeatureColumns\u001b[0m: \u001b[1m\u001b[32mArray[String]\u001b[0m = Array(Survived, Pclass, Age, SibSp, Parch, Fare, Sex_int)\n\u001b[1m\u001b[34massembler\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.feature.VectorAssembler\u001b[0m = VectorAssembler: uid=vecAssembler_6b3dbd92014f, handleInvalid=error, numInputCols=7\n\u001b[1m\u001b[34massembled\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [Survived: int, Pclass: int ... 6 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174580_984903174",
+      "id": "paragraph_1683305970952_22045790",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "FINISHED",
+      "$$hashKey": "object:15188",
+      "dateFinished": "2023-05-22T18:17:00+0900",
+      "dateStarted": "2023-05-22T18:17:00+0900"
+    },
+    {
+      "text": "// https://spark.apache.org/docs/latest/ml-features.html#standardscaler\n\nimport org.apache.spark.ml.feature.StandardScaler\n\nval scaler = new StandardScaler()\n  .setInputCol(\"Age\")\n  .setOutputCol(\"scaledFeatures\")\n  .setWithStd(true)\n  .setWithMean(true)\n  .fit(df3)\n\n\nscaler.transform(df3).show",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T18:17:00+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "java.lang.IllegalArgumentException: requirement failed: Column Age must be of type class org.apache.spark.ml.linalg.VectorUDT:struct<type:tinyint,size:int,indices:array<int>,values:array<double>> but was actually class org.apache.spark.sql.types.IntegerType$:int.\n  at scala.Predef$.require(Predef.scala:281)\n  at org.apache.spark.ml.util.SchemaUtils$.checkColumnType(SchemaUtils.scala:45)\n  at org.apache.spark.ml.feature.StandardScalerParams.validateAndTransformSchema(StandardScaler.scala:64)\n  at org.apache.spark.ml.feature.StandardScalerParams.validateAndTransformSchema$(StandardScaler.scala:63)\n  at org.apache.spark.ml.feature.StandardScaler.validateAndTransformSchema(StandardScaler.scala:84)\n  at org.apache.spark.ml.feature.StandardScaler.transformSchema(StandardScaler.scala:121)\n  at org.apache.spark.ml.PipelineStage.transformSchema(Pipeline.scala:71)\n  at org.apache.spark.ml.feature.StandardScaler.fit(StandardScaler.scala:109)\n  ... 45 elided\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174580_101810834",
+      "id": "paragraph_1683305149181_867135024",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "ERROR",
+      "$$hashKey": "object:15189",
+      "dateFinished": "2023-05-22T18:17:00+0900",
+      "dateStarted": "2023-05-22T18:17:00+0900"
+    },
+    {
+      "text": "// https://habr.com/ru/companies/otus/articles/653033/",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-22T16:56:14+0900",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1684742174580_1464187390",
+      "id": "paragraph_1683296668991_448582019",
+      "dateCreated": "2023-05-22T16:56:14+0900",
+      "status": "READY",
+      "$$hashKey": "object:15190"
+    }
+  ],
+  "name": "lab",
+  "id": "2HZZ5UFTY",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/lab"
+}

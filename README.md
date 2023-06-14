@@ -98,9 +98,31 @@
 
 ### 7. Apache Spark - 1
 Apache Spark. Настройка и работа c REPL.
+https://ivtipm.github.io/BigDataLanguages/Spark/slides/Spark.html
+
+
+### Задание Spark
+1. Войдите на сервер, где установлен Spark
+   - Проверьте версию Spark
+   - Убедитесь, что задана переменная окружения SPARK_HOME
+   - Убедитесь, что spark shell работает
+   - Запустите тестовую программу из отдельного файла
+   - Запустите Apache Zeppelin; подключитесь к оболочке через браузер
+2. Сделайте короткую шапаргалку с основами работы в терминале
+   - Перемещение по директориям, операции с файлами и папаками
+   - Информация о аппаратном обеспечении
+   - Монитор процессов
+   - tmux
+   - grep
+   - wget
+3. Запустите кластер [в докер контейнерах]
 
 ### 8. Apache Spark - 2
 Resilient Distributed Dataset
+
+### Задание Spark 
+Допишите ноутбук `zeppelin_notebook.zpln`, решающий задачу классификации. Дополните коментариями.\
+https://github.com/ivtipm/BigDataLanguages/tree/main/Spark
 
 
 ## Рубежный контроль
