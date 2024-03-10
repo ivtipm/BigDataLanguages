@@ -3,6 +3,9 @@
 - Слайды: https://docs.google.com/presentation/d/1pmOlWlulw2prFhPjn73f3SE6KCyYtW2jYux-aKugVcA/edit?usp=sharing
 - Шпарагалка по основам Java: https://introcs.cs.princeton.edu/java/11cheatsheet/
 
+См. записи лекций в дискорде.
+
+
 1. Введение в Java. Общая характеристика языка программирования. Виртуальная машина Java. JDK. IntelliJ IDEA. Sublime text или любой другой простой редактор.
 1. Структура программы. Основы синтаксиса. Операторные скобки. Комментарии. Компиляция и запуск в консоли.
 1. Статическая типизация. Объявление переменных. Отличия от Python.
