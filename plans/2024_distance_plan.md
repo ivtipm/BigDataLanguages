@@ -38,6 +38,8 @@
 11 марта, понедельник
 - Лекции. Основы Java. План 1-7 
 
+Примеры: https://github.com/VetrovSV/OOP/blob/master/examples/java/simple%20examples/simple-examples.md 
+
 
 
 ### Задание 0. Основы работы с Java
