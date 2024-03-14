@@ -145,6 +145,23 @@ Java
 ```
 
 
+**Извлчение **
+```java
+// регулярное выражение с группой захвата (capturing group) записанной в скобках - (\\d\\d\\d\\d)
+// \d\d\d\d - последовательность из 4 цифр; 
+// т.к. в Java \ (бэкслеш) используется для обозначения служебных символов, его нужно экранировать:  \\d\\d\\d\\d
+Pattern num_regex = Pattern.compile("(\\d\\d\\d\\d) год");
+// создание объекта для обработки строки регулярным выражением
+Matcher matcher = num_regex.matcher("1995 год");
+if (matcher.find()) {  // поиск по регулярному выражению, вернёт true если найдено соответствие
+        System.out.println( matcher.group() );          // 1995 год
+        System.out.println( matcher.group(0) );         // 1995 год
+        // group() и .group(0) возвращает весь текст, который совпадает со всем регулярным выражением
+        System.out.println( matcher.group(1) );         // 1995
+        // matcher.group(1) выдаст подстроку, которая соответствует первой группе захвата в регулярном выражении
+}
+```
+
 
 # Ссылки
 - Слайды: https://docs.google.com/presentation/d/1pmOlWlulw2prFhPjn73f3SE6KCyYtW2jYux-aKugVcA/edit#slide=id.g1b63e56b075_0_77
