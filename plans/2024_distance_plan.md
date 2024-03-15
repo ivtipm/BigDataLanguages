@@ -64,7 +64,7 @@
 Выполните задание 1 (первая строка) из задачника: https://ivtipm.github.io/Programming/Files/spisocall.htm соглавно вашему варианту.
 
 #### 2. Условный оператор.
-Выполните задание 3 из задачника: https://ivtipm.github.io/Programming/Files/spisocall.htm согласно вашему варианту.
+Выполните задание 4 из задачника: https://ivtipm.github.io/Programming/Files/spisocall.htm согласно вашему варианту.
 
 #### 3. Циклический оператор
 Выполните задание 13 из задачника: https://ivtipm.github.io/Programming/Files/spisocall.htm согласно вашему варианту.
