@@ -63,3 +63,8 @@ con.setReadTimeout(5000);
 ```java
 con.addRequestProperty("User-Agent", "Mozilla");
 ```
+
+
+# Ссылки
+- https://github.com/chubin/wttr.in#usage -- информация о сайте wttr.in выдающем погоду в Plain Text.
+- https://habr.com/ru/articles/page2/
