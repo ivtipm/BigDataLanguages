@@ -52,3 +52,14 @@ Connection Response Message : OK
 Connection Response Code :    200
 Connection Response Body :    8.8.8.8
 ```
+
+При необходимости можно настроить время ожидания соединения и получения данных
+```java
+con.setConnectTimeout(5000);
+con.setReadTimeout(5000);
+```
+
+Сервер может блокировать запрос, если он поступает не от браузера. Задание типичных полей запроса, например User-Agent может помочь:
+```java
+con.addRequestProperty("User-Agent", "Mozilla");
+```
