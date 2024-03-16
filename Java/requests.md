@@ -1,4 +1,4 @@
-# Интернеет запросы
+# Интернеет запросы. HTTPUrlConnection
 
 Пример простого запроса к сайту http://icanhazip.com/.
 Этот сайт выдаёт в виде простого текста внешний IP устройства, с которого на него зашли.
@@ -64,6 +64,55 @@ con.setReadTimeout(5000);
 con.addRequestProperty("User-Agent", "Mozilla");
 ```
 
+
+
+# JSoup
+Библиотека Jsoup - это мощный инструмент для работы с HTML в Java. Она предоставляет очень удобный API для извлечения и манипулирования данных, используя DOM, CSS и jquery-подобные методы.
+
+JSoup не входит в стандартную юиблиотеку Java.
+
+Важные возможности и особенности библиотеки Jsoup:
+- Парсинг HTML и XML документов, локальных и по URL
+- Использование CSS или jquery-подобных селекторов для выборка элементов документа.
+- Изменение HTML документов: изменить текст элемента, добавить или удалить атрибуты, и т.д.
+- Очистка входных данных. Например чтобы предотвратить атаки через внедрение кода (XSS attacks).
+- Поддержка обработки ошибок: Jsoup хорошо справляется с некорректным HTML и предоставляет удобные методы для обработки ошибок.
+- Преобразование документа в тест
+
+
+
+Пример использования библиотеки JSoup для парсинга HTML документа (вывода всех ссылок)
+```java
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            // Получаем HTML-документ страницы
+            Document doc = Jsoup.connect("http://example.com").get();
+
+            // Заголовок страницы
+            String title = doc.title();
+            System.out.println("Title: " + title);
+
+            // Получаем все ссылки на странице
+            Elements links = doc.select("a[href]");
+
+            // Переебор коллекции всех найденных элементов
+            for (Element link : links) {
+                // Выводим текст ссылки и саму ссылку
+                System.out.println("\nТекст: " + link.text());
+                System.out.println("Ссылка: " + link.attr("href"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
 
 # Ссылки
 - https://github.com/chubin/wttr.in#usage -- информация о сайте wttr.in выдающем погоду в Plain Text.
