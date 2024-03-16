@@ -1,4 +1,4 @@
-# Интернеет запросы. HTTPUrlConnection
+# Интернеет запросы. HTTPUrlConnection, URL
 
 Пример простого запроса к сайту http://icanhazip.com/.
 Этот сайт выдаёт в виде простого текста внешний IP устройства, с которого на него зашли.
@@ -76,6 +76,31 @@ con.addRequestProperty("User-Agent", "Mozilla");
     // Бросает исключение InterruptedException, если поток был прерван
 ```
 
+**Скачивание бинарного файла**
+```java
+String image_url = "https://apod.nasa.gov/apod/image/2403/FullPlantonMoon_Horalek_1022.jpg";
+String destination_file = "FullPlantonMoon_Horalek_1022.jpg";
+
+try (
+    InputStream in = new URL(image_url).openStream();          // объект для чтения входного потока из URL
+    OutputStream out = new FileOutputStream(destination_file)   // объект для записи данных в файл
+        )     
+        {
+            // Буфер для получения данных
+            byte[] buffer = new byte[1024];
+            int length;
+
+            while ((    length = in.read(buffer)) != -1 ) {
+                out.write(buffer, 0, length);
+            }
+
+            System.out.println("Изображение успешно скачано!");
+
+        } catch (IOException e) {
+        }
+```
+
+Для объектов внутри круглых скобок try будет автоматически вызван метод закрытия соединения и файла, если возникнет исключениие (см. try-with-resources) 
 
 
 # JSoup
