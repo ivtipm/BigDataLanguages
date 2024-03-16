@@ -113,6 +113,11 @@ https://stackoverflow.com/questions/4955635/how-to-add-local-jar-files-to-a-mave
 ```
 
 
+**Сайт репозитория Maven**
+https://mvnrepository.com/
+
+На сайте есть поиск по библиотекам. Для каждой библиотеки приведены примеры описания зависимости в файлах сборки (в частности для Maven и Gradle). Можно отдельно скачать jar файл.
+
 ## Ссылки
 1. Начальное руководство Maven: https://maven.apache.org/guides/getting-started/index.html
 1. Соглашение о файловой структуре проекта: https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html
