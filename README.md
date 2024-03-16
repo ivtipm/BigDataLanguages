@@ -42,7 +42,7 @@
    
 
 **Подсказки**
-* Как скачать веб-страницу: https://github.com/VetrovSV/OOP/blob/master/examples/java/HTTP_request.md
+* Как скачать веб-страницу: https://github.com/ivtipm/BigDataLanguages/blob/main/Java/requests.md
    https://mkyong.com/java/java-how-to-download-web-page-from-internet/ 
 * сервер может не выдавать страницы если не указан UserAgent.
 * указывайте большое время ожидания (timeout) для чтобы иметь больше гарантий на получение страницы целиком

@@ -53,10 +53,11 @@ Connection Response Code :    200
 Connection Response Body :    8.8.8.8
 ```
 
-При необходимости можно настроить время ожидания соединения и получения данных
+При необходимости можно настроить время ожидания соединения и получения данных - таймауты:
 ```java
 con.setConnectTimeout(5000);
 con.setReadTimeout(5000);
+// время задаётся в миллисекундах
 ```
 
 Сервер может блокировать запрос, если он поступает не от браузера. Задание типичных полей запроса, например User-Agent может помочь:
@@ -64,12 +65,23 @@ con.setReadTimeout(5000);
 con.addRequestProperty("User-Agent", "Mozilla");
 ```
 
+См. также класс URLConnection.
+
+
+
+Чтобы не создавать сильной нагруки на сервер и избежать блокировки стоит делать паузы между запросами. Задежка выполнения (текущего потока)
+```java
+    // import java.lang.Thread; подключается автоматически
+    Thread.sleep(5_000);       // ожидание 5000 миллисекунд  
+    // Бросает исключение InterruptedException, если поток был прерван
+```
+
 
 
 # JSoup
 Библиотека Jsoup - это мощный инструмент для работы с HTML в Java. Она предоставляет очень удобный API для извлечения и манипулирования данных, используя DOM, CSS и jquery-подобные методы.
 
-JSoup не входит в стандартную юиблиотеку Java.
+JSoup не входит в стандартную библиотеку Java.
 
 Важные возможности и особенности библиотеки Jsoup:
 - Парсинг HTML и XML документов, локальных и по URL
@@ -80,13 +92,28 @@ JSoup не входит в стандартную юиблиотеку Java.
 - Преобразование документа в тест
 
 
+Указание зависимости в файле конфигурации maven:
+<details>
+```xml
+<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+<dependency>
+    <groupId>org.jsoup</groupId>
+    <artifactId>jsoup</artifactId>
+    <version>1.17.2</version>
+</dependency>
+```
+</details>
 
-Пример использования библиотеки JSoup для парсинга HTML документа (вывода всех ссылок)
+<br>
+
+**Пример использования библиотеки JSoup для парсинга HTML документа (вывода всех ссылок)**
 ```java
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
@@ -101,7 +128,7 @@ public class Main {
             // Получаем все ссылки на странице
             Elements links = doc.select("a[href]");
 
-            // Переебор коллекции всех найденных элементов
+            // Перебор коллекции всех найденных элементов
             for (Element link : links) {
                 // Выводим текст ссылки и саму ссылку
                 System.out.println("\nТекст: " + link.text());
@@ -113,6 +140,23 @@ public class Main {
     }
 }
 ```
+
+Задание параметров запроса
+```java
+// Отправляем запрос с параметрами
+Document doc = Jsoup.connect(url)
+                .data("q", searchQuery) // Здесь "q" - это имя параметра запроса, а searchQuery - его значение
+                .userAgent("Mozilla")  // Устанавливаем User-Agent
+                .timeout(5000)         // Устанавливаем таймаут соединения
+                .get();
+```
+
+
+# См. также
+- Файл `robots.txt`, обычно находится в корневом каталоге сайта.
+- Структуру HTTP запроса и ответа, метода POST и GET
+- Нескоторые серверы предоставляют API для запроса данных. Это может сильно упростить процесс получения данных.
+- Для работы с динамическим содержимым (JavaScript) можно использовать библиотеку Selenium для управления браузером (в том числе в фоновом режиме).
 
 # Ссылки
 - https://github.com/chubin/wttr.in#usage -- информация о сайте wttr.in выдающем погоду в Plain Text.
