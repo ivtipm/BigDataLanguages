@@ -122,6 +122,7 @@ JSoup не входит в стандартную библиотеку Java.
 
 Указание зависимости в файле конфигурации maven:
 <details>
+
 ```xml
 <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
 <dependency>
@@ -130,6 +131,7 @@ JSoup не входит в стандартную библиотеку Java.
     <version>1.17.2</version>
 </dependency>
 ```
+
 </details>
 
 <br>
