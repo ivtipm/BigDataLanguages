@@ -65,6 +65,9 @@ con.setReadTimeout(5000);
 con.addRequestProperty("User-Agent", "Mozilla");
 ```
 
+Подробнее о User-agent:
+https://www.zenrows.com/blog/user-agent-web-scraping#what-is
+
 См. также класс `java.net.URLConnection` - абстрактный базовый класс, который предоставляет интерфейс для работы с URL-адресами. Он может быть использован для работы с любым типом URL: HTTP, FTP и др.
 
 
