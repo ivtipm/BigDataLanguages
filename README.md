@@ -8,11 +8,12 @@
 ### Основы Java
 1. О курсе. Основы языка программирования Java. Примеры использования технологий BigData. Типы данных в Java. Работа со строками и числами.  Структура JVM
    - https://docs.google.com/presentation/d/1pmOlWlulw2prFhPjn73f3SE6KCyYtW2jYux-aKugVcA/edit?usp=sharing
+   - Pattern Matching: https://github.com/VetrovSV/OOP/blob/master/examples/java/pattern_matching.md 
 2. Структура памяти. Сборщик мусора. Строки. Интернирование строк. Методы. Числа. Библиотека коллекций в Java. Юнит тестирование JUnit. Альтернативная библиотека коллекций в Java: Apache Commons Collections & Google Guava. Примеры. https://docs.google.com/presentation/d/1Td-9ajaiMqHK_dGIjq2enU0MZdtbDoB7s-46NyuGtq4/edit?usp=sharing
 3. Потоки в Java. Класс Thread, интерфейс Runnable. Ключевое слово synchronized. Пулы потоков.
    - https://github.com/ivtipm/BigDataLanguages/tree/main/Java/Threads
    - Сборщик Maven. Ввод и вывод в Java. Классы: InputStream, Outputstream, Scanner, BufferedReader. Исключения. Stream API
-
+4. Stream API: https://github.com/ivtipm/BigDataLanguages/blob/main/Java/Streams/readme.md
 
 ### Системы хранения и обработки данных, Scala
 1. Работа с базами данных в Java. Введение в язык Scala – ООП и переменные, Scala Shell, коллекции в Scala
@@ -96,6 +97,7 @@ https://github.com/ivtipm/BigDataLanguages/blob/main/Java/Threads/readme.md
 #### Задание 5. Stream API
 Создайте вариант программы из предыдущих заданий, который использует Stream API для скачивания и обработки данных.
 - Конспект: https://github.com/ivtipm/BigDataLanguages/tree/main/Java/Streams
+
 
 
 ### 6. Основы Scala
