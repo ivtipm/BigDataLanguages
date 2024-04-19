@@ -104,9 +104,11 @@ https://github.com/ivtipm/BigDataLanguages/blob/main/Java/Threads/readme.md
 Знакомство с базовым синтаксисом Scala: переменные, значения, типы; функции, анонимные функции; классы, объекты; интерфейсы и трейты; особенности и отличия от Java
 - https://ivtipm.github.io/BigDataLanguages/Scala/slides/Scala_about.html
 - [Шпаргалка](Scala/Readme.md)
+
 #### Задание 6. Scala
 - Установите компилятор Scala. Попробуйте запустить примеры кода из лекции.
 - Установите Apache Spark.
+- Выполните задачи из строк 11, 19 и 23 [задачника](https://ivtipm.github.io/Programming/Files/spisocall.htm).  Пишите функции. Пишите тесты. Разбивайте код на модули.
 
 #### Задание 7. Scala. Обработка данных
 Напишите программу, которая подсчитывает количество появлений каждого IP адреса и логина в файле лога (см. дискорд).
