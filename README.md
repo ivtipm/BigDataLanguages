@@ -122,7 +122,8 @@ https://github.com/ivtipm/BigDataLanguages/blob/main/Java/Threads/readme.md
 
 ### 7. Apache Spark - 1
 Apache Spark. Настройка и работа c REPL.
-https://ivtipm.github.io/BigDataLanguages/Spark/slides/Spark.html
+- https://ivtipm.github.io/BigDataLanguages/Spark/slides/Spark.html
+- https://github.com/ivtipm/BigDataLanguages/blob/main/Spark/Spark.md
 
 
 ### Задание Spark
