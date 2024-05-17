@@ -4,7 +4,29 @@
 ### Запуск на одной машине:
 https://spark.apache.org/docs/latest/spark-standalone.html
 
-Далее предполагается, что путь к папке Spark указан в Path
+Далее предполагается, что путь к папке Spark указан в Path, задана переменная окружения JAVA_HOME - путь к Java SDK.
+
+<details>
+
+```bash
+# вывести значение переменной окружения PATH
+echo $PATH
+# вывести значение переменной окружения PATH по одному пути в строке
+echo "${PATH//:/$'\n'}"
+```
+
+Проверить путь к java
+```bash
+which java
+```
+
+Проверить переменную окружения JAVA_HOME
+
+Если необходимо задать значение переменной JAVA_HOME. Например
+```bash
+export JAVA_HOME=/usr/lib/jvm/java-20-openjdk-amd64
+```
+</details>
 
 1. Запуск основного (координирующего) сервера
 ```bash
