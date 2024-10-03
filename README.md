@@ -13,7 +13,9 @@
 3. Потоки в Java. Класс Thread, интерфейс Runnable. Ключевое слово synchronized. Пулы потоков.
    - https://github.com/ivtipm/BigDataLanguages/tree/main/Java/Threads
    - Сборщик Maven. Ввод и вывод в Java. Классы: InputStream, Outputstream, Scanner, BufferedReader. Исключения. Stream API
-4. Stream API: https://github.com/ivtipm/BigDataLanguages/blob/main/Java/Streams/readme.md
+4. Stream API.
+- Понятие потока (stream). Терминальные и промежуточные потоки, их методы. Специальные потоки. Генераторы. Параллельная обработка данных в потоках (multithreading).
+https://github.com/ivtipm/BigDataLanguages/blob/main/Java/Streams/readme.md
 
 ### Системы хранения и обработки данных, Scala
 1. Работа с базами данных в Java. Введение в язык Scala – ООП и переменные, Scala Shell, коллекции в Scala
