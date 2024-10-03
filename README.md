@@ -83,6 +83,7 @@ https://github.com/ivtipm/BigDataLanguages/blob/main/Java/Threads/readme.md
 
 
 ### 5. Взаимодействие с СУБД
+- JDBC. Основные классы. Запросы на выборку, получение и изменение данных. 
 - https://github.com/ivtipm/BigDataLanguages/tree/main/Java/DataBase
 
 #### Задание 4. Взаимодействие с БД
@@ -103,7 +104,7 @@ https://github.com/ivtipm/BigDataLanguages/blob/main/Java/Threads/readme.md
 
 
 ### 6. Основы Scala
-Знакомство с базовым синтаксисом Scala: переменные, значения, типы; функции, анонимные функции; классы, объекты; интерфейсы и трейты; особенности и отличия от Java
+Scala.особенности и отличия от Java переменные, значения, система типов.  Option. Either. Коллекции. Методы и функции. анонимные функции. Каррирование. Частичные функции. Обобщённые функции. классы, объекты; интерфейсы и трейты.
 - https://ivtipm.github.io/BigDataLanguages/Scala/slides/Scala_about.html
 - [Шпаргалка](Scala/Readme.md)
 
