@@ -5,6 +5,10 @@ Maven - сборщик Java.
 
 
 ## Установка
+
+Maven не входит в состав JDK поэтому устанавливается отдельно.
+
+
 ```bash
 apt install maven
 ```
@@ -17,6 +21,14 @@ mvn --version
 
 Для корректной работы нужно задать значение переменной окружения `JAVA_HOME` - путь к JDK, к папке, в которой лежит папка bin.
 Например: `/usr/lib/jvm/java-20-openjdk-amd64`
+
+
+### Существующая версия Maven
+Maven может быть не достпен в системе напрямую. Но если система сборки использовалась через IDE, например IntellIJ IDEA, но Maven можно найти в папке вместе со скаченными зависимостями. В Ubuntu это: `~/.m2/wrapper/dists/apache-maven`.
+
+В Windows это может быть C:\Users\<ваш_пользователь>\AppData\Local\JetBrains\IntelliJIdea<версия>\maven\
+
+В IntelliJ IDEA можно посмотреть путь к maven в настройках: File → Settings → Build, Execution, Deployment → Build Tools → Maven → Maven home path
 
 
 ## Создание проекта
