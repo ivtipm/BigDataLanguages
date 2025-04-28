@@ -11,8 +11,23 @@ https://spark.apache.org/docs/latest/spark-standalone.html
 ```bash
 # вывести значение переменной окружения PATH
 echo $PATH
+# или
+printenv PATH
+# или
 # вывести значение переменной окружения PATH по одному пути в строке
 echo "${PATH//:/$'\n'}"
+```
+
+Временно добавить путь к переменной PATH
+```bash
+export PATH="/Directory1:$PATH"
+```
+
+Чтобы добавленный путь сохранился и после перезапуска системы нужно сохранить команду export в файл, который выполняется при входе в систему или при запуске терминала. Например в `~/.bashrc`.
+
+Удаление пути из PATH с помощью операции замены строки:
+```bash
+export PATH=${PATH/'/Directory1'/}
 ```
 
 Проверить путь к java
@@ -59,6 +74,8 @@ export JAVA_HOME=/usr/lib/jvm/java-20-openjdk-amd64
 ```
 
 <img src=images/master-with-task.png width=600>
+
+Примеры программ: https://spark.apache.org/examples.html
 
 
 4. Остановка всех серверов:
