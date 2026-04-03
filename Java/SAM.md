@@ -144,4 +144,6 @@ int total = Stream.of(1,2,3).reduce(sum).orElse(0);
 ## Паттерн объектно-ориентированного проектирования Strategy
 Паттерн Strategy инкапсулирует алгоритм за интерфейсом, чтобы менять его в процессе работы программы. Функциональный интерфейс в Java — тот же интерфейс стратегии, но без создания отдельного класса. Достаточно передать лямбду или ссылку на метод.
 
+https://docs.google.com/presentation/d/1SJ7-9TTjaU_EJdmh2LL1til82Kl-Ie7i6kQzzBwquCs/edit?slide=id.g350a1432d03_0_0#slide=id.g350a1432d03_0_0
 
+<img src="Strategy.png" width=600>
